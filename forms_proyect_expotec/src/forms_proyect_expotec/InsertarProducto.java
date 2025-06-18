@@ -26,6 +26,7 @@ public class InsertarProducto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -274,10 +275,15 @@ public class InsertarProducto extends javax.swing.JFrame {
 
         jPanel8.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 1210, 470));
 
+=======
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+>>>>>>> origin/victor
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1463, Short.MAX_VALUE)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -287,11 +293,19 @@ public class InsertarProducto extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE))
+=======
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+>>>>>>> origin/victor
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -300,6 +314,8 @@ public class InsertarProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
+=======
+>>>>>>> origin/victor
     /**
      * @param args the command line arguments
      */
@@ -336,6 +352,7 @@ public class InsertarProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -363,5 +380,7 @@ public class InsertarProducto extends javax.swing.JFrame {
     private forms_proyect_expotec.PanelRound panelRound4;
     private forms_proyect_expotec.PanelRound panelRound5;
     private forms_proyect_expotec.PanelRound panelRound6;
+=======
+>>>>>>> origin/victor
     // End of variables declaration//GEN-END:variables
 }
