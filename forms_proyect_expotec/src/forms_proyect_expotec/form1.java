@@ -36,22 +36,22 @@ public class form1 extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jSpinner1 = new javax.swing.JSpinner();
         jPanel5 = new javax.swing.JPanel();
-        panelRound1 = new forms_proyect_expotec.PanelRound();
-        panelRound3 = new forms_proyect_expotec.PanelRound();
-        panelRound5 = new forms_proyect_expotec.PanelRound();
-        panelRound6 = new forms_proyect_expotec.PanelRound();
-        panelRound7 = new forms_proyect_expotec.PanelRound();
-        panelRound8 = new forms_proyect_expotec.PanelRound();
-        panelRound9 = new forms_proyect_expotec.PanelRound();
-        panelRound10 = new forms_proyect_expotec.PanelRound();
-        panelRound11 = new forms_proyect_expotec.PanelRound();
-        panelRound12 = new forms_proyect_expotec.PanelRound();
-        panelRound13 = new forms_proyect_expotec.PanelRound();
-        panelRound14 = new forms_proyect_expotec.PanelRound();
-        panelRound15 = new forms_proyect_expotec.PanelRound();
-        panelRound16 = new forms_proyect_expotec.PanelRound();
-        panelRound17 = new forms_proyect_expotec.PanelRound();
-        panelRound18 = new forms_proyect_expotec.PanelRound();
+        anuncio1 = new forms_proyect_expotec.PanelRound();
+        anuncio2 = new forms_proyect_expotec.PanelRound();
+        pd1 = new forms_proyect_expotec.PanelRound();
+        pd8 = new forms_proyect_expotec.PanelRound();
+        pd9 = new forms_proyect_expotec.PanelRound();
+        pd2 = new forms_proyect_expotec.PanelRound();
+        pd3 = new forms_proyect_expotec.PanelRound();
+        pd10 = new forms_proyect_expotec.PanelRound();
+        pd11 = new forms_proyect_expotec.PanelRound();
+        pd4 = new forms_proyect_expotec.PanelRound();
+        pd5 = new forms_proyect_expotec.PanelRound();
+        pd12 = new forms_proyect_expotec.PanelRound();
+        pd13 = new forms_proyect_expotec.PanelRound();
+        pd6 = new forms_proyect_expotec.PanelRound();
+        pd7 = new forms_proyect_expotec.PanelRound();
+        pd14 = new forms_proyect_expotec.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -109,309 +109,309 @@ public class form1 extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(112, 112, 108));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound1.setRoundBottomLeft(50);
-        panelRound1.setRoundBottomRight(50);
-        panelRound1.setRoundTopLeft(50);
-        panelRound1.setRoundTopRight(50);
+        anuncio1.setBackground(new java.awt.Color(255, 255, 255));
+        anuncio1.setRoundBottomLeft(50);
+        anuncio1.setRoundBottomRight(50);
+        anuncio1.setRoundTopLeft(50);
+        anuncio1.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout anuncio1Layout = new javax.swing.GroupLayout(anuncio1);
+        anuncio1.setLayout(anuncio1Layout);
+        anuncio1Layout.setHorizontalGroup(
+            anuncio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 590, Short.MAX_VALUE)
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        anuncio1Layout.setVerticalGroup(
+            anuncio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 590, 90));
+        jPanel5.add(anuncio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 590, 90));
 
-        panelRound3.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound3.setRoundBottomLeft(50);
-        panelRound3.setRoundBottomRight(50);
-        panelRound3.setRoundTopLeft(50);
-        panelRound3.setRoundTopRight(50);
+        anuncio2.setBackground(new java.awt.Color(255, 255, 255));
+        anuncio2.setRoundBottomLeft(50);
+        anuncio2.setRoundBottomRight(50);
+        anuncio2.setRoundTopLeft(50);
+        anuncio2.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout anuncio2Layout = new javax.swing.GroupLayout(anuncio2);
+        anuncio2.setLayout(anuncio2Layout);
+        anuncio2Layout.setHorizontalGroup(
+            anuncio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        anuncio2Layout.setVerticalGroup(
+            anuncio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 90, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 560, 90));
+        jPanel5.add(anuncio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 560, 90));
 
-        panelRound5.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound5.setRoundBottomLeft(50);
-        panelRound5.setRoundBottomRight(50);
-        panelRound5.setRoundTopLeft(50);
-        panelRound5.setRoundTopRight(50);
+        pd1.setBackground(new java.awt.Color(60, 60, 60));
+        pd1.setRoundBottomLeft(50);
+        pd1.setRoundBottomRight(50);
+        pd1.setRoundTopLeft(50);
+        pd1.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
-        panelRound5.setLayout(panelRound5Layout);
-        panelRound5Layout.setHorizontalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd1Layout = new javax.swing.GroupLayout(pd1);
+        pd1.setLayout(pd1Layout);
+        pd1Layout.setHorizontalGroup(
+            pd1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound5Layout.setVerticalGroup(
-            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd1Layout.setVerticalGroup(
+            pd1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 140, 110));
+        jPanel5.add(pd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 140, 110));
 
-        panelRound6.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound6.setRoundBottomLeft(50);
-        panelRound6.setRoundBottomRight(50);
-        panelRound6.setRoundTopLeft(50);
-        panelRound6.setRoundTopRight(50);
+        pd8.setBackground(new java.awt.Color(60, 60, 60));
+        pd8.setRoundBottomLeft(50);
+        pd8.setRoundBottomRight(50);
+        pd8.setRoundTopLeft(50);
+        pd8.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
-        panelRound6.setLayout(panelRound6Layout);
-        panelRound6Layout.setHorizontalGroup(
-            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd8Layout = new javax.swing.GroupLayout(pd8);
+        pd8.setLayout(pd8Layout);
+        pd8Layout.setHorizontalGroup(
+            pd8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound6Layout.setVerticalGroup(
-            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd8Layout.setVerticalGroup(
+            pd8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 140, 110));
+        jPanel5.add(pd8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 140, 110));
 
-        panelRound7.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound7.setRoundBottomLeft(50);
-        panelRound7.setRoundBottomRight(50);
-        panelRound7.setRoundTopLeft(50);
-        panelRound7.setRoundTopRight(50);
+        pd9.setBackground(new java.awt.Color(60, 60, 60));
+        pd9.setRoundBottomLeft(50);
+        pd9.setRoundBottomRight(50);
+        pd9.setRoundTopLeft(50);
+        pd9.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
-        panelRound7.setLayout(panelRound7Layout);
-        panelRound7Layout.setHorizontalGroup(
-            panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd9Layout = new javax.swing.GroupLayout(pd9);
+        pd9.setLayout(pd9Layout);
+        pd9Layout.setHorizontalGroup(
+            pd9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound7Layout.setVerticalGroup(
-            panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd9Layout.setVerticalGroup(
+            pd9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 140, 110));
+        jPanel5.add(pd9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 140, 110));
 
-        panelRound8.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound8.setRoundBottomLeft(50);
-        panelRound8.setRoundBottomRight(50);
-        panelRound8.setRoundTopLeft(50);
-        panelRound8.setRoundTopRight(50);
+        pd2.setBackground(new java.awt.Color(60, 60, 60));
+        pd2.setRoundBottomLeft(50);
+        pd2.setRoundBottomRight(50);
+        pd2.setRoundTopLeft(50);
+        pd2.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
-        panelRound8.setLayout(panelRound8Layout);
-        panelRound8Layout.setHorizontalGroup(
-            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd2Layout = new javax.swing.GroupLayout(pd2);
+        pd2.setLayout(pd2Layout);
+        pd2Layout.setHorizontalGroup(
+            pd2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound8Layout.setVerticalGroup(
-            panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd2Layout.setVerticalGroup(
+            pd2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 140, 110));
+        jPanel5.add(pd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 140, 110));
 
-        panelRound9.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound9.setRoundBottomLeft(50);
-        panelRound9.setRoundBottomRight(50);
-        panelRound9.setRoundTopLeft(50);
-        panelRound9.setRoundTopRight(50);
+        pd3.setBackground(new java.awt.Color(60, 60, 60));
+        pd3.setRoundBottomLeft(50);
+        pd3.setRoundBottomRight(50);
+        pd3.setRoundTopLeft(50);
+        pd3.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
-        panelRound9.setLayout(panelRound9Layout);
-        panelRound9Layout.setHorizontalGroup(
-            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd3Layout = new javax.swing.GroupLayout(pd3);
+        pd3.setLayout(pd3Layout);
+        pd3Layout.setHorizontalGroup(
+            pd3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound9Layout.setVerticalGroup(
-            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd3Layout.setVerticalGroup(
+            pd3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 140, 110));
+        jPanel5.add(pd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 140, 110));
 
-        panelRound10.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound10.setRoundBottomLeft(50);
-        panelRound10.setRoundBottomRight(50);
-        panelRound10.setRoundTopLeft(50);
-        panelRound10.setRoundTopRight(50);
+        pd10.setBackground(new java.awt.Color(60, 60, 60));
+        pd10.setRoundBottomLeft(50);
+        pd10.setRoundBottomRight(50);
+        pd10.setRoundTopLeft(50);
+        pd10.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound10Layout = new javax.swing.GroupLayout(panelRound10);
-        panelRound10.setLayout(panelRound10Layout);
-        panelRound10Layout.setHorizontalGroup(
-            panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd10Layout = new javax.swing.GroupLayout(pd10);
+        pd10.setLayout(pd10Layout);
+        pd10Layout.setHorizontalGroup(
+            pd10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound10Layout.setVerticalGroup(
-            panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd10Layout.setVerticalGroup(
+            pd10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 140, 110));
+        jPanel5.add(pd10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 140, 110));
 
-        panelRound11.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound11.setRoundBottomLeft(50);
-        panelRound11.setRoundBottomRight(50);
-        panelRound11.setRoundTopLeft(50);
-        panelRound11.setRoundTopRight(50);
+        pd11.setBackground(new java.awt.Color(60, 60, 60));
+        pd11.setRoundBottomLeft(50);
+        pd11.setRoundBottomRight(50);
+        pd11.setRoundTopLeft(50);
+        pd11.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound11Layout = new javax.swing.GroupLayout(panelRound11);
-        panelRound11.setLayout(panelRound11Layout);
-        panelRound11Layout.setHorizontalGroup(
-            panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd11Layout = new javax.swing.GroupLayout(pd11);
+        pd11.setLayout(pd11Layout);
+        pd11Layout.setHorizontalGroup(
+            pd11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound11Layout.setVerticalGroup(
-            panelRound11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd11Layout.setVerticalGroup(
+            pd11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 140, 110));
+        jPanel5.add(pd11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 140, 110));
 
-        panelRound12.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound12.setRoundBottomLeft(50);
-        panelRound12.setRoundBottomRight(50);
-        panelRound12.setRoundTopLeft(50);
-        panelRound12.setRoundTopRight(50);
+        pd4.setBackground(new java.awt.Color(60, 60, 60));
+        pd4.setRoundBottomLeft(50);
+        pd4.setRoundBottomRight(50);
+        pd4.setRoundTopLeft(50);
+        pd4.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound12Layout = new javax.swing.GroupLayout(panelRound12);
-        panelRound12.setLayout(panelRound12Layout);
-        panelRound12Layout.setHorizontalGroup(
-            panelRound12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd4Layout = new javax.swing.GroupLayout(pd4);
+        pd4.setLayout(pd4Layout);
+        pd4Layout.setHorizontalGroup(
+            pd4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound12Layout.setVerticalGroup(
-            panelRound12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd4Layout.setVerticalGroup(
+            pd4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound12, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 140, 110));
+        jPanel5.add(pd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 140, 110));
 
-        panelRound13.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound13.setRoundBottomLeft(50);
-        panelRound13.setRoundBottomRight(50);
-        panelRound13.setRoundTopLeft(50);
-        panelRound13.setRoundTopRight(50);
+        pd5.setBackground(new java.awt.Color(60, 60, 60));
+        pd5.setRoundBottomLeft(50);
+        pd5.setRoundBottomRight(50);
+        pd5.setRoundTopLeft(50);
+        pd5.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound13Layout = new javax.swing.GroupLayout(panelRound13);
-        panelRound13.setLayout(panelRound13Layout);
-        panelRound13Layout.setHorizontalGroup(
-            panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd5Layout = new javax.swing.GroupLayout(pd5);
+        pd5.setLayout(pd5Layout);
+        pd5Layout.setHorizontalGroup(
+            pd5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound13Layout.setVerticalGroup(
-            panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd5Layout.setVerticalGroup(
+            pd5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound13, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 140, 110));
+        jPanel5.add(pd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 140, 110));
 
-        panelRound14.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound14.setRoundBottomLeft(50);
-        panelRound14.setRoundBottomRight(50);
-        panelRound14.setRoundTopLeft(50);
-        panelRound14.setRoundTopRight(50);
+        pd12.setBackground(new java.awt.Color(60, 60, 60));
+        pd12.setRoundBottomLeft(50);
+        pd12.setRoundBottomRight(50);
+        pd12.setRoundTopLeft(50);
+        pd12.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound14Layout = new javax.swing.GroupLayout(panelRound14);
-        panelRound14.setLayout(panelRound14Layout);
-        panelRound14Layout.setHorizontalGroup(
-            panelRound14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd12Layout = new javax.swing.GroupLayout(pd12);
+        pd12.setLayout(pd12Layout);
+        pd12Layout.setHorizontalGroup(
+            pd12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound14Layout.setVerticalGroup(
-            panelRound14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd12Layout.setVerticalGroup(
+            pd12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound14, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, 140, 110));
+        jPanel5.add(pd12, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, 140, 110));
 
-        panelRound15.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound15.setRoundBottomLeft(50);
-        panelRound15.setRoundBottomRight(50);
-        panelRound15.setRoundTopLeft(50);
-        panelRound15.setRoundTopRight(50);
+        pd13.setBackground(new java.awt.Color(60, 60, 60));
+        pd13.setRoundBottomLeft(50);
+        pd13.setRoundBottomRight(50);
+        pd13.setRoundTopLeft(50);
+        pd13.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound15Layout = new javax.swing.GroupLayout(panelRound15);
-        panelRound15.setLayout(panelRound15Layout);
-        panelRound15Layout.setHorizontalGroup(
-            panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd13Layout = new javax.swing.GroupLayout(pd13);
+        pd13.setLayout(pd13Layout);
+        pd13Layout.setHorizontalGroup(
+            pd13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound15Layout.setVerticalGroup(
-            panelRound15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd13Layout.setVerticalGroup(
+            pd13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound15, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, 140, 110));
+        jPanel5.add(pd13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, 140, 110));
 
-        panelRound16.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound16.setRoundBottomLeft(50);
-        panelRound16.setRoundBottomRight(50);
-        panelRound16.setRoundTopLeft(50);
-        panelRound16.setRoundTopRight(50);
+        pd6.setBackground(new java.awt.Color(60, 60, 60));
+        pd6.setRoundBottomLeft(50);
+        pd6.setRoundBottomRight(50);
+        pd6.setRoundTopLeft(50);
+        pd6.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound16Layout = new javax.swing.GroupLayout(panelRound16);
-        panelRound16.setLayout(panelRound16Layout);
-        panelRound16Layout.setHorizontalGroup(
-            panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd6Layout = new javax.swing.GroupLayout(pd6);
+        pd6.setLayout(pd6Layout);
+        pd6Layout.setHorizontalGroup(
+            pd6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound16Layout.setVerticalGroup(
-            panelRound16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd6Layout.setVerticalGroup(
+            pd6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound16, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 150, 140, 110));
+        jPanel5.add(pd6, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 150, 140, 110));
 
-        panelRound17.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound17.setRoundBottomLeft(50);
-        panelRound17.setRoundBottomRight(50);
-        panelRound17.setRoundTopLeft(50);
-        panelRound17.setRoundTopRight(50);
+        pd7.setBackground(new java.awt.Color(60, 60, 60));
+        pd7.setRoundBottomLeft(50);
+        pd7.setRoundBottomRight(50);
+        pd7.setRoundTopLeft(50);
+        pd7.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound17Layout = new javax.swing.GroupLayout(panelRound17);
-        panelRound17.setLayout(panelRound17Layout);
-        panelRound17Layout.setHorizontalGroup(
-            panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd7Layout = new javax.swing.GroupLayout(pd7);
+        pd7.setLayout(pd7Layout);
+        pd7Layout.setHorizontalGroup(
+            pd7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound17Layout.setVerticalGroup(
-            panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd7Layout.setVerticalGroup(
+            pd7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 150, 140, 110));
+        jPanel5.add(pd7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 150, 140, 110));
 
-        panelRound18.setBackground(new java.awt.Color(60, 60, 60));
-        panelRound18.setRoundBottomLeft(50);
-        panelRound18.setRoundBottomRight(50);
-        panelRound18.setRoundTopLeft(50);
-        panelRound18.setRoundTopRight(50);
+        pd14.setBackground(new java.awt.Color(60, 60, 60));
+        pd14.setRoundBottomLeft(50);
+        pd14.setRoundBottomRight(50);
+        pd14.setRoundTopLeft(50);
+        pd14.setRoundTopRight(50);
 
-        javax.swing.GroupLayout panelRound18Layout = new javax.swing.GroupLayout(panelRound18);
-        panelRound18.setLayout(panelRound18Layout);
-        panelRound18Layout.setHorizontalGroup(
-            panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pd14Layout = new javax.swing.GroupLayout(pd14);
+        pd14.setLayout(pd14Layout);
+        pd14Layout.setHorizontalGroup(
+            pd14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 140, Short.MAX_VALUE)
         );
-        panelRound18Layout.setVerticalGroup(
-            panelRound18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pd14Layout.setVerticalGroup(
+            pd14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 110, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelRound18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 310, 140, 110));
+        jPanel5.add(pd14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 310, 140, 110));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(29, 29, 27));
@@ -524,7 +524,7 @@ public class form1 extends javax.swing.JFrame {
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
         jButton4.setFocusPainted(false);
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 73, 30));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 90, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/iconito.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 80));
@@ -538,11 +538,21 @@ public class form1 extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Captura de pantalla 2025-06-07 2.png"))); // NOI18N
         jButton2.setBorder(null);
         jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 120, 60));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Registarse.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 120, 60));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Campanita (1).png"))); // NOI18N
@@ -613,6 +623,18 @@ public class form1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//DEBEMOS DE HACER QUE VUELVA 
+       form2 f2 = new form2();
+       f2.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        form3 f3 = new form3();
+        f3.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -654,6 +676,8 @@ public class form1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private forms_proyect_expotec.PanelRound anuncio1;
+    private forms_proyect_expotec.PanelRound anuncio2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -690,22 +714,20 @@ public class form1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField1;
-    private forms_proyect_expotec.PanelRound panelRound1;
-    private forms_proyect_expotec.PanelRound panelRound10;
-    private forms_proyect_expotec.PanelRound panelRound11;
-    private forms_proyect_expotec.PanelRound panelRound12;
-    private forms_proyect_expotec.PanelRound panelRound13;
-    private forms_proyect_expotec.PanelRound panelRound14;
-    private forms_proyect_expotec.PanelRound panelRound15;
-    private forms_proyect_expotec.PanelRound panelRound16;
-    private forms_proyect_expotec.PanelRound panelRound17;
-    private forms_proyect_expotec.PanelRound panelRound18;
-    private forms_proyect_expotec.PanelRound panelRound3;
-    private forms_proyect_expotec.PanelRound panelRound5;
-    private forms_proyect_expotec.PanelRound panelRound6;
-    private forms_proyect_expotec.PanelRound panelRound7;
-    private forms_proyect_expotec.PanelRound panelRound8;
-    private forms_proyect_expotec.PanelRound panelRound9;
+    private forms_proyect_expotec.PanelRound pd1;
+    private forms_proyect_expotec.PanelRound pd10;
+    private forms_proyect_expotec.PanelRound pd11;
+    private forms_proyect_expotec.PanelRound pd12;
+    private forms_proyect_expotec.PanelRound pd13;
+    private forms_proyect_expotec.PanelRound pd14;
+    private forms_proyect_expotec.PanelRound pd2;
+    private forms_proyect_expotec.PanelRound pd3;
+    private forms_proyect_expotec.PanelRound pd4;
+    private forms_proyect_expotec.PanelRound pd5;
+    private forms_proyect_expotec.PanelRound pd6;
+    private forms_proyect_expotec.PanelRound pd7;
+    private forms_proyect_expotec.PanelRound pd8;
+    private forms_proyect_expotec.PanelRound pd9;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 }

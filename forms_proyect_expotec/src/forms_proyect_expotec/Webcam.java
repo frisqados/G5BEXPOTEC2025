@@ -170,7 +170,10 @@ public class Webcam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   
+
+        form1 f1 = new form1();
+        f1.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
