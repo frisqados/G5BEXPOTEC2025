@@ -600,7 +600,7 @@ public class form3 extends javax.swing.JFrame {
         
         form1 f1 = new form1();
         f1.setVisible(true);
-        
+        this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -612,6 +612,7 @@ public class form3 extends javax.swing.JFrame {
    
     }//GEN-LAST:event_jButton4ActionPerformed
 
+<<<<<<< HEAD
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -619,6 +620,16 @@ public class form3 extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
+=======
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+        Webcam wc = new Webcam();
+        wc.setVisible(true);
+        this.dispose();
+     
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+>>>>>>> origin/Develop
 
     /**
      * @param args the command line arguments
@@ -651,6 +662,7 @@ public class form3 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new form3().setVisible(true);
+               
             }
         });
     }
