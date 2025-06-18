@@ -627,12 +627,14 @@ public class form1 extends javax.swing.JFrame {
 //DEBEMOS DE HACER QUE VUELVA 
        form2 f2 = new form2();
        f2.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         form3 f3 = new form3();
         f3.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
