@@ -272,11 +272,19 @@ public class form2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      
+
+        form1 f1 = new form1();
+        f1.setVisible(true);
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
+    
+        form3 f3 = new form3();
+        f3.setVisible(true);
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
