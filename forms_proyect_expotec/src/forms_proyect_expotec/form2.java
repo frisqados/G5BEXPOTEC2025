@@ -281,6 +281,7 @@ public class form2 extends javax.swing.JFrame {
 
         form1 f1 = new form1();
         f1.setVisible(true);
+        this.dispose();
         
         
     }//GEN-LAST:event_jButton4ActionPerformed

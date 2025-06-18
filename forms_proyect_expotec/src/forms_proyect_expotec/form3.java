@@ -757,7 +757,7 @@ public class form3 extends javax.swing.JFrame {
         
         form1 f1 = new form1();
         f1.setVisible(true);
-        
+        this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -773,6 +773,7 @@ public class form3 extends javax.swing.JFrame {
        
         Webcam wc = new Webcam();
         wc.setVisible(true);
+        this.dispose();
      
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -808,6 +809,7 @@ public class form3 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new form3().setVisible(true);
+               
             }
         });
     }
