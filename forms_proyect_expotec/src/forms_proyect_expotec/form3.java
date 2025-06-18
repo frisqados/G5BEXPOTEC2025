@@ -55,8 +55,6 @@ public class form3 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         panelRound3 = new forms_proyect_expotec.PanelRound();
         jTextField1 = new javax.swing.JTextField();
         panelRound4 = new forms_proyect_expotec.PanelRound();
@@ -70,22 +68,12 @@ public class form3 extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         panelRound8 = new forms_proyect_expotec.PanelRound();
         jTextField6 = new javax.swing.JTextField();
-        panelRound9 = new forms_proyect_expotec.PanelRound();
-        jTextField7 = new javax.swing.JTextField();
-        panelRound10 = new forms_proyect_expotec.PanelRound();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        panelRound12 = new forms_proyect_expotec.PanelRound();
-        jTextField11 = new javax.swing.JTextField();
-        panelRound13 = new forms_proyect_expotec.PanelRound();
-        jTextField12 = new javax.swing.JTextField();
-        panelRound14 = new forms_proyect_expotec.PanelRound();
-        jTextField13 = new javax.swing.JTextField();
         panelRound1 = new forms_proyect_expotec.PanelRound();
         jButton3 = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
+        panelRound9 = new forms_proyect_expotec.PanelRound();
+        jButton5 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -296,38 +284,28 @@ public class form3 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre Completo");
-        panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 45));
+        jLabel2.setText("Nombre");
+        panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 45));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Correo Electrónico");
-        panelRound2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 210, 31));
+        jLabel3.setText("Apellido");
+        panelRound2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 210, 31));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Numero");
+        jLabel4.setText("Correo");
         panelRound2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 150, 40));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Departamento");
-        panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 192, 45));
+        jLabel5.setText("Direccion");
+        panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 192, 45));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Zona de residencia");
-        panelRound2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 230, 31));
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("DPI");
-        panelRound2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 170, -1));
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Contraseña");
-        panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 180, 41));
+        jLabel6.setText("Telefono");
+        panelRound2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 230, 31));
 
         panelRound3.setBackground(new java.awt.Color(170, 170, 170));
         panelRound3.setForeground(new java.awt.Color(255, 255, 255));
@@ -426,8 +404,8 @@ public class form3 extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Fecha nacimieto");
-        panelRound2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 190, 45));
+        jLabel11.setText("Contraseña");
+        panelRound2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 190, 45));
 
         panelRound6.setBackground(new java.awt.Color(170, 170, 170));
         panelRound6.setRoundBottomLeft(50);
@@ -497,6 +475,11 @@ public class form3 extends javax.swing.JFrame {
         jTextField6.setBackground(new java.awt.Color(170, 170, 170));
         jTextField6.setForeground(new java.awt.Color(255, 255, 255));
         jTextField6.setBorder(null);
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
@@ -517,71 +500,6 @@ public class form3 extends javax.swing.JFrame {
 
         panelRound2.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 240, 39));
 
-        panelRound9.setBackground(new java.awt.Color(170, 170, 170));
-        panelRound9.setForeground(new java.awt.Color(128, 128, 128));
-        panelRound9.setRoundBottomLeft(50);
-        panelRound9.setRoundBottomRight(50);
-        panelRound9.setRoundTopLeft(50);
-        panelRound9.setRoundTopRight(50);
-
-        jTextField7.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField7.setBorder(null);
-
-        javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
-        panelRound9.setLayout(panelRound9Layout);
-        panelRound9Layout.setHorizontalGroup(
-            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelRound9Layout.setVerticalGroup(
-            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelRound2.add(panelRound9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 240, -1));
-
-        panelRound10.setBackground(new java.awt.Color(170, 170, 170));
-        panelRound10.setForeground(new java.awt.Color(128, 128, 128));
-        panelRound10.setRoundBottomLeft(50);
-        panelRound10.setRoundBottomRight(50);
-        panelRound10.setRoundTopLeft(50);
-        panelRound10.setRoundTopRight(50);
-
-        jTextField8.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField8.setBorder(null);
-
-        javax.swing.GroupLayout panelRound10Layout = new javax.swing.GroupLayout(panelRound10);
-        panelRound10.setLayout(panelRound10Layout);
-        panelRound10Layout.setHorizontalGroup(
-            panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelRound10Layout.setVerticalGroup(
-            panelRound10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelRound2.add(panelRound10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 240, -1));
-
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("NIT");
-        panelRound2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 240, 27));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -595,163 +513,88 @@ public class form3 extends javax.swing.JFrame {
 
         panelRound2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 240, -1));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Confirmacion Contraseña");
-        panelRound2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 300, 40));
-
-        panelRound12.setBackground(new java.awt.Color(170, 170, 170));
-        panelRound12.setForeground(new java.awt.Color(255, 255, 255));
-        panelRound12.setRoundBottomLeft(50);
-        panelRound12.setRoundBottomRight(50);
-        panelRound12.setRoundTopLeft(50);
-        panelRound12.setRoundTopRight(50);
-
-        jTextField11.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField11.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField11.setBorder(null);
-
-        javax.swing.GroupLayout panelRound12Layout = new javax.swing.GroupLayout(panelRound12);
-        panelRound12.setLayout(panelRound12Layout);
-        panelRound12Layout.setHorizontalGroup(
-            panelRound12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelRound12Layout.setVerticalGroup(
-            panelRound12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        panelRound2.add(panelRound12, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 240, -1));
-
-        panelRound13.setBackground(new java.awt.Color(170, 170, 170));
-        panelRound13.setRoundBottomLeft(50);
-        panelRound13.setRoundBottomRight(50);
-        panelRound13.setRoundTopLeft(50);
-        panelRound13.setRoundTopRight(50);
-
-        jTextField12.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField12.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField12.setBorder(null);
-
-        javax.swing.GroupLayout panelRound13Layout = new javax.swing.GroupLayout(panelRound13);
-        panelRound13.setLayout(panelRound13Layout);
-        panelRound13Layout.setHorizontalGroup(
-            panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelRound13Layout.setVerticalGroup(
-            panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField12)
-                .addContainerGap())
-        );
-
-        panelRound2.add(panelRound13, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 240, 39));
-
-        panelRound14.setBackground(new java.awt.Color(170, 170, 170));
-        panelRound14.setRoundBottomLeft(50);
-        panelRound14.setRoundBottomRight(50);
-        panelRound14.setRoundTopLeft(50);
-        panelRound14.setRoundTopRight(50);
-
-        jTextField13.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField13.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField13.setBorder(null);
-
-        javax.swing.GroupLayout panelRound14Layout = new javax.swing.GroupLayout(panelRound14);
-        panelRound14.setLayout(panelRound14Layout);
-        panelRound14Layout.setHorizontalGroup(
-            panelRound14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound14Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-        );
-        panelRound14Layout.setVerticalGroup(
-            panelRound14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound14Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        panelRound2.add(panelRound14, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 240, -1));
-
-        panelRound1.setBackground(new java.awt.Color(29, 29, 27));
         panelRound1.setRoundBottomLeft(50);
         panelRound1.setRoundBottomRight(50);
         panelRound1.setRoundTopLeft(50);
         panelRound1.setRoundTopRight(50);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton3.setText("Fotografía");
         jButton3.setBorder(null);
         jButton3.setContentAreaFilled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelRound2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 230, 40));
+        panelRound2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 120, 40));
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Género");
-        panelRound2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 291, -1));
+        panelRound9.setRoundBottomLeft(50);
+        panelRound9.setRoundBottomRight(50);
+        panelRound9.setRoundTopLeft(50);
+        panelRound9.setRoundTopRight(50);
+
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton5.setText("Listo");
+        jButton5.setBorder(null);
+        jButton5.setContentAreaFilled(false);
+
+        javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
+        panelRound9.setLayout(panelRound9Layout);
+        panelRound9Layout.setHorizontalGroup(
+            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+        panelRound9Layout.setVerticalGroup(
+            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelRound2.add(panelRound9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 120, 40));
+
+        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        panelRound2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 220, 140));
 
         javax.swing.GroupLayout panelRound17Layout = new javax.swing.GroupLayout(panelRound17);
         panelRound17.setLayout(panelRound17Layout);
         panelRound17Layout.setHorizontalGroup(
             panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound17Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 1056, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(322, 322, 322)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         panelRound17Layout.setVerticalGroup(
             panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound17Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(56, 56, 56)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelRound17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1370, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
@@ -769,13 +612,13 @@ public class form3 extends javax.swing.JFrame {
    
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
-        Webcam wc = new Webcam();
-        wc.setVisible(true);
-     
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -817,11 +660,10 @@ public class form3 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -830,9 +672,7 @@ public class form3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -841,23 +681,14 @@ public class form3 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private forms_proyect_expotec.PanelRound panelRound1;
-    private forms_proyect_expotec.PanelRound panelRound10;
     private forms_proyect_expotec.PanelRound panelRound11;
-    private forms_proyect_expotec.PanelRound panelRound12;
-    private forms_proyect_expotec.PanelRound panelRound13;
-    private forms_proyect_expotec.PanelRound panelRound14;
     private forms_proyect_expotec.PanelRound panelRound15;
     private forms_proyect_expotec.PanelRound panelRound16;
     private forms_proyect_expotec.PanelRound panelRound17;
