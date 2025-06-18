@@ -56,19 +56,18 @@ public class form3 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         panelRound3 = new forms_proyect_expotec.PanelRound();
-        jTextField1 = new javax.swing.JTextField();
-        panelRound4 = new forms_proyect_expotec.PanelRound();
+        txtNombre = new javax.swing.JTextField();
+        txtApellidos = new forms_proyect_expotec.PanelRound();
         jTextField2 = new javax.swing.JTextField();
         panelRound5 = new forms_proyect_expotec.PanelRound();
-        jTextField3 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         panelRound6 = new forms_proyect_expotec.PanelRound();
-        jTextField4 = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
         panelRound7 = new forms_proyect_expotec.PanelRound();
-        jTextField5 = new javax.swing.JTextField();
+        txtDirección = new javax.swing.JTextField();
         panelRound8 = new forms_proyect_expotec.PanelRound();
-        jTextField6 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        txtTelefono = new javax.swing.JTextField();
         panelRound1 = new forms_proyect_expotec.PanelRound();
         jButton3 = new javax.swing.JButton();
         panelRound9 = new forms_proyect_expotec.PanelRound();
@@ -314,9 +313,9 @@ public class form3 extends javax.swing.JFrame {
         panelRound3.setRoundTopLeft(50);
         panelRound3.setRoundTopRight(50);
 
-        jTextField1.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
+        txtNombre.setBackground(new java.awt.Color(170, 170, 170));
+        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombre.setBorder(null);
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -324,25 +323,25 @@ public class form3 extends javax.swing.JFrame {
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         panelRound2.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 250, -1));
 
-        panelRound4.setBackground(new java.awt.Color(170, 170, 170));
-        panelRound4.setForeground(new java.awt.Color(255, 255, 255));
-        panelRound4.setRoundBottomLeft(50);
-        panelRound4.setRoundBottomRight(50);
-        panelRound4.setRoundTopLeft(50);
-        panelRound4.setRoundTopRight(50);
+        txtApellidos.setBackground(new java.awt.Color(170, 170, 170));
+        txtApellidos.setForeground(new java.awt.Color(255, 255, 255));
+        txtApellidos.setRoundBottomLeft(50);
+        txtApellidos.setRoundBottomRight(50);
+        txtApellidos.setRoundTopLeft(50);
+        txtApellidos.setRoundTopRight(50);
 
         jTextField2.setBackground(new java.awt.Color(170, 170, 170));
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
@@ -353,24 +352,24 @@ public class form3 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
-        panelRound4.setLayout(panelRound4Layout);
-        panelRound4Layout.setHorizontalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
+        javax.swing.GroupLayout txtApellidosLayout = new javax.swing.GroupLayout(txtApellidos);
+        txtApellidos.setLayout(txtApellidosLayout);
+        txtApellidosLayout.setHorizontalGroup(
+            txtApellidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtApellidosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelRound4Layout.setVerticalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+        txtApellidosLayout.setVerticalGroup(
+            txtApellidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtApellidosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        panelRound2.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 250, -1));
+        panelRound2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 250, -1));
 
         panelRound5.setBackground(new java.awt.Color(170, 170, 170));
         panelRound5.setForeground(new java.awt.Color(128, 128, 128));
@@ -379,9 +378,9 @@ public class form3 extends javax.swing.JFrame {
         panelRound5.setRoundTopLeft(50);
         panelRound5.setRoundTopRight(50);
 
-        jTextField3.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setBorder(null);
+        txtCorreo.setBackground(new java.awt.Color(170, 170, 170));
+        txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        txtCorreo.setBorder(null);
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
         panelRound5.setLayout(panelRound5Layout);
@@ -389,14 +388,14 @@ public class form3 extends javax.swing.JFrame {
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -413,9 +412,9 @@ public class form3 extends javax.swing.JFrame {
         panelRound6.setRoundTopLeft(50);
         panelRound6.setRoundTopRight(50);
 
-        jTextField4.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField4.setBorder(null);
+        txtPass.setBackground(new java.awt.Color(170, 170, 170));
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setBorder(null);
 
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
         panelRound6.setLayout(panelRound6Layout);
@@ -423,14 +422,14 @@ public class form3 extends javax.swing.JFrame {
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -443,9 +442,9 @@ public class form3 extends javax.swing.JFrame {
         panelRound7.setRoundTopLeft(50);
         panelRound7.setRoundTopRight(50);
 
-        jTextField5.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setBorder(null);
+        txtDirección.setBackground(new java.awt.Color(170, 170, 170));
+        txtDirección.setForeground(new java.awt.Color(255, 255, 255));
+        txtDirección.setBorder(null);
 
         javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
         panelRound7.setLayout(panelRound7Layout);
@@ -453,14 +452,14 @@ public class form3 extends javax.swing.JFrame {
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addComponent(txtDirección, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField5)
+                .addComponent(txtDirección)
                 .addContainerGap())
         );
 
@@ -472,12 +471,12 @@ public class form3 extends javax.swing.JFrame {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
-        jTextField6.setBackground(new java.awt.Color(170, 170, 170));
-        jTextField6.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField6.setBorder(null);
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        txtTelefono.setBackground(new java.awt.Color(170, 170, 170));
+        txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        txtTelefono.setBorder(null);
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                txtTelefonoActionPerformed(evt);
             }
         });
 
@@ -487,31 +486,18 @@ public class form3 extends javax.swing.JFrame {
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField6)
+                .addComponent(txtTelefono)
                 .addContainerGap())
         );
 
         panelRound2.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 240, 39));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
-        );
-
-        panelRound2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 240, -1));
 
         panelRound1.setRoundBottomLeft(50);
         panelRound1.setRoundBottomRight(50);
@@ -528,9 +514,9 @@ public class form3 extends javax.swing.JFrame {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGap(19, 19, 19))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,9 +565,9 @@ public class form3 extends javax.swing.JFrame {
         panelRound17Layout.setHorizontalGroup(
             panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound17Layout.createSequentialGroup()
-                .addGap(322, 322, 322)
+                .addGap(346, 346, 346)
                 .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
         panelRound17Layout.setVerticalGroup(
             panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -591,7 +577,7 @@ public class form3 extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelRound17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1370, 590));
+        getContentPane().add(panelRound17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1370, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -612,15 +598,15 @@ public class form3 extends javax.swing.JFrame {
    
     }//GEN-LAST:event_jButton4ActionPerformed
 
-<<<<<<< HEAD
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-=======
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        
         Webcam wc = new Webcam();
@@ -629,7 +615,7 @@ public class form3 extends javax.swing.JFrame {
      
         
     }//GEN-LAST:event_jButton3ActionPerformed
->>>>>>> origin/Develop
+
 
     /**
      * @param args the command line arguments
@@ -686,18 +672,12 @@ public class form3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField9;
     private forms_proyect_expotec.PanelRound panelRound1;
     private forms_proyect_expotec.PanelRound panelRound11;
@@ -706,11 +686,16 @@ public class form3 extends javax.swing.JFrame {
     private forms_proyect_expotec.PanelRound panelRound17;
     private forms_proyect_expotec.PanelRound panelRound2;
     private forms_proyect_expotec.PanelRound panelRound3;
-    private forms_proyect_expotec.PanelRound panelRound4;
     private forms_proyect_expotec.PanelRound panelRound5;
     private forms_proyect_expotec.PanelRound panelRound6;
     private forms_proyect_expotec.PanelRound panelRound7;
     private forms_proyect_expotec.PanelRound panelRound8;
     private forms_proyect_expotec.PanelRound panelRound9;
+    private forms_proyect_expotec.PanelRound txtApellidos;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDirección;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
