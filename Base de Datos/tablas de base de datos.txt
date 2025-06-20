@@ -1,0 +1,99 @@
+tablas de base de datos
+-- CREACIÓN Y USO DE BASE DE DATOS
+CREATE DATABASE expopruebra;
+USE expopruebra;
+
+-- TABLA: Usuarios
+CREATE TABLE Usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL, 
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    direccion TEXT,
+    telefono VARCHAR(15),
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- TABLA: Productos
+CREATE TABLE Productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10,2) NOT NULL,
+    stock INT NOT NULL,
+    categoria VARCHAR(50)
+);
+
+-- TABLA: Carritos
+CREATE TABLE Carritos (
+    id_carrito INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+);
+
+-- TABLA: Carrito1_Items
+CREATE TABLE Carrito1_Items (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+);
+
+-- TABLA: detalle_ordenes
+CREATE TABLE detalle_ordenes (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_orden INT,
+    id_producto INT,
+    cantidad INT,
+    precio_unitario DECIMAL(10,2),
+    FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+-- TABLA: lista_deseos
+CREATE TABLE lista_deseos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_producto INT,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+-- TABLA: membresias
+CREATE TABLE membresias (
+    id_membresia INT AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(50), 
+    beneficios TEXT,
+    precio DECIMAL(10,2)
+);
+
+-- TABLA: ordenes
+CREATE TABLE ordenes (
+    id_orden INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    total DECIMAL(10,2),
+    estado ENUM('pendiente', 'pagado', 'enviado', 'entregado', 'cancelado') DEFAULT 'pendiente',
+    fecha_orden TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+-- TABLA: resenas
+CREATE TABLE resenas (
+    id_resena INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT,
+    id_usuario INT,
+    calificacion INT CHECK (calificacion BETWEEN 1 AND 5),
+    comentario TEXT,
+    fecha_resena TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
