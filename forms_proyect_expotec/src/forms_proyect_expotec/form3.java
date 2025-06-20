@@ -782,8 +782,6 @@ public class form3 extends javax.swing.JFrame {
    
     }//GEN-LAST:event_jButton4ActionPerformed
 
-<<<<<<< HEAD
-
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -802,8 +800,6 @@ public class form3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
-=======
->>>>>>> Jaime
     /**
      * @param args the command line arguments
      */
