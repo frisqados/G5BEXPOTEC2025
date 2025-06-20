@@ -94,7 +94,7 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Container class="forms_proyect_expotec.PanelRound" name="anuncio1">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -123,7 +123,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="anuncio2">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -152,7 +152,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd1">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound5">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -181,7 +181,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd8">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound6">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -210,7 +210,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd9">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound7">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -239,7 +239,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd2">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound8">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -268,7 +268,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd3">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound9">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -297,7 +297,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd10">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound10">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -326,7 +326,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd11">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound11">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -355,7 +355,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd4">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound12">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -384,7 +384,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd5">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound13">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -413,7 +413,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd12">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound14">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -442,7 +442,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd13">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound15">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -471,7 +471,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd6">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound16">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -500,7 +500,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd7">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound17">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -529,7 +529,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="forms_proyect_expotec.PanelRound" name="pd14">
+        <Container class="forms_proyect_expotec.PanelRound" name="panelRound18">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3c" green="3c" red="3c" type="rgb"/>
@@ -903,7 +903,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="870" y="30" width="90" height="30"/>
+              <AbsoluteConstraints x="870" y="30" width="73" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -953,9 +953,6 @@
             </Property>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1090" y="20" width="120" height="60"/>
@@ -972,9 +969,6 @@
             </Property>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
-          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1220" y="20" width="120" height="60"/>
