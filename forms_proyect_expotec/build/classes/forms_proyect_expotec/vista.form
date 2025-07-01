@@ -33,10 +33,14 @@
               <Component id="jPanel1" min="-2" pref="140" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Component id="jPanel5" pref="605" max="32767" attributes="0"/>
 =======
               <Component id="jPanel5" pref="600" max="32767" attributes="0"/>
 >>>>>>> victor
+=======
+              <Component id="jPanel5" pref="605" max="32767" attributes="0"/>
+>>>>>>> origin/Aron
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -334,10 +338,14 @@
                           </Group>
                       </Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <EmptySpace pref="11" max="32767" attributes="0"/>
 =======
                       <EmptySpace max="32767" attributes="0"/>
 >>>>>>> victor
+=======
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
+>>>>>>> origin/Aron
                   </Group>
               </Group>
             </DimensionLayout>

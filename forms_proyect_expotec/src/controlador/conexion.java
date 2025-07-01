@@ -37,7 +37,11 @@ public class conexion {
         return conn;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 >>>>>>> victor
+=======
+    
+>>>>>>> origin/Aron
 }

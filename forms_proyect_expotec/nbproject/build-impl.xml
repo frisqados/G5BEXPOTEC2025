@@ -1,6 +1,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Aron
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 *** GENERATED FROM project.xml - DO NOT EDIT  ***
@@ -1801,10 +1804,13 @@ is divided into following sections:
     </target>
 </project>
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
 =======
 >>>>>>> victor
+=======
+>>>>>>> origin/Aron
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 *** GENERATED FROM project.xml - DO NOT EDIT  ***
@@ -3578,8 +3584,12 @@ is divided into following sections:
 </project>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
 =======
 >>>>>>> victor
+=======
+>>>>>>> Jaime
+>>>>>>> origin/Aron

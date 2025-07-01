@@ -279,10 +279,14 @@ public class vista extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addContainerGap(11, Short.MAX_VALUE))
 =======
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 >>>>>>> victor
+=======
+                .addContainerGap(11, Short.MAX_VALUE))
+>>>>>>> origin/Aron
         );
         panelRound13Layout.setVerticalGroup(
             panelRound13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,10 +466,14 @@ public class vista extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
 =======
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 >>>>>>> victor
+=======
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
 

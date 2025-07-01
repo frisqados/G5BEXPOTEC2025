@@ -55,22 +55,28 @@ public class form3 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+<<<<<<< HEAD
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+=======
+>>>>>>> origin/Aron
         panelRound3 = new forms_proyect_expotec.PanelRound();
-        jTextField1 = new javax.swing.JTextField();
-        panelRound4 = new forms_proyect_expotec.PanelRound();
+        txtNombre = new javax.swing.JTextField();
+        txtApellidos = new forms_proyect_expotec.PanelRound();
         jTextField2 = new javax.swing.JTextField();
         panelRound5 = new forms_proyect_expotec.PanelRound();
-        jTextField3 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         panelRound6 = new forms_proyect_expotec.PanelRound();
-        jTextField4 = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
         panelRound7 = new forms_proyect_expotec.PanelRound();
-        jTextField5 = new javax.swing.JTextField();
+        txtDirección = new javax.swing.JTextField();
         panelRound8 = new forms_proyect_expotec.PanelRound();
-        jTextField6 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        panelRound1 = new forms_proyect_expotec.PanelRound();
+        jButton3 = new javax.swing.JButton();
         panelRound9 = new forms_proyect_expotec.PanelRound();
+<<<<<<< HEAD
         jTextField7 = new javax.swing.JTextField();
         panelRound10 = new forms_proyect_expotec.PanelRound();
         jTextField8 = new javax.swing.JTextField();
@@ -86,6 +92,10 @@ public class form3 extends javax.swing.JFrame {
         panelRound1 = new forms_proyect_expotec.PanelRound();
         jButton3 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+=======
+        jButton5 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+>>>>>>> origin/Aron
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -296,6 +306,7 @@ public class form3 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+<<<<<<< HEAD
         jLabel2.setText("Nombre Completo");
         panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 45));
 
@@ -307,10 +318,24 @@ public class form3 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Numero");
+=======
+        jLabel2.setText("Nombre");
+        panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 45));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Apellido");
+        panelRound2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 210, 31));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Correo");
+>>>>>>> origin/Aron
         panelRound2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 150, 40));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+<<<<<<< HEAD
         jLabel5.setText("Departamento");
         panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 192, 45));
 
@@ -329,6 +354,16 @@ public class form3 extends javax.swing.JFrame {
         jLabel9.setText("Contraseña");
         panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 180, 41));
 
+=======
+        jLabel5.setText("Direccion");
+        panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 192, 45));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Telefono");
+        panelRound2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 230, 31));
+
+>>>>>>> origin/Aron
         panelRound3.setBackground(new java.awt.Color(170, 170, 170));
         panelRound3.setForeground(new java.awt.Color(255, 255, 255));
         panelRound3.setRoundBottomLeft(50);
@@ -336,9 +371,15 @@ public class form3 extends javax.swing.JFrame {
         panelRound3.setRoundTopLeft(50);
         panelRound3.setRoundTopRight(50);
 
+<<<<<<< HEAD
         jTextField1.setBackground(new java.awt.Color(170, 170, 170));
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
         jTextField1.setBorder(null);
+=======
+        txtNombre.setBackground(new java.awt.Color(170, 170, 170));
+        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombre.setBorder(null);
+>>>>>>> origin/Aron
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -346,18 +387,23 @@ public class form3 extends javax.swing.JFrame {
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+=======
+                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         panelRound2.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 250, -1));
+<<<<<<< HEAD
 
         panelRound4.setBackground(new java.awt.Color(170, 170, 170));
         panelRound4.setForeground(new java.awt.Color(255, 255, 255));
@@ -366,6 +412,16 @@ public class form3 extends javax.swing.JFrame {
         panelRound4.setRoundTopLeft(50);
         panelRound4.setRoundTopRight(50);
 
+=======
+
+        txtApellidos.setBackground(new java.awt.Color(170, 170, 170));
+        txtApellidos.setForeground(new java.awt.Color(255, 255, 255));
+        txtApellidos.setRoundBottomLeft(50);
+        txtApellidos.setRoundBottomRight(50);
+        txtApellidos.setRoundTopLeft(50);
+        txtApellidos.setRoundTopRight(50);
+
+>>>>>>> origin/Aron
         jTextField2.setBackground(new java.awt.Color(170, 170, 170));
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
         jTextField2.setBorder(null);
@@ -375,24 +431,28 @@ public class form3 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
-        panelRound4.setLayout(panelRound4Layout);
-        panelRound4Layout.setHorizontalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
+        javax.swing.GroupLayout txtApellidosLayout = new javax.swing.GroupLayout(txtApellidos);
+        txtApellidos.setLayout(txtApellidosLayout);
+        txtApellidosLayout.setHorizontalGroup(
+            txtApellidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtApellidosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelRound4Layout.setVerticalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
+        txtApellidosLayout.setVerticalGroup(
+            txtApellidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtApellidosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
+<<<<<<< HEAD
         panelRound2.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 250, -1));
+=======
+        panelRound2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 250, -1));
+>>>>>>> origin/Aron
 
         panelRound5.setBackground(new java.awt.Color(170, 170, 170));
         panelRound5.setForeground(new java.awt.Color(128, 128, 128));
@@ -401,9 +461,15 @@ public class form3 extends javax.swing.JFrame {
         panelRound5.setRoundTopLeft(50);
         panelRound5.setRoundTopRight(50);
 
+<<<<<<< HEAD
         jTextField3.setBackground(new java.awt.Color(170, 170, 170));
         jTextField3.setForeground(new java.awt.Color(255, 255, 255));
         jTextField3.setBorder(null);
+=======
+        txtCorreo.setBackground(new java.awt.Color(170, 170, 170));
+        txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        txtCorreo.setBorder(null);
+>>>>>>> origin/Aron
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
         panelRound5.setLayout(panelRound5Layout);
@@ -411,6 +477,7 @@ public class form3 extends javax.swing.JFrame {
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
 <<<<<<< HEAD
@@ -420,12 +487,21 @@ public class form3 extends javax.swing.JFrame {
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
 =======
 >>>>>>> victor
+=======
+<<<<<<< HEAD
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+>>>>>>> Jaime
+>>>>>>> origin/Aron
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -433,8 +509,13 @@ public class form3 extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+<<<<<<< HEAD
         jLabel11.setText("Fecha nacimieto");
         panelRound2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 190, 45));
+=======
+        jLabel11.setText("Contraseña");
+        panelRound2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 190, 45));
+>>>>>>> origin/Aron
 
         panelRound6.setBackground(new java.awt.Color(170, 170, 170));
         panelRound6.setRoundBottomLeft(50);
@@ -442,9 +523,15 @@ public class form3 extends javax.swing.JFrame {
         panelRound6.setRoundTopLeft(50);
         panelRound6.setRoundTopRight(50);
 
+<<<<<<< HEAD
         jTextField4.setBackground(new java.awt.Color(170, 170, 170));
         jTextField4.setForeground(new java.awt.Color(255, 255, 255));
         jTextField4.setBorder(null);
+=======
+        txtPass.setBackground(new java.awt.Color(170, 170, 170));
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setBorder(null);
+>>>>>>> origin/Aron
 
         javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
         panelRound6.setLayout(panelRound6Layout);
@@ -452,14 +539,18 @@ public class form3 extends javax.swing.JFrame {
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound6Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+=======
+                .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
         panelRound6Layout.setVerticalGroup(
             panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -472,9 +563,15 @@ public class form3 extends javax.swing.JFrame {
         panelRound7.setRoundTopLeft(50);
         panelRound7.setRoundTopRight(50);
 
+<<<<<<< HEAD
         jTextField5.setBackground(new java.awt.Color(170, 170, 170));
         jTextField5.setForeground(new java.awt.Color(255, 255, 255));
         jTextField5.setBorder(null);
+=======
+        txtDirección.setBackground(new java.awt.Color(170, 170, 170));
+        txtDirección.setForeground(new java.awt.Color(255, 255, 255));
+        txtDirección.setBorder(null);
+>>>>>>> origin/Aron
 
         javax.swing.GroupLayout panelRound7Layout = new javax.swing.GroupLayout(panelRound7);
         panelRound7.setLayout(panelRound7Layout);
@@ -482,13 +579,18 @@ public class form3 extends javax.swing.JFrame {
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound7Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+=======
+                .addComponent(txtDirección, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
         panelRound7Layout.setVerticalGroup(
             panelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound7Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -497,6 +599,13 @@ public class form3 extends javax.swing.JFrame {
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
 =======
 >>>>>>> victor
+=======
+<<<<<<< HEAD
+                .addComponent(txtDirección)
+=======
+                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+>>>>>>> Jaime
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
 
@@ -508,9 +617,20 @@ public class form3 extends javax.swing.JFrame {
         panelRound8.setRoundTopLeft(50);
         panelRound8.setRoundTopRight(50);
 
+<<<<<<< HEAD
         jTextField6.setBackground(new java.awt.Color(170, 170, 170));
         jTextField6.setForeground(new java.awt.Color(255, 255, 255));
         jTextField6.setBorder(null);
+=======
+        txtTelefono.setBackground(new java.awt.Color(170, 170, 170));
+        txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        txtTelefono.setBorder(null);
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+>>>>>>> origin/Aron
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);
@@ -518,13 +638,18 @@ public class form3 extends javax.swing.JFrame {
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+=======
+                .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
         panelRound8Layout.setVerticalGroup(
             panelRound8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound8Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -533,11 +658,23 @@ public class form3 extends javax.swing.JFrame {
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
 =======
 >>>>>>> victor
+=======
+<<<<<<< HEAD
+                .addComponent(txtTelefono)
+=======
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+>>>>>>> Jaime
+>>>>>>> origin/Aron
                 .addContainerGap())
         );
 
         panelRound2.add(panelRound8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 240, 39));
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Aron
         panelRound9.setBackground(new java.awt.Color(170, 170, 170));
         panelRound9.setForeground(new java.awt.Color(128, 128, 128));
         panelRound9.setRoundBottomLeft(50);
@@ -711,17 +848,25 @@ public class form3 extends javax.swing.JFrame {
 
         panelRound1.setBackground(new java.awt.Color(29, 29, 27));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> Jaime
+>>>>>>> origin/Aron
         panelRound1.setRoundBottomLeft(50);
         panelRound1.setRoundBottomRight(50);
         panelRound1.setRoundTopLeft(50);
         panelRound1.setRoundTopRight(50);
 
+<<<<<<< HEAD
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
+=======
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+>>>>>>> origin/Aron
         jButton3.setText("Fotografía");
         jButton3.setBorder(null);
         jButton3.setContentAreaFilled(false);
@@ -730,6 +875,7 @@ public class form3 extends javax.swing.JFrame {
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -765,17 +911,112 @@ public class form3 extends javax.swing.JFrame {
         );
 
         getContentPane().add(panelRound17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1370, 590));
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelRound2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 120, 40));
+
+        panelRound9.setRoundBottomLeft(50);
+        panelRound9.setRoundBottomRight(50);
+        panelRound9.setRoundTopLeft(50);
+        panelRound9.setRoundTopRight(50);
+
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton5.setText("Listo");
+        jButton5.setBorder(null);
+        jButton5.setContentAreaFilled(false);
+
+        javax.swing.GroupLayout panelRound9Layout = new javax.swing.GroupLayout(panelRound9);
+        panelRound9.setLayout(panelRound9Layout);
+        panelRound9Layout.setHorizontalGroup(
+            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound9Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+        panelRound9Layout.setVerticalGroup(
+            panelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelRound2.add(panelRound9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 120, 40));
+
+        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        panelRound2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 220, 140));
+
+        javax.swing.GroupLayout panelRound17Layout = new javax.swing.GroupLayout(panelRound17);
+        panelRound17.setLayout(panelRound17Layout);
+        panelRound17Layout.setHorizontalGroup(
+            panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound17Layout.createSequentialGroup()
+                .addGap(346, 346, 346)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(335, Short.MAX_VALUE))
+        );
+        panelRound17Layout.setVerticalGroup(
+            panelRound17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound17Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelRound17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1370, 590));
+>>>>>>> origin/Aron
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+   
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+<<<<<<< HEAD
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
     }//GEN-LAST:event_jButton1ActionPerformed
+=======
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+        Webcam wc = new Webcam();
+        wc.setVisible(true);
+        this.dispose();
+     
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+>>>>>>> origin/Aron
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
@@ -849,11 +1090,18 @@ public class form3 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+<<<<<<< HEAD
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+=======
+    private javax.swing.JButton jButton5;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+>>>>>>> origin/Aron
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -862,44 +1110,52 @@ public class form3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+<<<<<<< HEAD
     private javax.swing.JPanel jPanel2;
+=======
+>>>>>>> origin/Aron
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< HEAD
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
+=======
+    private javax.swing.JTextField jTextField10;
+>>>>>>> origin/Aron
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private forms_proyect_expotec.PanelRound panelRound1;
+<<<<<<< HEAD
     private forms_proyect_expotec.PanelRound panelRound10;
     private forms_proyect_expotec.PanelRound panelRound11;
     private forms_proyect_expotec.PanelRound panelRound12;
     private forms_proyect_expotec.PanelRound panelRound13;
     private forms_proyect_expotec.PanelRound panelRound14;
+=======
+    private forms_proyect_expotec.PanelRound panelRound11;
+>>>>>>> origin/Aron
     private forms_proyect_expotec.PanelRound panelRound15;
     private forms_proyect_expotec.PanelRound panelRound16;
     private forms_proyect_expotec.PanelRound panelRound17;
     private forms_proyect_expotec.PanelRound panelRound2;
     private forms_proyect_expotec.PanelRound panelRound3;
-    private forms_proyect_expotec.PanelRound panelRound4;
     private forms_proyect_expotec.PanelRound panelRound5;
     private forms_proyect_expotec.PanelRound panelRound6;
     private forms_proyect_expotec.PanelRound panelRound7;
     private forms_proyect_expotec.PanelRound panelRound8;
     private forms_proyect_expotec.PanelRound panelRound9;
+    private forms_proyect_expotec.PanelRound txtApellidos;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDirección;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
