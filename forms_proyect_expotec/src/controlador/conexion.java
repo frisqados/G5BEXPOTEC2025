@@ -36,5 +36,8 @@ public class conexion {
     public Connection getConnection() {
         return conn;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> victor
 }

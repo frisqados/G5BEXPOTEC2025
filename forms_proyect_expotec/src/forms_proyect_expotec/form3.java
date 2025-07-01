@@ -414,9 +414,12 @@ public class form3 extends javax.swing.JFrame {
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,9 +491,12 @@ public class form3 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
                 .addContainerGap())
         );
 
@@ -521,9 +527,12 @@ public class form3 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
                 .addContainerGap())
         );
 
@@ -777,6 +786,7 @@ public class form3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -797,6 +807,8 @@ public class form3 extends javax.swing.JFrame {
 
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
     /**
      * @param args the command line arguments
      */

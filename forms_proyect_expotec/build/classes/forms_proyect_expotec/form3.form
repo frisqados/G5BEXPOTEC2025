@@ -694,9 +694,12 @@
                           <Component id="jTextField3" min="-2" pref="228" max="-2" attributes="0"/>
                           <EmptySpace pref="16" max="32767" attributes="0"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -829,9 +832,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextField5" pref="27" max="32767" attributes="0"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -885,9 +891,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextField6" pref="27" max="32767" attributes="0"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Jaime
 =======
 >>>>>>> parent of f32b461 (Merge remote-tracking branch 'origin/victor' into victor)
+=======
+>>>>>>> victor
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
