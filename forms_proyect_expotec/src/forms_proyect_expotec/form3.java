@@ -599,9 +599,13 @@ public class form3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> db1a39f (Se arregla la clase Form 3)
+=======
+
+>>>>>>> origin/Aron
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -609,8 +613,11 @@ public class form3 extends javax.swing.JFrame {
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
 <<<<<<< HEAD
+<<<<<<< HEAD
     }//GEN-LAST:event_jTextField6ActionPerformed
 =======
+=======
+>>>>>>> origin/Aron
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -622,7 +629,10 @@ public class form3 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+<<<<<<< HEAD
 >>>>>>> db1a39f (Se arregla la clase Form 3)
+=======
+>>>>>>> origin/Aron
 
     /**
      * @param args the command line arguments
