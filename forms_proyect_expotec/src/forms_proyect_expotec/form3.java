@@ -394,7 +394,11 @@ public class form3 extends javax.swing.JFrame {
 =======
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
+<<<<<<< HEAD
 >>>>>>> Jaime
+=======
+>>>>>>> origin/victor
+>>>>>>> origin/Develop
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,7 +472,11 @@ public class form3 extends javax.swing.JFrame {
                 .addComponent(txtDirección)
 =======
                 .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+<<<<<<< HEAD
 >>>>>>> Jaime
+=======
+>>>>>>> origin/victor
+>>>>>>> origin/Develop
                 .addContainerGap())
         );
 
@@ -506,7 +514,11 @@ public class form3 extends javax.swing.JFrame {
                 .addComponent(txtTelefono)
 =======
                 .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+<<<<<<< HEAD
 >>>>>>> Jaime
+=======
+>>>>>>> origin/victor
+>>>>>>> origin/Develop
                 .addContainerGap())
         );
 
@@ -686,7 +698,11 @@ public class form3 extends javax.swing.JFrame {
         panelRound2.add(panelRound14, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 240, -1));
 
         panelRound1.setBackground(new java.awt.Color(29, 29, 27));
+<<<<<<< HEAD
 >>>>>>> Jaime
+=======
+>>>>>>> origin/victor
+>>>>>>> origin/Develop
         panelRound1.setRoundBottomLeft(50);
         panelRound1.setRoundBottomRight(50);
         panelRound1.setRoundTopLeft(50);
@@ -803,7 +819,11 @@ public class form3 extends javax.swing.JFrame {
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> Jaime
+=======
+>>>>>>> origin/victor
+>>>>>>> origin/Develop
     /**
      * @param args the command line arguments
      */
