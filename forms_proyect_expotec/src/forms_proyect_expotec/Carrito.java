@@ -30,21 +30,21 @@ public class Carrito extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton13 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        btnmarcas = new javax.swing.JButton();
+        btnnuevo = new javax.swing.JButton();
+        btnofertas = new javax.swing.JButton();
+        btncategorias = new javax.swing.JButton();
+        btnmembresias = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btninfo = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnayuda = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btniniciar = new javax.swing.JButton();
+        btnregistrarse = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -104,45 +104,45 @@ public class Carrito extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(60, 60, 60));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("Marcas");
-        jButton13.setBorder(null);
-        jButton13.setContentAreaFilled(false);
-        jPanel2.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 115, -1));
+        btnmarcas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnmarcas.setForeground(new java.awt.Color(255, 255, 255));
+        btnmarcas.setText("Marcas");
+        btnmarcas.setBorder(null);
+        btnmarcas.setContentAreaFilled(false);
+        jPanel2.add(btnmarcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 115, -1));
 
-        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Nuevo");
-        jButton5.setBorder(null);
-        jButton5.setContentAreaFilled(false);
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 115, -1));
+        btnnuevo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnnuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnnuevo.setText("Nuevo");
+        btnnuevo.setBorder(null);
+        btnnuevo.setContentAreaFilled(false);
+        jPanel2.add(btnnuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 115, -1));
 
-        jButton14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("Ofertas");
-        jButton14.setBorder(null);
-        jButton14.setContentAreaFilled(false);
-        jPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 115, -1));
+        btnofertas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnofertas.setForeground(new java.awt.Color(255, 255, 255));
+        btnofertas.setText("Ofertas");
+        btnofertas.setBorder(null);
+        btnofertas.setContentAreaFilled(false);
+        jPanel2.add(btnofertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 115, -1));
 
-        jButton17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(255, 255, 255));
-        jButton17.setText("Categorias");
-        jButton17.setBorder(null);
-        jButton17.setContentAreaFilled(false);
-        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, -10, 115, 42));
+        btncategorias.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btncategorias.setForeground(new java.awt.Color(255, 255, 255));
+        btncategorias.setText("Categorias");
+        btncategorias.setBorder(null);
+        btncategorias.setContentAreaFilled(false);
+        jPanel2.add(btncategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, -10, 115, 42));
 
-        jButton18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton18.setForeground(new java.awt.Color(255, 255, 255));
-        jButton18.setText("Membresías");
-        jButton18.setBorder(null);
-        jButton18.setContentAreaFilled(false);
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        btnmembresias.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnmembresias.setForeground(new java.awt.Color(255, 255, 255));
+        btnmembresias.setText("Membresías");
+        btnmembresias.setBorder(null);
+        btnmembresias.setContentAreaFilled(false);
+        btnmembresias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                btnmembresiasActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 115, 20));
+        jPanel2.add(btnmembresias, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 115, 20));
 
         jPanel1.setBackground(new java.awt.Color(29, 29, 27));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,20 +155,20 @@ public class Carrito extends javax.swing.JFrame {
         jLabel1.setText("METSHOP");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 272, 61));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Dutch801 XBd BT", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("informacion");
-        jButton1.setBorder(new javax.swing.border.MatteBorder(null));
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btninfo.setBackground(new java.awt.Color(0, 0, 0));
+        btninfo.setFont(new java.awt.Font("Dutch801 XBd BT", 0, 14)); // NOI18N
+        btninfo.setForeground(new java.awt.Color(255, 255, 255));
+        btninfo.setText("informacion");
+        btninfo.setBorder(new javax.swing.border.MatteBorder(null));
+        btninfo.setBorderPainted(false);
+        btninfo.setContentAreaFilled(false);
+        btninfo.setFocusPainted(false);
+        btninfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btninfoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 30, 110, 30));
+        jPanel1.add(btninfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 30, 110, 30));
 
         jTextField1.setBackground(new java.awt.Color(60, 60, 60));
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
@@ -176,14 +176,14 @@ public class Carrito extends javax.swing.JFrame {
         jTextField1.setBorder(null);
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 630, 20));
 
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Ayuda");
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.setFocusPainted(false);
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 73, 30));
+        btnayuda.setBackground(new java.awt.Color(0, 0, 0));
+        btnayuda.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnayuda.setForeground(new java.awt.Color(255, 255, 255));
+        btnayuda.setText("Ayuda");
+        btnayuda.setBorderPainted(false);
+        btnayuda.setContentAreaFilled(false);
+        btnayuda.setFocusPainted(false);
+        jPanel1.add(btnayuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 73, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/iconito.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 80));
@@ -194,20 +194,20 @@ public class Carrito extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Corazon.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 90, -1, 41));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Captura de pantalla 2025-06-07 2.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 120, 60));
+        btniniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Captura de pantalla 2025-06-07 2.png"))); // NOI18N
+        btniniciar.setBorder(null);
+        btniniciar.setContentAreaFilled(false);
+        jPanel1.add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 120, 60));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Registarse.png"))); // NOI18N
-        jButton3.setBorder(null);
-        jButton3.setContentAreaFilled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnregistrarse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Registarse.png"))); // NOI18N
+        btnregistrarse.setBorder(null);
+        btnregistrarse.setContentAreaFilled(false);
+        btnregistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnregistrarseActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 120, 60));
+        jPanel1.add(btnregistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 120, 60));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Campanita (1).png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 90, -1, 41));
@@ -942,17 +942,17 @@ public class Carrito extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void btnmembresiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmembresiasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_btnmembresiasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btninfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninfoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btninfoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarseActionPerformed
              // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnregistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -990,15 +990,15 @@ public class Carrito extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnayuda;
+    private javax.swing.JButton btncategorias;
+    private javax.swing.JButton btninfo;
+    private javax.swing.JButton btniniciar;
+    private javax.swing.JButton btnmarcas;
+    private javax.swing.JButton btnmembresias;
+    private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnofertas;
+    private javax.swing.JButton btnregistrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
