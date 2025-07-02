@@ -1,7 +1,9 @@
 package vista;
 
-import modelo.Producto;
+import modelo.Producto; // Asegúrate de que esta clase Producto tenga un constructor o setters adecuados si la usas.
 import controlador.conexion; // Importa tu clase de conexión
+import util.UserSession; // Importa la clase UserSession para detectar al usuario conectado
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -11,9 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
-import java.sql.Connection; // Para Connection
-import java.sql.PreparedStatement; // Para PreparedStatement
-import java.sql.SQLException; // Para SQLException
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class IngresoProductoFrame extends JFrame {
     private JTextField txtNombre, txtPrecio, txtStock, txtCategoria;
@@ -24,7 +26,7 @@ public class IngresoProductoFrame extends JFrame {
     public IngresoProductoFrame() {
         setTitle("Ingresar Nuevo Producto - Panel Administrativo");
         setSize(800, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cambiado a DISPOSE_ON_CLOSE para no cerrar toda la app
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(20, 20));
 
@@ -49,7 +51,7 @@ public class IngresoProductoFrame extends JFrame {
 
         gbc.gridx = 0; gbc.gridy = 1;
         formPanel.add(createLabel("Descripción:", new Font("SansSerif", Font.BOLD, 14)), gbc);
-        
+
         gbc.gridx = 1; gbc.weightx = 1.0;
         txtDescripcion = new JTextArea(5, 30);
         txtDescripcion.setLineWrap(true);
@@ -75,14 +77,14 @@ public class IngresoProductoFrame extends JFrame {
         btnCargarImagen.setForeground(Color.BLACK);
         btnCargarImagen.setFocusPainted(false);
         btnCargarImagen.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         lblImagenPreview = new JLabel("No hay imagen seleccionada", SwingConstants.CENTER);
         lblImagenPreview.setPreferredSize(new Dimension(150, 100));
         lblImagenPreview.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         lblImagenPreview.setBackground(Color.WHITE);
         lblImagenPreview.setOpaque(true);
         lblImagenPreview.setFont(new Font("SansSerif", Font.ITALIC, 10));
-        
+
         imageUploadPanel.add(btnCargarImagen, BorderLayout.WEST);
         imageUploadPanel.add(lblImagenPreview, BorderLayout.CENTER);
         formPanel.add(imageUploadPanel, gbc);
@@ -124,7 +126,7 @@ public class IngresoProductoFrame extends JFrame {
         btnGuardar.addActionListener(e -> {
             guardarProducto(); // Llama al método para guardar el producto directamente
         });
-        
+
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
@@ -132,10 +134,18 @@ public class IngresoProductoFrame extends JFrame {
     }
 
     private void guardarProducto() {
+        // --- Paso 1: Verificar si hay un usuario logueado ---
+        if (!UserSession.isLoggedIn()) {
+            JOptionPane.showMessageDialog(this, "Debe iniciar sesión para subir productos.", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idUsuarioSubida = UserSession.getCurrentUserId(); // Obtiene el ID del usuario conectado
+
         String nombre = txtNombre.getText();
         String descripcion = txtDescripcion.getText();
         String categoria = txtCategoria.getText();
-        
+
         if (nombre.isEmpty() || descripcion.isEmpty() || txtPrecio.getText().isEmpty() || txtStock.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
             return;
@@ -162,7 +172,9 @@ public class IngresoProductoFrame extends JFrame {
                 return;
             }
 
-            String sql = "INSERT INTO Productos (nombre, descripcion, precio, stock, categoria, imagen) VALUES (?, ?, ?, ?, ?, ?)";
+            // --- SQL: Incluir id_usuario_subida en la inserción ---
+            // Asegúrate de que la columna 'id_usuario_subida' exista en tu tabla 'Productos'
+            String sql = "INSERT INTO Productos (nombre, descripcion, precio, stock, categoria, imagen, id_usuario_subida) VALUES (?, ?, ?, ?, ?, ?, ?)";
             ps = connection.prepareStatement(sql);
             ps.setString(1, nombre);
             ps.setString(2, descripcion);
@@ -170,6 +182,7 @@ public class IngresoProductoFrame extends JFrame {
             ps.setInt(4, stock);
             ps.setString(5, categoria);
             ps.setBytes(6, imagenBytes); // Manejo de imagen como byte array
+            ps.setInt(7, idUsuarioSubida); // Asigna el ID del usuario conectado
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
@@ -222,6 +235,10 @@ public class IngresoProductoFrame extends JFrame {
     }
 
     public static void main(String[] args) {
+        // Simula un usuario logueado para probar el IngresoProductoFrame
+        // Asegúrate de que este ID exista en tu tabla Usuarios para pruebas.
+        UserSession.login(1, "admin_test", "admin@example.com");
+
         SwingUtilities.invokeLater(IngresoProductoFrame::new);
     }
 }
