@@ -192,7 +192,7 @@ public class Bienvenida extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 80, 700, 80));
+        jPanel5.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 80, 700, 80));
 
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
