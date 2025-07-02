@@ -4,22 +4,25 @@
  */
 package forms_proyect_expotec;
 
+
+import forms_proyect_expotec.CarritoForm;
+import javax.swing.JLabel; // Solo si usas JLabels para contenido general, no para info de usuario
 import java.awt.Color;
+import javax.swing.JOptionPane; // Para mensajes de error/advertencia
 
-/**
- *
- * @author admp1
- */
+
+import util.UserSession; // Importa la clase UserSession
+
 public class form1 extends javax.swing.JFrame {
-
-    /**
-     * Creates new form form1
-     */
+    
+   private JLabel contentLabel;
+    
     public form1() {
         initComponents();
         setTitle("Principal");
         this.getContentPane().setBackground(new Color(60,60,60));
         
+        detectUserSession();
         
 
 
@@ -80,7 +83,7 @@ public class form1 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        btnCarrito = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton13 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -551,8 +554,13 @@ public class form1 extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Campanita (1).png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 90, -1, 41));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Carrito.png"))); // NOI18N
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 90, -1, 41));
+        btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Carrito.png"))); // NOI18N
+        btnCarrito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCarritoMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 90, -1, 41));
 
         jPanel2.setBackground(new java.awt.Color(60, 60, 60));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -616,6 +624,46 @@ public class form1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCarritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCarritoMouseClicked
+        
+        detectUserSession();
+        
+        CarritoForm frm = new CarritoForm();
+        frm.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_btnCarritoMouseClicked
+    
+    private void detectUserSession() {
+        if (UserSession.isLoggedIn()) {
+            int userId = UserSession.getCurrentUserId();
+            String userName = UserSession.getCurrentUserName();
+            String userEmail = UserSession.getCurrentUserEmail();
+
+            // *** AQUÍ ES DONDE EL PROGRAMA "DETECTA" AL USUARIO ***
+            // Las variables 'userId', 'userName', y 'userEmail' ahora contienen la información
+            // del usuario conectado. Puedes usarlas para:
+            // 1. Cargar datos específicos del usuario desde la base de datos:
+            //    Por ejemplo: loadUserSpecificData(userId);
+            // 2. Habilitar o deshabilitar funcionalidades basadas en el rol del usuario:
+            //    if (userName != null && userName.equalsIgnoreCase("administrador")) {
+            //        // Lógica para administradores, por ejemplo, habilitar un menú oculto,
+            //        // o permitir acceso a ciertas funciones.
+            //        System.out.println("form1: Usuario administrador detectado. Funcionalidades de admin habilitadas.");
+            //    } else {
+            //        System.out.println("form1: Usuario normal detectado.");
+            //    }
+            // 3. Cualquier otra personalización de la lógica de negocio basada en el usuario.
+
+            System.out.println("form1: Usuario conectado detectado. ID: " + userId + ", Nombre: " + userName + ", Email: " + userEmail);
+            // No se actualiza ningún componente visual con esta información.
+        } else {
+            // Esto no debería ocurrir si el login fue exitoso, pero es una buena práctica manejarlo.
+            JOptionPane.showMessageDialog(this, "No hay sesión de usuario activa. Por favor, inicie sesión.", "Sesión no encontrada", JOptionPane.WARNING_MESSAGE);
+            // Opcional: redirigir al formulario de login si no hay sesión activa
+            // new YourLoginForm().setVisible(true); // Asegúrate de tener una instancia de YourLoginForm
+            // this.dispose();
+            System.out.println("form1: No hay usuario logueado.");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -657,6 +705,7 @@ public class form1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnCarrito;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -684,7 +733,6 @@ public class form1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
