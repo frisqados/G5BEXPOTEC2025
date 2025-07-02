@@ -19,6 +19,9 @@ public class form1 extends javax.swing.JFrame {
         initComponents();
         setTitle("Principal");
         this.getContentPane().setBackground(new Color(60,60,60));
+        
+        
+
 
     }
 
