@@ -23,10 +23,10 @@ public class ProductoCardPanel extends JPanel {
         setLayout(new BorderLayout(8, 8));
         
         setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(220, 220, 220), 1),
+            BorderFactory.createLineBorder(new Color(112,112,108), 1),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
-        setBackground(Color.WHITE);
+        setBackground(new Color(112,112,108));
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(Color.WHITE);
@@ -67,7 +67,7 @@ public class ProductoCardPanel extends JPanel {
 
         JButton verDetallesButton = new JButton("Ver Detalles");
         verDetallesButton.setFont(new Font("SansSerif", Font.BOLD, 11));
-        verDetallesButton.setBackground(new Color(255, 153, 0));
+        verDetallesButton.setBackground(new Color(34, 70, 113));
         verDetallesButton.setForeground(Color.WHITE);
         verDetallesButton.setFocusPainted(false);
         verDetallesButton.setBorderPainted(false);
@@ -88,7 +88,7 @@ public class ProductoCardPanel extends JPanel {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
-        infoPanel.setBackground(Color.WHITE);
+        infoPanel.setBackground(new Color(112,112,108));
 
         JLabel nombreLabel = new JLabel("<html><b>" + producto.getNombre() + "</b></html>");
         nombreLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
@@ -106,7 +106,7 @@ public class ProductoCardPanel extends JPanel {
 
         JLabel stockLabel = new JLabel("Stock: " + producto.getStock());
         stockLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        stockLabel.setForeground(new Color(100, 100, 100));
+        stockLabel.setForeground(new Color(245,245,245));
         stockLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         infoPanel.add(stockLabel);
 

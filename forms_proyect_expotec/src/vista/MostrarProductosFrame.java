@@ -33,7 +33,7 @@ public class MostrarProductosFrame extends JFrame {
         productosPanel = new JPanel();
         productosPanel.setLayout(new GridLayout(0, 4, 25, 25));
         productosPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
-        productosPanel.setBackground(new Color(245, 245, 245));
+        productosPanel.setBackground(new Color(187,187,187));
 
         cargarProductosDesdeBD(); // Llama al método para cargar productos directamente
 
