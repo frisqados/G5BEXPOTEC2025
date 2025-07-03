@@ -14,7 +14,9 @@ public class conexion {
 
     public void conectar() {
         try {
-            String cadena = "jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:6543/postgres?user=postgres.dmysuzpnstbefvvklffu&password=crash3344";
+            // CADENA DE CONEXIÓN MODIFICADA
+            // Añade &prepareThreshold=0 al final de la cadena de conexión
+            String cadena = "jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:6543/postgres?user=postgres.dmysuzpnstbefvvklffu&password=crash3344&prepareThreshold=0";
             conn = DriverManager.getConnection(cadena);
             System.out.println("Conectado a la base de datos");
         } catch (SQLException e) {
@@ -34,8 +36,13 @@ public class conexion {
     }
 
     public Connection getConnection() {
-        if (conn == null) {
-            conectar(); // Asegúrate de que la conexión esté abierta
+        try {
+            if (conn == null || conn.isClosed()) {
+                conectar();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al verificar estado de la conexión: " + e.getMessage());
+            conectar(); // Intentar reconectar si la conexión se perdió
         }
         return conn;
     }
