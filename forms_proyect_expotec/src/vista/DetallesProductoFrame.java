@@ -4,6 +4,7 @@ import modelo.Producto;
 import controlador.conexion;
 import util.UserSession;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder; // Added this import, it was missing for EmptyBorder
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -15,14 +16,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.io.File;
-import java.nio.file.Files;
 
-<<<<<<< HEAD
-import forms_proyect_expotec.CarritoForm; // Asegúrate de que esta importación sea correcta si CarritoForm está en otro paquete
-=======
+// Importaciones eliminadas por ser innecesarias para este archivo:
+// import java.io.File;
+// import java.nio.file.Files;
+
+// Asumo que esta importación es correcta y CarritoForm existe en ese paquete
 import forms_proyect_expotec.CarritoForm;
->>>>>>> origin/aron2
 
 public class DetallesProductoFrame extends JFrame {
 
@@ -33,10 +33,7 @@ public class DetallesProductoFrame extends JFrame {
     private JPanel detallesPanel;
     private JButton buyNowButton;
     private JButton addToCartButton;
-<<<<<<< HEAD
-    private JButton addToWishlistButton; // Nuevo botón para lista de deseos
-=======
->>>>>>> origin/aron2
+    private JButton addToWishlistButton; // Botón para lista de deseos
 
     private CarritoForm carritoFormInstance;
 
@@ -167,12 +164,8 @@ public class DetallesProductoFrame extends JFrame {
         scrollDesc.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230), 1));
         scrollDesc.setPreferredSize(new Dimension(500, 150));
 
-<<<<<<< HEAD
         gbc.gridy = row;
         gbc.weighty = 1.0;
-=======
-        gbc.gridy = row; gbc.weighty = 1.0;
->>>>>>> origin/aron2
         gbc.fill = GridBagConstraints.BOTH;
         detallesPanel.add(scrollDesc, gbc);
         gbc.weighty = 0;
@@ -197,13 +190,9 @@ public class DetallesProductoFrame extends JFrame {
         gbc.insets = new Insets(20, 0, 10, 0);
         JLabel cantidadLabel = new JLabel("Cantidad:");
         cantidadLabel.setFont(labelFont);
-<<<<<<< HEAD
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.gridwidth = 1;
-=======
-        gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 1;
->>>>>>> origin/aron2
         gbc.anchor = GridBagConstraints.WEST;
         detallesPanel.add(cantidadLabel, gbc);
 
@@ -211,12 +200,8 @@ public class DetallesProductoFrame extends JFrame {
         cantidadSpinner = new JSpinner(spinnerModel);
         cantidadSpinner.setFont(valueFont);
         cantidadSpinner.setPreferredSize(new Dimension(80, 30));
-<<<<<<< HEAD
         gbc.gridx = 1;
         gbc.gridy = row;
-=======
-        gbc.gridx = 1; gbc.gridy = row;
->>>>>>> origin/aron2
         gbc.anchor = GridBagConstraints.WEST;
         detallesPanel.add(cantidadSpinner, gbc);
         row++;
@@ -227,13 +212,9 @@ public class DetallesProductoFrame extends JFrame {
         }
 
         gbc.insets = new Insets(10, 0, 5, 0);
-<<<<<<< HEAD
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.gridwidth = 2;
-=======
-        gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 2;
->>>>>>> origin/aron2
         gbc.anchor = GridBagConstraints.WEST;
         detallesPanel.add(new JSeparator(), gbc);
         row++;
@@ -288,8 +269,7 @@ public class DetallesProductoFrame extends JFrame {
         buyNowButton.addActionListener(e -> realizarCompra());
         actionButtonPanel.add(buyNowButton);
 
-<<<<<<< HEAD
-        // --- Nuevo: Botón de "Agregar a Lista de Deseos" ---
+        // --- Botón para Lista de Deseos ---
         addToWishlistButton = new JButton("Agregar a Lista de Deseos");
         addToWishlistButton.setFont(new Font("SansSerif", Font.BOLD, 14));
         addToWishlistButton.setBackground(new Color(173, 216, 230)); // Azul claro
@@ -300,49 +280,32 @@ public class DetallesProductoFrame extends JFrame {
         addToWishlistButton.setEnabled(UserSession.isLoggedIn()); // Solo habilitado si hay sesión
         addToWishlistButton.addActionListener(e -> addProductoToWishlist(producto.getId()));
         actionButtonPanel.add(addToWishlistButton);
-        // --- Fin Nuevo ---
+        // --- Fin Botón Lista de Deseos ---
 
-
-=======
->>>>>>> origin/aron2
+        // Mensajes de stock y login
         if (!hasStock) {
             JLabel noStockMsg = new JLabel("Producto sin stock.", SwingConstants.CENTER);
             noStockMsg.setFont(new Font("SansSerif", Font.BOLD, 16));
             noStockMsg.setForeground(Color.RED);
-<<<<<<< HEAD
             gbc.gridy = row;
             gbc.gridwidth = 2;
             gbc.insets = new Insets(10, 0, 0, 0);
             detallesPanel.add(noStockMsg, gbc);
             row++;
         } else if (!UserSession.isLoggedIn()) {
-            JLabel loginMsg = new JLabel("Inicia sesión para añadir al carrito, comprar o agregar a deseos.", SwingConstants.CENTER); // Mensaje actualizado
+            JLabel loginMsg = new JLabel("Inicia sesión para añadir al carrito, comprar o agregar a deseos.", SwingConstants.CENTER);
             loginMsg.setFont(new Font("SansSerif", Font.BOLD, 16));
             loginMsg.setForeground(new Color(0, 100, 0));
             gbc.gridy = row;
             gbc.gridwidth = 2;
             gbc.insets = new Insets(10, 0, 0, 0);
-=======
-            gbc.gridy = row; gbc.gridwidth = 2; gbc.insets = new Insets(10, 0, 0, 0);
-            detallesPanel.add(noStockMsg, gbc);
-            row++;
-        } else if (!UserSession.isLoggedIn()) {
-            JLabel loginMsg = new JLabel("Inicia sesión para añadir al carrito o comprar.", SwingConstants.CENTER);
-            loginMsg.setFont(new Font("SansSerif", Font.BOLD, 16));
-            loginMsg.setForeground(new Color(0, 100, 0));
-            gbc.gridy = row; gbc.gridwidth = 2; gbc.insets = new Insets(10, 0, 0, 0);
->>>>>>> origin/aron2
             detallesPanel.add(loginMsg, gbc);
             row++;
         }
 
-<<<<<<< HEAD
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridwidth = 2;
-=======
-        gbc.gridy = row; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.gridwidth = 2;
->>>>>>> origin/aron2
         gbc.insets = new Insets(20, 0, 0, 0);
         detallesPanel.add(actionButtonPanel, gbc);
 
@@ -402,7 +365,7 @@ public class DetallesProductoFrame extends JFrame {
                 return;
             }
 
-            connection.setAutoCommit(false);
+            connection.setAutoCommit(false); // Iniciar transacción
 
             int idCarrito = -1;
 
@@ -414,7 +377,7 @@ public class DetallesProductoFrame extends JFrame {
             if (rs.next()) {
                 idCarrito = rs.getInt("id_carrito");
             } else {
-                String sqlInsertCarrito = "INSERT INTO Carritos (id_usuario, fecha_agregado) VALUES (?, CURRENT_TIMESTAMP)";
+                String sqlInsertCarrito = "INSERT INTO Carritos (id_usuario, fecha_creacion) VALUES (?, CURRENT_TIMESTAMP)"; // Asumo que es fecha_creacion
                 psInsertCarrito = connection.prepareStatement(sqlInsertCarrito, Statement.RETURN_GENERATED_KEYS);
                 psInsertCarrito.setInt(1, currentUserId);
                 psInsertCarrito.executeUpdate();
@@ -464,11 +427,7 @@ public class DetallesProductoFrame extends JFrame {
                 int openCart = JOptionPane.showConfirmDialog(this, "¿Deseas ver tu carrito de compras ahora?", "Ver Carrito", JOptionPane.YES_NO_OPTION);
                 if (openCart == JOptionPane.YES_OPTION) {
                     if (carritoFormInstance == null) {
-<<<<<<< HEAD
                         carritoFormInstance = new CarritoForm();
-=======
-                         carritoFormInstance = new CarritoForm();
->>>>>>> origin/aron2
                     }
                     carritoFormInstance.setVisible(true);
                     carritoFormInstance.toFront();
@@ -478,13 +437,9 @@ public class DetallesProductoFrame extends JFrame {
 
         } catch (SQLException e) {
             try {
-<<<<<<< HEAD
                 if (connection != null && !connection.isClosed()) {
                     connection.rollback();
                 }
-=======
-                if (connection != null && !connection.isClosed()) connection.rollback();
->>>>>>> origin/aron2
             } catch (SQLException ex) {
                 System.err.println("Error al revertir la transacción de carrito: " + ex.getMessage());
             }
@@ -493,29 +448,6 @@ public class DetallesProductoFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Error al añadir al carrito: " + e.getMessage(), "Error de Carrito", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
-<<<<<<< HEAD
-                if (rs != null) {
-                    rs.close();
-                }
-                if (rsItem != null) {
-                    rsItem.close();
-                }
-                if (psGetCarritoId != null) {
-                    psGetCarritoId.close();
-                }
-                if (psInsertCarrito != null) {
-                    psInsertCarrito.close();
-                }
-                if (psCheckExistingItem != null) {
-                    psCheckExistingItem.close();
-                }
-                if (psUpdateItem != null) {
-                    psUpdateItem.close();
-                }
-                if (psInsertNewItem != null) {
-                    psInsertNewItem.close();
-                }
-=======
                 if (rs != null) rs.close();
                 if (rsItem != null) rsItem.close();
                 if (psGetCarritoId != null) psGetCarritoId.close();
@@ -523,7 +455,7 @@ public class DetallesProductoFrame extends JFrame {
                 if (psCheckExistingItem != null) psCheckExistingItem.close();
                 if (psUpdateItem != null) psUpdateItem.close();
                 if (psInsertNewItem != null) psInsertNewItem.close();
->>>>>>> origin/aron2
+
                 if (connection != null && !connection.isClosed()) {
                     connection.setAutoCommit(true);
                     con.desconectar();
@@ -535,17 +467,10 @@ public class DetallesProductoFrame extends JFrame {
     }
 
     /**
-<<<<<<< HEAD
      * Procesa la compra del producto seleccionado. Crea una nueva orden, sus
      * detalles y actualiza el stock del producto. Incluye una verificación del
      * límite de crédito del usuario y debita el monto. Utiliza transacciones
      * para asegurar la integridad de los datos.
-=======
-     * Procesa la compra del producto seleccionado.
-     * Crea una nueva orden, sus detalles y actualiza el stock del producto.
-     * Incluye una verificación del límite de crédito del usuario y debita el monto.
-     * Utiliza transacciones para asegurar la integridad de los datos.
->>>>>>> origin/aron2
      */
     private void realizarCompra() {
         if (!UserSession.isLoggedIn()) {
@@ -571,19 +496,10 @@ public class DetallesProductoFrame extends JFrame {
         int currentUserId = UserSession.getCurrentUserId();
 
         // --- INICIO DE LA TRANSACCIÓN COMPLETA DE COMPRA Y DÉBITO ---
-<<<<<<< HEAD
         conexion conPurchase = new conexion();
         Connection connectionPurchase = null;
         PreparedStatement psCheckCredit = null;
         PreparedStatement psUpdateCredit = null;
-=======
-        // Usar una única instancia de conexión para toda la transacción de compra,
-        // incluyendo la verificación y el débito del crédito.
-        conexion conPurchase = new conexion();
-        Connection connectionPurchase = null;
-        PreparedStatement psCheckCredit = null;
-        PreparedStatement psUpdateCredit = null; // Nuevo PreparedStatement para el débito
->>>>>>> origin/aron2
         PreparedStatement psOrden = null;
         PreparedStatement psDetalle = null;
         PreparedStatement psUpdateStock = null;
@@ -599,7 +515,8 @@ public class DetallesProductoFrame extends JFrame {
             connectionPurchase.setAutoCommit(false); // Iniciar transacción
 
             // 1. Verificar el límite de crédito
-            String sqlCheckCredit = "SELECT limite_credito FROM tarjeta_credito WHERE usuario_id = ? FOR UPDATE"; // Bloquear la fila para evitar concurrencia
+            // Bloquear la fila para evitar concurrencia en entornos multiusuario
+            String sqlCheckCredit = "SELECT limite_credito FROM tarjeta_credito WHERE usuario_id = ? FOR UPDATE";
             psCheckCredit = connectionPurchase.prepareStatement(sqlCheckCredit);
             psCheckCredit.setInt(1, currentUserId);
             rsCredit = psCheckCredit.executeQuery();
@@ -616,29 +533,17 @@ public class DetallesProductoFrame extends JFrame {
 
             if (totalCompra.compareTo(limiteCredito) > 0) {
                 JOptionPane.showMessageDialog(this,
-<<<<<<< HEAD
                         String.format("Saldo insuficiente. El total de la compra es $%.2f, pero tu límite de crédito es $%.2f.",
                                 totalCompra, limiteCredito),
                         "Saldo Insuficiente", JOptionPane.WARNING_MESSAGE);
-=======
-                    String.format("Saldo insuficiente. El total de la compra es $%.2f, pero tu límite de crédito es $%.2f.",
-                        totalCompra, limiteCredito),
-                    "Saldo Insuficiente", JOptionPane.WARNING_MESSAGE);
->>>>>>> origin/aron2
                 connectionPurchase.rollback(); // Rollback antes de salir
                 return;
             }
 
             int confirm = JOptionPane.showConfirmDialog(this,
-<<<<<<< HEAD
                     String.format("¿Desea confirmar la compra de %d unidades de %s por un total de $%.2f?",
                             cantidad, producto.getNombre(), totalCompra),
                     "Confirmar Compra", JOptionPane.YES_NO_OPTION);
-=======
-                String.format("¿Desea confirmar la compra de %d unidades de %s por un total de $%.2f?",
-                    cantidad, producto.getNombre(), totalCompra),
-                "Confirmar Compra", JOptionPane.YES_NO_OPTION);
->>>>>>> origin/aron2
 
             if (confirm != JOptionPane.YES_OPTION) {
                 connectionPurchase.rollback(); // Rollback si el usuario cancela
@@ -705,54 +610,23 @@ public class DetallesProductoFrame extends JFrame {
                 cantidadSpinner.setEnabled(false);
                 buyNowButton.setEnabled(false);
                 addToCartButton.setEnabled(false);
-            } else {
-                cantidadSpinner.setValue(1);
             }
-            actualizarResumenCompra();
-
-            detallesPanel.revalidate();
-            detallesPanel.repaint();
-
-            if (carritoFormInstance != null && carritoFormInstance.isVisible()) {
-                carritoFormInstance.loadCarritoItems();
-            }
+            // No hay 'else' aquí, el botón addToWishlistButton puede permanecer habilitado
+            // si el usuario está logueado, ya que no depende del stock para agregar a la lista de deseos.
 
         } catch (SQLException e) {
             try {
                 if (connectionPurchase != null && !connectionPurchase.isClosed()) {
-                    connectionPurchase.rollback(); // Revertir toda la transacción en caso de error
+                    connectionPurchase.rollback(); // Deshacer en caso de error
                 }
             } catch (SQLException ex) {
                 System.err.println("Error al revertir la transacción de compra: " + ex.getMessage());
             }
-            System.err.println("Error SQL al procesar la compra: " + e.getMessage());
+            System.err.println("Error SQL al realizar la compra: " + e.getMessage());
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al procesar la compra: " + e.getMessage(), "Error de Compra", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al realizar la compra: " + e.getMessage(), "Error de Compra", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
-<<<<<<< HEAD
-                if (rsCredit != null) {
-                    rsCredit.close();
-                }
-                if (rsOrder != null) {
-                    rsOrder.close();
-                }
-                if (psCheckCredit != null) {
-                    psCheckCredit.close();
-                }
-                if (psUpdateCredit != null) {
-                    psUpdateCredit.close();
-                }
-                if (psOrden != null) {
-                    psOrden.close();
-                }
-                if (psDetalle != null) {
-                    psDetalle.close();
-                }
-                if (psUpdateStock != null) {
-                    psUpdateStock.close();
-                }
-=======
                 if (rsCredit != null) rsCredit.close();
                 if (rsOrder != null) rsOrder.close();
                 if (psCheckCredit != null) psCheckCredit.close();
@@ -760,29 +634,25 @@ public class DetallesProductoFrame extends JFrame {
                 if (psOrden != null) psOrden.close();
                 if (psDetalle != null) psDetalle.close();
                 if (psUpdateStock != null) psUpdateStock.close();
->>>>>>> origin/aron2
+
                 if (connectionPurchase != null && !connectionPurchase.isClosed()) {
                     connectionPurchase.setAutoCommit(true); // Restaurar autocommit
-                    conPurchase.desconectar(); // Cerrar la conexión
+                    conPurchase.desconectar();
                 }
             } catch (SQLException e) {
-                System.err.println("Error al cerrar recursos de DB (compra): " + e.getMessage());
+                System.err.println("Error al cerrar recursos de DB en compra: " + e.getMessage());
             }
         }
     }
 
-<<<<<<< HEAD
-  
     /**
-     * Método para agregar un producto a la lista de deseos del usuario logueado.
-     * Verifica si el usuario ha iniciado sesión y si el producto ya existe en su lista de deseos
-     * antes de realizar la inserción en la base de datos.
-     * @param idProducto El ID del producto a agregar a la lista de deseos.
+     * Agrega el producto a la lista de deseos del usuario logueado.
+     * Verifica si ya existe en la lista para evitar duplicados.
+     * @param idProducto El ID del producto a añadir a la lista de deseos.
      */
     private void addProductoToWishlist(int idProducto) {
-        // 1. Verificar si el usuario ha iniciado sesión
         if (!UserSession.isLoggedIn()) {
-            JOptionPane.showMessageDialog(this, "Debes iniciar sesión para agregar productos a tu lista de deseos.", "No Autenticado", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debes iniciar sesión para agregar productos a tu lista de deseos.", "Error de Sesión", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -796,68 +666,67 @@ public class DetallesProductoFrame extends JFrame {
         try {
             connection = con.getConnection();
             if (connection == null) {
-                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos para agregar a la lista de deseos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // 2. Verificar si el producto ya está en la lista de deseos del usuario
-            String checkSql = "SELECT COUNT(*) FROM lista_deseos WHERE id_usuario = ? AND id_producto = ?";
-            psCheck = connection.prepareStatement(checkSql);
+            // 1. Verificar si el producto ya está en la lista de deseos del usuario
+            String sqlCheck = "SELECT COUNT(*) FROM lista_deseos WHERE id_usuario = ? AND id_producto = ?";
+            psCheck = connection.prepareStatement(sqlCheck);
             psCheck.setInt(1, idUsuario);
             psCheck.setInt(2, idProducto);
             rs = psCheck.executeQuery();
 
             if (rs.next() && rs.getInt(1) > 0) {
-                // Producto ya existe en la lista de deseos
                 JOptionPane.showMessageDialog(this, "Este producto ya está en tu lista de deseos.", "Producto Existente", JOptionPane.INFORMATION_MESSAGE);
-                return; // Salir sin insertar
+                return;
             }
 
-            // 3. Si no existe, proceder a insertar el producto en la lista de deseos
-            String insertSql = "INSERT INTO lista_deseos (id_usuario, id_producto) VALUES (?, ?)";
-            psInsert = connection.prepareStatement(insertSql);
+            // 2. Si no existe, insertarlo en la tabla lista_deseos
+            String sqlInsert = "INSERT INTO lista_deseos (id_usuario, id_producto, fecha_agregado) VALUES (?, ?, CURRENT_TIMESTAMP)";
+            psInsert = connection.prepareStatement(sqlInsert);
             psInsert.setInt(1, idUsuario);
             psInsert.setInt(2, idProducto);
-            int rowsAffected = psInsert.executeUpdate();
+            psInsert.executeUpdate();
 
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(this, "Producto agregado a tu lista de deseos exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo agregar el producto a la lista de deseos.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(this, "Producto añadido a tu lista de deseos con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
-            System.err.println("Error SQL al agregar a lista de deseos: " + e.getMessage());
+            System.err.println("Error SQL al añadir producto a la lista de deseos: " + e.getMessage());
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error de base de datos al agregar a lista de deseos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al añadir producto a la lista de deseos: " + e.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
         } finally {
-            // 4. Cerrar recursos de la base de datos
             try {
                 if (rs != null) rs.close();
                 if (psCheck != null) psCheck.close();
                 if (psInsert != null) psInsert.close();
-                if (connection != null) con.desconectar(); // Usar el método desconectar de tu clase de conexión
+                if (connection != null) con.desconectar();
             } catch (SQLException e) {
-                System.err.println("Error al cerrar recursos de DB (lista de deseos): " + e.getMessage());
+                System.err.println("Error al cerrar recursos de DB en lista de deseos: " + e.getMessage());
             }
         }
     }
 
+    // El método main es solo para pruebas.
     public static void main(String[] args) {
-
         SwingUtilities.invokeLater(() -> {
-            JOptionPane.showMessageDialog(null, "Para probar DetallesProductoFrame, necesitas cargar un objeto Producto real desde tu base de datos. \n"
-                    + "El código de ejemplo para cargar un un producto (o varios) desde la DB está en MostrarProductosFrame.",
-                    "Información de Prueba", JOptionPane.INFORMATION_MESSAGE);
-=======
-    public static void main(String[] args) {
-        UserSession.login(1, "EjemploUser", "ejemplo@dominio.com");
+            // Producto de prueba. Asegúrate de que los datos sean válidos para tu base de datos.
+            Producto testProduct = new Producto(
+                1, // id_producto (debe existir en tu DB)
+                "Laptop Gamer XYZ",
+                "Potente laptop con procesador i7, 16GB RAM, 512GB SSD y tarjeta gráfica RTX 3060. Ideal para juegos y trabajo.",
+                new BigDecimal("1200.00"),
+                5, // stock
+                "Electrónica",
+                null, // imagen (puedes cargar una imagen real si tienes un byte array)
+                "Tech Solutions S.A." // nombre_publicador
+            );
+            
+            // Simular un usuario logueado para pruebas
+            UserSession.login(1, "testuser", "test@example.com"); 
 
-         SwingUtilities.invokeLater(() -> {
-            JOptionPane.showMessageDialog(null, "Para probar DetallesProductoFrame, necesitas cargar un objeto Producto real desde tu base de datos. \n" +
-                                                 "El código de ejemplo para cargar un producto desde la DB está comentado en el main().",
-                                                 "Información de Prueba", JOptionPane.INFORMATION_MESSAGE);
->>>>>>> origin/aron2
+            new DetallesProductoFrame(testProduct);
+            // new DetallesProductoFrame(testProduct, new CarritoForm()); // Si quieres probar con una instancia de CarritoForm
         });
     }
 }
