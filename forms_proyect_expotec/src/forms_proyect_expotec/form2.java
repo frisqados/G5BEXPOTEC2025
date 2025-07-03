@@ -293,6 +293,8 @@ public class form2 extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    
+    
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
        // --- PASO 1: OBTENER LAS CREDENCIALES DE LOS CAMPOS DE TEXTO ---
         String usuarioOcorreo = txtUsser.getText(); // Obtiene el texto del campo de usuario/correo

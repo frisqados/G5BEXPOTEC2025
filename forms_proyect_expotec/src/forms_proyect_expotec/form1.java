@@ -7,25 +7,23 @@ package forms_proyect_expotec;
 import vista.IngresoProductoFrame;
 import vista.MostrarProductosFrame;
 import forms_proyect_expotec.CarritoForm;
-import javax.swing.JLabel; // Solo si usas JLabels para contenido general, no para info de usuario
+import vista.MostrarListaDeseosFrame;
+import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JOptionPane; // Para mensajes de error/advertencia
-
 
 import util.UserSession; // Importa la clase UserSession
 
 public class form1 extends javax.swing.JFrame {
-    
-   private JLabel contentLabel;
-    
+
+    private JLabel contentLabel;
+
     public form1() {
         initComponents();
         setTitle("Principal");
-        this.getContentPane().setBackground(new Color(60,60,60));
-        
-        detectUserSession();
-        
+        this.getContentPane().setBackground(new Color(60, 60, 60));
 
+        detectUserSession();
 
     }
 
@@ -51,10 +49,9 @@ public class form1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         btnCarrito = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton13 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -136,16 +133,6 @@ public class form1 extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 90, -1, 41));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Captura de pantalla 2025-06-07 2.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, 120, 60));
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Registarse.png"))); // NOI18N
-        jButton3.setBorder(null);
-        jButton3.setContentAreaFilled(false);
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 20, 120, 60));
-
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Campanita (1).png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -162,6 +149,14 @@ public class form1 extends javax.swing.JFrame {
         });
         jPanel1.add(btnCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 90, -1, 41));
 
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 20, 110, 40));
+
         jPanel2.setBackground(new java.awt.Color(60, 60, 60));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -177,6 +172,11 @@ public class form1 extends javax.swing.JFrame {
         jButton5.setText("Nuevo");
         jButton5.setBorder(null);
         jButton5.setContentAreaFilled(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 115, -1));
 
         jButton14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -226,27 +226,73 @@ public class form1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCarritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCarritoMouseClicked
-        
+
         detectUserSession();
-        
+
         CarritoForm frm = new CarritoForm();
         frm.setVisible(rootPaneCheckingEnabled);
-        
+
     }//GEN-LAST:event_btnCarritoMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-         detectUserSession();
-        
+        detectUserSession();
+
         IngresoProductoFrame frm = new IngresoProductoFrame();
         frm.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         detectUserSession();
-        
+
         MostrarProductosFrame frm = new MostrarProductosFrame();
         frm.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // No necesitas 'detectUserSession()' si tu lógica de login ya usa UserSession.login()
+        // y si UserSession.isLoggedIn() es suficiente para verificar.
+
+        // Obtener el ID del usuario logueado de la clase UserSession
+        int idUsuarioActual = util.UserSession.getCurrentUserId();
+
+        // Opcional: Verificar si hay un usuario logueado antes de abrir la ventana
+        if (util.UserSession.isLoggedIn()) {
+            MostrarListaDeseosFrame frm = new MostrarListaDeseosFrame(idUsuarioActual);
+            frm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe iniciar sesión para ver su lista de deseos.", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+            // Opcionalmente, aquí podrías abrir el frame de login:
+            // new LoginFrame().setVisible(true);
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        cerrarSesionUsuario();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void cerrarSesionUsuario() {
+        // 1. Preguntar confirmación al usuario (opcional, pero buena práctica)
+        int confirm = JOptionPane.showConfirmDialog(this, 
+                                                    "¿Estás seguro de que quieres cerrar sesión?", 
+                                                    "Cerrar Sesión", 
+                                                    JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            // 2. Limpiar la sesión del usuario
+            UserSession.logout();
+            
+            // 3. Informar al usuario
+            JOptionPane.showMessageDialog(this, "Sesión cerrada correctamente.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            
+            // 4. Redirigir a la pantalla de form2
+            // Cierra la ventana actual (form1)
+            this.dispose(); 
+            
+            // Abre la ventana form2
+            form2 siguienteFrame = new form2(); // ¡CAMBIADO AQUÍ! Abre tu form2
+            siguienteFrame.setVisible(true);
+        }
+    }
     
     private void detectUserSession() {
         if (UserSession.isLoggedIn()) {
@@ -254,41 +300,21 @@ public class form1 extends javax.swing.JFrame {
             String userName = UserSession.getCurrentUserName();
             String userEmail = UserSession.getCurrentUserEmail();
 
-            // *** AQUÍ ES DONDE EL PROGRAMA "DETECTA" AL USUARIO ***
-            // Las variables 'userId', 'userName', y 'userEmail' ahora contienen la información
-            // del usuario conectado. Puedes usarlas para:
-            // 1. Cargar datos específicos del usuario desde la base de datos:
-            //    Por ejemplo: loadUserSpecificData(userId);
-            // 2. Habilitar o deshabilitar funcionalidades basadas en el rol del usuario:
-            //    if (userName != null && userName.equalsIgnoreCase("administrador")) {
-            //        // Lógica para administradores, por ejemplo, habilitar un menú oculto,
-            //        // o permitir acceso a ciertas funciones.
-            //        System.out.println("form1: Usuario administrador detectado. Funcionalidades de admin habilitadas.");
-            //    } else {
-            //        System.out.println("form1: Usuario normal detectado.");
-            //    }
-            // 3. Cualquier otra personalización de la lógica de negocio basada en el usuario.
-
             System.out.println("form1: Usuario conectado detectado. ID: " + userId + ", Nombre: " + userName + ", Email: " + userEmail);
-            // No se actualiza ningún componente visual con esta información.
+
         } else {
             // Esto no debería ocurrir si el login fue exitoso, pero es una buena práctica manejarlo.
             JOptionPane.showMessageDialog(this, "No hay sesión de usuario activa. Por favor, inicie sesión.", "Sesión no encontrada", JOptionPane.WARNING_MESSAGE);
-            // Opcional: redirigir al formulario de login si no hay sesión activa
-            // new YourLoginForm().setVisible(true); // Asegúrate de tener una instancia de YourLoginForm
-            // this.dispose();
+
             System.out.println("form1: No hay usuario logueado.");
         }
     }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        
-        
-        
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -318,18 +344,18 @@ public class form1 extends javax.swing.JFrame {
                 new form1().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCarrito;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JPanel frmPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;

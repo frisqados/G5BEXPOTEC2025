@@ -2,43 +2,51 @@ package vista;
 
 import modelo.Producto;
 import controlador.conexion; // Importa tu clase de conexión
+import util.UserSession; // Importa tu clase de sesión de usuario
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter; // Para el MouseListener
-import java.awt.event.MouseEvent; // Para el MouseListener
-import java.sql.Connection; // Para Connection
-import java.sql.PreparedStatement; // Para PreparedStatement
-import java.sql.ResultSet; // Para ResultSet
-import java.sql.SQLException; // Para SQLException
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigDecimal; // Para BigDecimal
+import java.math.BigDecimal;
 
-public class MostrarProductosFrame extends JFrame {
+public class MostrarListaDeseosFrame extends JFrame {
     private JPanel productosPanel;
-    private JTextField searchField; // Campo de texto para la búsqueda
-    private JButton searchButton; // Botón para iniciar la búsqueda
+    private JTextField searchField;
+    private JButton searchButton;
+    private int idUsuarioLogueado; // Variable para almacenar el ID del usuario logueado
 
-    public MostrarProductosFrame() {
-        setTitle("Explorar Productos - Tienda Online");
+    /**
+     * Constructor para el frame de la lista de deseos.
+     * @param idUsuarioLogueado El ID del usuario cuya lista de deseos se va a mostrar.
+     */
+    public MostrarListaDeseosFrame(int idUsuarioLogueado) {
+        this.idUsuarioLogueado = idUsuarioLogueado; // Asigna el ID del usuario logueado
+
+        setTitle("Mi Lista de Deseos - Tienda Online");
         setSize(1200, 750);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cambiado a DISPOSE_ON_CLOSE para no cerrar la aplicación principal
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(15, 15));
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         headerPanel.setBackground(new Color(23, 23, 23));
-        JLabel titleLabel = new JLabel("Explorar Productos");
+        JLabel titleLabel = new JLabel("Mis Productos Deseados");
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
         titleLabel.setForeground(Color.WHITE);
         headerPanel.add(titleLabel);
 
-        // --- Nuevo: Panel para la barra de búsqueda ---
+        // --- Panel para la barra de búsqueda ---
         JPanel searchBarPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
-        searchBarPanel.setBackground(new Color(23, 23, 23)); // Mismo color de fondo que el header
+        searchBarPanel.setBackground(new Color(23, 23, 23));
         
-        JLabel searchLabel = new JLabel("Buscar:");
+        JLabel searchLabel = new JLabel("Buscar en deseos:");
         searchLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
         searchLabel.setForeground(Color.WHITE);
         searchBarPanel.add(searchLabel);
@@ -46,28 +54,27 @@ public class MostrarProductosFrame extends JFrame {
         searchField = new JTextField(20);
         searchField.setFont(new Font("SansSerif", Font.PLAIN, 14));
         searchField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(100, 100, 100)), // Borde más oscuro
-            BorderFactory.createEmptyBorder(5, 10, 5, 10) // Padding interno
+            BorderFactory.createLineBorder(new Color(100, 100, 100)),
+            BorderFactory.createEmptyBorder(5, 10, 5, 10)
         ));
         searchBarPanel.add(searchField);
 
         searchButton = new JButton("Buscar");
         searchButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-        searchButton.setBackground(new Color(70, 130, 180)); // Un azul más claro para el botón
+        searchButton.setBackground(new Color(70, 130, 180));
         searchButton.setForeground(Color.WHITE);
         searchButton.setFocusPainted(false);
         searchButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
         searchButton.addActionListener(e -> {
             String searchTerm = searchField.getText().trim();
-            cargarProductosDesdeBD(searchTerm); // Llama al método de carga con el término de búsqueda
+            cargarProductosListaDeseosDesdeBD(searchTerm); // Llama al método de carga con el término de búsqueda
         });
         searchBarPanel.add(searchButton);
 
-        headerPanel.setLayout(new BorderLayout()); // Cambiar a BorderLayout para alinear búsqueda a la derecha
+        headerPanel.setLayout(new BorderLayout());
         headerPanel.add(titleLabel, BorderLayout.WEST);
         headerPanel.add(searchBarPanel, BorderLayout.EAST);
-        // --- Fin Nuevo ---
-
+        
         add(headerPanel, BorderLayout.NORTH);
 
         productosPanel = new JPanel();
@@ -75,7 +82,7 @@ public class MostrarProductosFrame extends JFrame {
         productosPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
         productosPanel.setBackground(new Color(187,187,187));
 
-        cargarProductosDesdeBD(null); // Llama al método para cargar productos, inicialmente sin filtro
+        cargarProductosListaDeseosDesdeBD(null); // Carga inicial de productos sin filtro
 
         JScrollPane scrollPane = new JScrollPane(productosPanel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
@@ -85,8 +92,12 @@ public class MostrarProductosFrame extends JFrame {
         setVisible(true);
     }
 
-    // --- Método modificado para aceptar un término de búsqueda ---
-    private void cargarProductosDesdeBD(String searchTerm) {
+    /**
+     * Carga los productos de la lista de deseos del usuario desde la base de datos.
+     * Permite filtrar por un término de búsqueda.
+     * @param searchTerm Término de búsqueda para filtrar productos, o null si no hay filtro.
+     */
+    private void cargarProductosListaDeseosDesdeBD(String searchTerm) {
         List<Producto> productos = new ArrayList<>();
         conexion con = new conexion();
         Connection connection = null;
@@ -96,27 +107,32 @@ public class MostrarProductosFrame extends JFrame {
         try {
             connection = con.getConnection();
             if (connection == null) {
-                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos para cargar productos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos para cargar la lista de deseos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
+            // Consulta SQL para obtener productos de la lista de deseos del usuario
+            // ¡CORRECCIÓN AQUÍ! Cambiado de "ListaDeseos" a "lista_deseos"
             String sql = "SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock, p.categoria, p.imagen, u.nombre AS nombre_publicador " +
                          "FROM Productos p " +
-                         "LEFT JOIN Usuarios u ON p.id_usuario_subida = u.id_usuario";
+                         "JOIN lista_deseos ld ON p.id_producto = ld.id_producto " + // ¡Nombre de la tabla corregido!
+                         "LEFT JOIN Usuarios u ON p.id_usuario_subida = u.id_usuario " +
+                         "WHERE ld.id_usuario = ?"; // Filtrar por el ID del usuario logueado
             
-            // Si hay un término de búsqueda, añade la cláusula WHERE
+            // Si hay un término de búsqueda, añade la cláusula WHERE adicional
             if (searchTerm != null && !searchTerm.isEmpty()) {
-                sql += " WHERE p.nombre LIKE ? OR p.descripcion LIKE ? OR p.categoria LIKE ?";
+                sql += " AND (p.nombre LIKE ? OR p.descripcion LIKE ? OR p.categoria LIKE ?)";
             }
             
             ps = connection.prepareStatement(sql);
+            ps.setInt(1, idUsuarioLogueado); // Establece el ID del usuario logueado
 
-            // Si hay un término de búsqueda, establece los parámetros
+            // Si hay un término de búsqueda, establece los parámetros adicionales
             if (searchTerm != null && !searchTerm.isEmpty()) {
                 String searchPattern = "%" + searchTerm + "%";
-                ps.setString(1, searchPattern);
                 ps.setString(2, searchPattern);
                 ps.setString(3, searchPattern);
+                ps.setString(4, searchPattern);
             }
 
             rs = ps.executeQuery();
@@ -134,14 +150,14 @@ public class MostrarProductosFrame extends JFrame {
                 productos.add(new Producto(id, nombre, descripcion, precio, stock, categoria, imagen, nombrePublicador));
             }
         } catch (SQLException e) {
-            System.err.println("Error SQL al obtener productos: " + e.getMessage());
+            System.err.println("Error SQL al obtener productos de la lista de deseos: " + e.getMessage());
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error de base de datos al cargar productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error de base de datos al cargar la lista de deseos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 if (rs != null) rs.close();
                 if (ps != null) ps.close();
-                if (connection != null) con.desconectar(); // Usar el método desconectar de la clase conexion
+                if (connection != null) con.desconectar();
             } catch (SQLException e) {
                 System.err.println("Error al cerrar recursos: " + e.getMessage());
             }
@@ -151,12 +167,12 @@ public class MostrarProductosFrame extends JFrame {
 
         if (productos.isEmpty()) {
             productosPanel.setLayout(new BorderLayout());
-            JLabel noProductsLabel = new JLabel("Lo sentimos, no hay productos disponibles que coincidan con su búsqueda.", SwingConstants.CENTER);
+            JLabel noProductsLabel = new JLabel("Tu lista de deseos está vacía o no hay productos que coincidan con tu búsqueda.", SwingConstants.CENTER);
             noProductsLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
             noProductsLabel.setForeground(Color.GRAY);
             productosPanel.add(noProductsLabel, BorderLayout.CENTER);
         } else {
-            productosPanel.setLayout(new GridLayout(0, 4, 25, 25)); // Restaurar el layout si se encontraron productos
+            productosPanel.setLayout(new GridLayout(0, 4, 25, 25)); // Restaurar el layout
             for (Producto producto : productos) {
                 ProductoCardPanel card = new ProductoCardPanel(producto);
                 card.addMouseListener(new MouseAdapter() {
@@ -180,15 +196,19 @@ public class MostrarProductosFrame extends JFrame {
         productosPanel.revalidate();
         productosPanel.repaint();
     }
-    // --- Fin del método modificado ---
 
+    // El método main es solo para pruebas. En una aplicación real, el id_usuario_logueado
+    // se pasaría desde el sistema de login.
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(MostrarProductosFrame::new);
+        SwingUtilities.invokeLater(() -> {
+            // Suponiendo que el usuario logueado tiene el ID 1. Esto debe ser dinámico en tu aplicación.
+            new MostrarListaDeseosFrame(1); 
+        });
     }
 
     /**
      * Clase interna para representar la tarjeta de un producto.
-     * Esta clase es la que mostrará los detalles del producto, incluyendo el nombre del publicador.
+     * Es idéntica a la de MostrarProductosFrame, ya que el diseño es el mismo.
      */
     private class ProductoCardPanel extends JPanel {
         public ProductoCardPanel(Producto producto) {
