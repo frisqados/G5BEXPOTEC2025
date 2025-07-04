@@ -332,7 +332,7 @@ public class CarritoForm extends JFrame {
             conn.setAutoCommit(false); // Inicia una transacción
 
             // Consulta SQL para obtener el ID del carrito del usuario
-            String sqlGetCarritoId = "SELECT id_carrito FROM Carritos WHERE id_usuario = ?";
+            String sqlGetCarritoId = "SELECT id_carrito FROM carritos WHERE id_usuario = ?";
             ps = conn.prepareStatement(sqlGetCarritoId);
             ps.setInt(1, currentUserId);
             rs = ps.executeQuery();

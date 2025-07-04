@@ -4,12 +4,12 @@
  */
 package controlador;
 
-import forms_proyect_expotec.form2;
+import forms_proyect_expotec.RegistroForm;
 
 public class main {
     
     public static void main(String[] args) {
-       form2 frm = new form2();
+       RegistroForm frm = new RegistroForm();
        frm.setVisible(true);
     }
     

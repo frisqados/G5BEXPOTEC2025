@@ -369,7 +369,7 @@ public class DetallesProductoFrame extends JFrame {
 
             int idCarrito = -1;
 
-            String sqlGetCarritoId = "SELECT id_carrito FROM Carritos WHERE id_usuario = ?";
+            String sqlGetCarritoId = "SELECT id_carrito FROM carritos WHERE id_usuario = ?";
             psGetCarritoId = connection.prepareStatement(sqlGetCarritoId);
             psGetCarritoId.setInt(1, currentUserId);
             rs = psGetCarritoId.executeQuery();
@@ -377,7 +377,7 @@ public class DetallesProductoFrame extends JFrame {
             if (rs.next()) {
                 idCarrito = rs.getInt("id_carrito");
             } else {
-                String sqlInsertCarrito = "INSERT INTO Carritos (id_usuario, fecha_creacion) VALUES (?, CURRENT_TIMESTAMP)"; // Asumo que es fecha_creacion
+                String sqlInsertCarrito = "INSERT INTO carritos (id_usuario, fecha_agregado) VALUES (?, CURRENT_TIMESTAMP)"; // Asumo que es fecha_creacion
                 psInsertCarrito = connection.prepareStatement(sqlInsertCarrito, Statement.RETURN_GENERATED_KEYS);
                 psInsertCarrito.setInt(1, currentUserId);
                 psInsertCarrito.executeUpdate();
@@ -392,7 +392,7 @@ public class DetallesProductoFrame extends JFrame {
                 generatedKeys.close();
             }
 
-            String sqlCheckExistingItem = "SELECT id_item, cantidad FROM Carrito_Items WHERE id_carrito = ? AND id_producto = ?";
+            String sqlCheckExistingItem = "SELECT id_item, cantidad FROM carrito_Items WHERE id_carrito = ? AND id_producto = ?";
             psCheckExistingItem = connection.prepareStatement(sqlCheckExistingItem);
             psCheckExistingItem.setInt(1, idCarrito);
             psCheckExistingItem.setInt(2, producto.getId());
@@ -402,14 +402,14 @@ public class DetallesProductoFrame extends JFrame {
                 int currentQuantityInCart = rsItem.getInt("cantidad");
                 int idItemToUpdate = rsItem.getInt("id_item");
 
-                String sqlUpdateItem = "UPDATE Carrito_Items SET cantidad = ? WHERE id_item = ?";
+                String sqlUpdateItem = "UPDATE carrito_Items SET cantidad = ? WHERE id_item = ?";
                 psUpdateItem = connection.prepareStatement(sqlUpdateItem);
                 psUpdateItem.setInt(1, currentQuantityInCart + cantidadAAnadir);
                 psUpdateItem.setInt(2, idItemToUpdate);
                 psUpdateItem.executeUpdate();
                 System.out.println("Producto " + producto.getNombre() + " actualizado en el carrito. Nueva cantidad: " + (currentQuantityInCart + cantidadAAnadir));
             } else {
-                String sqlInsertNewItem = "INSERT INTO Carrito_Items (id_carrito, id_producto, cantidad) VALUES (?, ?, ?)";
+                String sqlInsertNewItem = "INSERT INTO carrito_Items (id_carrito, id_producto, cantidad) VALUES (?, ?, ?)";
                 psInsertNewItem = connection.prepareStatement(sqlInsertNewItem);
                 psInsertNewItem.setInt(1, idCarrito);
                 psInsertNewItem.setInt(2, producto.getId());
@@ -645,11 +645,7 @@ public class DetallesProductoFrame extends JFrame {
         }
     }
 
-    /**
-     * Agrega el producto a la lista de deseos del usuario logueado.
-     * Verifica si ya existe en la lista para evitar duplicados.
-     * @param idProducto El ID del producto a añadir a la lista de deseos.
-     */
+
     private void addProductoToWishlist(int idProducto) {
         if (!UserSession.isLoggedIn()) {
             JOptionPane.showMessageDialog(this, "Debes iniciar sesión para agregar productos a tu lista de deseos.", "Error de Sesión", JOptionPane.WARNING_MESSAGE);
@@ -707,26 +703,5 @@ public class DetallesProductoFrame extends JFrame {
         }
     }
 
-    // El método main es solo para pruebas.
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            // Producto de prueba. Asegúrate de que los datos sean válidos para tu base de datos.
-            Producto testProduct = new Producto(
-                1, // id_producto (debe existir en tu DB)
-                "Laptop Gamer XYZ",
-                "Potente laptop con procesador i7, 16GB RAM, 512GB SSD y tarjeta gráfica RTX 3060. Ideal para juegos y trabajo.",
-                new BigDecimal("1200.00"),
-                5, // stock
-                "Electrónica",
-                null, // imagen (puedes cargar una imagen real si tienes un byte array)
-                "Tech Solutions S.A." // nombre_publicador
-            );
-            
-            // Simular un usuario logueado para pruebas
-            UserSession.login(1, "testuser", "test@example.com"); 
-
-            new DetallesProductoFrame(testProduct);
-            // new DetallesProductoFrame(testProduct, new CarritoForm()); // Si quieres probar con una instancia de CarritoForm
-        });
-    }
+    
 }

@@ -44,19 +44,15 @@ public class form1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnCarrito = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton13 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
@@ -104,12 +100,6 @@ public class form1 extends javax.swing.JFrame {
         jButton1.setFocusPainted(false);
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 30, 110, 30));
 
-        jTextField1.setBackground(new java.awt.Color(60, 60, 60));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("  Buscar por categoría, marca, etc...");
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 630, 20));
-
         jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,9 +111,6 @@ public class form1 extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/iconito.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 80));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/linias.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, 50));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Corazon.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -160,16 +147,9 @@ public class form1 extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(60, 60, 60));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("Marcas");
-        jButton13.setBorder(null);
-        jButton13.setContentAreaFilled(false);
-        jPanel2.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 115, -1));
-
         jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Nuevo");
+        jButton5.setText("Lista de deseos");
         jButton5.setBorder(null);
         jButton5.setContentAreaFilled(false);
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,49 +157,54 @@ public class form1 extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 115, -1));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 170, -1));
 
         jButton14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("Ofertas");
+        jButton14.setText("Ingresar Productos");
         jButton14.setBorder(null);
         jButton14.setContentAreaFilled(false);
-        jPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 115, -1));
-
-        jButton17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(255, 255, 255));
-        jButton17.setText("Categorias");
-        jButton17.setBorder(null);
-        jButton17.setContentAreaFilled(false);
-        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, -10, 115, 42));
+        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton14MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 0, 190, -1));
 
         jButton18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton18.setForeground(new java.awt.Color(255, 255, 255));
-        jButton18.setText("Membresías");
+        jButton18.setText("Productos");
         jButton18.setBorder(null);
         jButton18.setContentAreaFilled(false);
-        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 115, 20));
+        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton18MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 115, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(frmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12)
+                .addComponent(frmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -235,40 +220,46 @@ public class form1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCarritoMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        detectUserSession();
-
-        IngresoProductoFrame frm = new IngresoProductoFrame();
-        frm.setVisible(rootPaneCheckingEnabled);
+        
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        detectUserSession();
-
-        MostrarProductosFrame frm = new MostrarProductosFrame();
-        frm.setVisible(rootPaneCheckingEnabled);
+        
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        // No necesitas 'detectUserSession()' si tu lógica de login ya usa UserSession.login()
-        // y si UserSession.isLoggedIn() es suficiente para verificar.
+        
 
         // Obtener el ID del usuario logueado de la clase UserSession
         int idUsuarioActual = util.UserSession.getCurrentUserId();
 
-        // Opcional: Verificar si hay un usuario logueado antes de abrir la ventana
+        
         if (util.UserSession.isLoggedIn()) {
             MostrarListaDeseosFrame frm = new MostrarListaDeseosFrame(idUsuarioActual);
             frm.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Debe iniciar sesión para ver su lista de deseos.", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
-            // Opcionalmente, aquí podrías abrir el frame de login:
-            // new LoginFrame().setVisible(true);
+            
         }
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         cerrarSesionUsuario();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
+        detectUserSession();
+
+        MostrarProductosFrame frm = new MostrarProductosFrame();
+        frm.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jButton18MouseClicked
+
+    private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
+         detectUserSession();
+
+        IngresoProductoFrame frm = new IngresoProductoFrame();
+        frm.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jButton14MouseClicked
 
     private void cerrarSesionUsuario() {
         // 1. Preguntar confirmación al usuario (opcional, pero buena práctica)
@@ -352,23 +343,19 @@ public class form1 extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JPanel frmPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 }
