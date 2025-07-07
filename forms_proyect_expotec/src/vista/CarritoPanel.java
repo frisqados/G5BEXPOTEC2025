@@ -261,9 +261,11 @@ public class CarritoPanel extends JPanel {
 
             int stockChange = oldQuantityInCart - newQuantity;
 
-            String updateCartItemSql = "UPDATE carrito_items SET cantidad = ? " +
+            // FIX: Corrected PostgreSQL UPDATE syntax with FROM clause
+            String updateCartItemSql = "UPDATE carrito_items ci " +
+                                       "SET cantidad = ? " +
                                        "FROM carritos c " +
-                                       "WHERE carrito_items.id_carrito = c.id_carrito AND c.id_usuario = ? AND carrito_items.id_producto = ?";
+                                       "WHERE ci.id_carrito = c.id_carrito AND c.id_usuario = ? AND ci.id_producto = ?";
             PreparedStatement updateCartItemPs = con.prepareStatement(updateCartItemSql);
             updateCartItemPs.setInt(1, newQuantity);
             updateCartItemPs.setInt(2, userId);
@@ -362,9 +364,10 @@ public class CarritoPanel extends JPanel {
                     updateStockPs.executeUpdate();
                 }
 
-                String deleteItemsSql = "DELETE FROM carrito_items " +
-                                        "FROM carritos c " +
-                                        "WHERE carrito_items.id_carrito = c.id_carrito AND c.id_usuario = ?";
+                // FIX: Corrected PostgreSQL DELETE syntax with USING clause
+                String deleteItemsSql = "DELETE FROM carrito_items ci " +
+                                        "USING carritos c " +
+                                        "WHERE ci.id_carrito = c.id_carrito AND c.id_usuario = ?";
                 PreparedStatement deleteItemsPs = con.prepareStatement(deleteItemsSql);
                 deleteItemsPs.setInt(1, userId);
                 deleteItemsPs.executeUpdate();
@@ -427,9 +430,10 @@ public class CarritoPanel extends JPanel {
                 return;
             }
 
-            String deleteItemSql = "DELETE FROM carrito_items " +
-                                   "FROM carritos c " +
-                                   "WHERE carrito_items.id_carrito = c.id_carrito AND c.id_usuario = ? AND carrito_items.id_producto = ?";
+            // FIX: Corrected PostgreSQL DELETE syntax with USING clause
+            String deleteItemSql = "DELETE FROM carrito_items ci " +
+                                   "USING carritos c " +
+                                   "WHERE ci.id_carrito = c.id_carrito AND c.id_usuario = ? AND ci.id_producto = ?";
             PreparedStatement deleteItemPs = con.prepareStatement(deleteItemSql);
             deleteItemPs.setInt(1, userId);
             deleteItemPs.setInt(2, productId);

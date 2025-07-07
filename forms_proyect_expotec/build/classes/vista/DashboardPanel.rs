@@ -1,0 +1,2 @@
+vista.RoundedPanel
+vista.DashboardPanel

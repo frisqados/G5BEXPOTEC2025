@@ -198,6 +198,51 @@ public class RegistroForm extends JFrame {
         return exists;
     }
 
+    private boolean esContraseniaRobusta(String contrasenia) {
+        if (contrasenia.length() < 8) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.", "Contraseña Débil", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        boolean tieneMayuscula = false;
+        boolean tieneMinuscula = false;
+        boolean tieneDigito = false;
+        boolean tieneCaracterEspecial = false;
+
+        String caracteresEspeciales = "!@#$%^&*()-_+=[]{}|;:'\",.<>/?";
+
+        for (char c : contrasenia.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                tieneMayuscula = true;
+            } else if (Character.isLowerCase(c)) {
+                tieneMinuscula = true;
+            } else if (Character.isDigit(c)) {
+                tieneDigito = true;
+            } else if (caracteresEspeciales.indexOf(c) >= 0) {
+                tieneCaracterEspecial = true;
+            }
+        }
+
+        if (!tieneMayuscula) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos una letra mayúscula.", "Contraseña Débil", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (!tieneMinuscula) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos una letra minúscula.", "Contraseña Débil", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (!tieneDigito) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos un dígito.", "Contraseña Débil", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (!tieneCaracterEspecial) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos un carácter especial (!@#$%^&*()-_+=[]{}|;:'\",.<>/?).", "Contraseña Débil", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
     private void registrarUsuario() {
         String nombre = txtNombre.getText().trim();
         String apellido = txtApellido.getText().trim();
@@ -213,6 +258,10 @@ public class RegistroForm extends JFrame {
         if (!contrasenia.equals(confirmContrasenia)) {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.", "Error de Contraseña", JOptionPane.ERROR_MESSAGE);
             return;
+        }
+
+        if (!esContraseniaRobusta(contrasenia)) {
+            return; // El método esContraseniaRobusta ya muestra un JOptionPane
         }
 
         if (!correo.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
@@ -310,7 +359,6 @@ public class RegistroForm extends JFrame {
             String numTarjeta = "0000000000000000";
             String tipoTarjeta = "Visa";
             LocalDate fechaVencimiento = LocalDate.now().plusYears(5);
-            // Convierte LocalDate a java.sql.Date
             java.sql.Date sqlFechaVencimiento = java.sql.Date.valueOf(fechaVencimiento);
 
             double limiteCredito = 1000.00;
@@ -320,7 +368,7 @@ public class RegistroForm extends JFrame {
             pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, numTarjeta);
             pstmt.setString(2, tipoTarjeta);
-            pstmt.setDate(3, sqlFechaVencimiento); // Usa setDate() para la columna de tipo Date
+            pstmt.setDate(3, sqlFechaVencimiento);
             pstmt.setDouble(4, limiteCredito);
             pstmt.setInt(5, userId);
             pstmt.setDouble(6, saldo);
