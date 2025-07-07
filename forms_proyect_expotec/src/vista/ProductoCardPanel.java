@@ -1,122 +1,103 @@
-package vista;
+package vista; // Or components_ui, depending on your project structure
 
 import modelo.Producto;
+import util.ProductoSeleccionadoListener; // Make sure this import is correct
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal; // For handling currency values
 
 public class ProductoCardPanel extends JPanel {
-    private Producto producto;
+    private ProductoSeleccionadoListener cardListener;
 
-    // El constructor ahora solo necesita el Producto.
-    // La acción de "Ver Detalles" se maneja directamente creando DetallesProductoFrame.
-    public ProductoCardPanel(Producto producto) {
-        this.producto = producto;
-        initUI();
-    }
+    public ProductoCardPanel(Producto producto, ProductoSeleccionadoListener listener) {
+        this.cardListener = listener;
 
-    private void initUI() {
-        setLayout(new BorderLayout(8, 8));
-        
+        // Set up the card's general appearance
+        setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(112,112,108), 1),
+            BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
-        setBackground(new Color(112,112,108));
+        setBackground(Color.WHITE);
+        setCursor(new Cursor(Cursor.HAND_CURSOR)); // Indicate it's clickable
 
-        JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Color.WHITE);
+        // --- Product Image Panel ---
+        JPanel imagePanel = new JPanel(new BorderLayout());
+        imagePanel.setBackground(Color.WHITE);
+        JLabel lblImagen = new JLabel();
+        lblImagen.setPreferredSize(new Dimension(150, 150));
+        lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
+        lblImagen.setVerticalAlignment(SwingConstants.CENTER);
 
-        JLabel imagenLabel = new JLabel();
-        imagenLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        imagenLabel.setVerticalAlignment(SwingConstants.CENTER);
-        imagenLabel.setPreferredSize(new Dimension(200, 200));
-        imagenLabel.setOpaque(true);
-        imagenLabel.setBackground(new Color(245, 245, 245));
-        
-        if (producto.getImagen() != null && producto.getImagen().length > 0) {
-            try {
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(producto.getImagen()));
-                if (originalImage != null) {
-                    Image scaledImage = originalImage.getScaledInstance(
-                        imagenLabel.getPreferredSize().width, 
-                        imagenLabel.getPreferredSize().height, 
-                        Image.SCALE_SMOOTH
-                    );
-                    imagenLabel.setIcon(new ImageIcon(scaledImage));
-                } else {
-                    imagenLabel.setText("Error de imagen");
-                    imagenLabel.setForeground(Color.RED);
-                }
-            } catch (IOException e) {
-                System.err.println("Error al cargar imagen del producto " + producto.getNombre() + ": " + e.getMessage());
-                imagenLabel.setText("No Image Available");
-                imagenLabel.setForeground(Color.DARK_GRAY);
-                imagenLabel.setFont(new Font("SansSerif", Font.ITALIC, 12));
-            }
+        if (producto.getImagen() != null) {
+            ImageIcon originalIcon = new ImageIcon(producto.getImagen());
+            Image scaledImage = originalIcon.getImage().getScaledInstance(
+                    150, 150, Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(scaledImage));
         } else {
-            imagenLabel.setText("No Image Available");
-            imagenLabel.setForeground(Color.DARK_GRAY);
-            imagenLabel.setFont(new Font("SansSerif", Font.ITALIC, 12));
+            lblImagen.setText("No hay imagen");
+            lblImagen.setFont(new Font("SansSerif", Font.ITALIC, 10));
+            lblImagen.setForeground(Color.LIGHT_GRAY);
         }
-        topPanel.add(imagenLabel, BorderLayout.CENTER);
+        imagePanel.add(lblImagen, BorderLayout.CENTER);
+        add(imagePanel, BorderLayout.NORTH);
 
-        JButton verDetallesButton = new JButton("Ver Detalles");
-        verDetallesButton.setFont(new Font("SansSerif", Font.BOLD, 11));
-        verDetallesButton.setBackground(new Color(34, 70, 113));
-        verDetallesButton.setForeground(Color.WHITE);
-        verDetallesButton.setFocusPainted(false);
-        verDetallesButton.setBorderPainted(false);
-        verDetallesButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        verDetallesButton.addActionListener(e -> {
-            // Aquí la Vista directamente crea la vista de detalles.
-            // En un MVC completo, esto se delegaría a un controlador.
-            new DetallesProductoFrame(producto);
-        });
-        
-        JPanel buttonWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        buttonWrapper.setBackground(Color.WHITE);
-        buttonWrapper.add(verDetallesButton);
-        topPanel.add(buttonWrapper, BorderLayout.NORTH);
-
-        add(topPanel, BorderLayout.CENTER);
-
+        // --- Product Information Panel ---
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
-        infoPanel.setBackground(new Color(112,112,108));
+        infoPanel.setBackground(Color.WHITE);
+        infoPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
 
-        JLabel nombreLabel = new JLabel("<html><b>" + producto.getNombre() + "</b></html>");
-        nombreLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
-        nombreLabel.setForeground(new Color(30, 30, 30));
-        nombreLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        infoPanel.add(nombreLabel);
+        JLabel lblNombre = new JLabel(producto.getNombre());
+        lblNombre.setFont(new Font("SansSerif", Font.BOLD, 16));
+        lblNombre.setForeground(new Color(30, 30, 30));
+        lblNombre.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel precioLabel = new JLabel("<html><b>$" + producto.getPrecio().setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "</b></html>");
-        precioLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-        precioLabel.setForeground(new Color(178, 34, 34));
-        precioLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        infoPanel.add(precioLabel);
+        JLabel lblPrecio = new JLabel("$" + producto.getPrecio().setScale(2, BigDecimal.ROUND_HALF_UP));
+        lblPrecio.setFont(new Font("SansSerif", Font.BOLD, 18));
+        lblPrecio.setForeground(new Color(0, 100, 0));
+        lblPrecio.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        infoPanel.add(Box.createVerticalStrut(5));
+        JLabel lblStock = new JLabel("Stock: " + producto.getStock());
+        lblStock.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        lblStock.setForeground(Color.GRAY);
+        lblStock.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel stockLabel = new JLabel("Stock: " + producto.getStock());
-        stockLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        stockLabel.setForeground(new Color(245,245,245));
-        stockLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        infoPanel.add(stockLabel);
+        JLabel lblPublicador = new JLabel("Publicado por: " + (producto.getPublisherName() != null ? producto.getPublisherName() : "Desconocido"));
+        lblPublicador.setFont(new Font("SansSerif", Font.ITALIC, 11));
+        lblPublicador.setForeground(new Color(100, 100, 100));
+        lblPublicador.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        add(infoPanel, BorderLayout.SOUTH);
+        infoPanel.add(lblNombre);
+        infoPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Spacer
+        infoPanel.add(lblPrecio);
+        infoPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Spacer
+        infoPanel.add(lblStock);
+        infoPanel.add(Box.createRigidArea(new Dimension(0, 5))); // Spacer
+        infoPanel.add(lblPublicador);
 
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) {
-                    new DetallesProductoFrame(producto);
+        add(infoPanel, BorderLayout.CENTER);
+
+        // --- Mouse Listener for Card Click ---
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (cardListener != null) {
+                    cardListener.onProductoSeleccionado(producto); // Notify the listener
                 }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setBackground(new Color(230, 230, 230)); // Hover effect
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setBackground(Color.WHITE); // Reset on exit
             }
         });
     }

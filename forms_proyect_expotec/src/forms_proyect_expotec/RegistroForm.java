@@ -8,14 +8,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.border.EmptyBorder;
 import java.awt.geom.RoundRectangle2D;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import controlador.conexion;
 import util.UserSession;
 
 public class RegistroForm extends JFrame {
-
     private JPanel panelLateral;
     private JPanel panelCampos;
     private JTextField txtNombre;
@@ -32,19 +33,16 @@ public class RegistroForm extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-
         panelLateral = new JPanel();
         panelLateral.setBackground(Color.BLACK);
         panelLateral.setPreferredSize(new Dimension(600, 700));
         panelLateral.setLayout(new GridBagLayout());
-
 
         ImageIcon logoIcon = new ImageIcon(new ImageIcon("src/Image/logo.png").getImage().getScaledInstance(450, 450, Image.SCALE_SMOOTH));
         JLabel lblLogo = new JLabel(logoIcon);
         panelLateral.add(lblLogo);
 
         add(panelLateral, BorderLayout.WEST);
-
 
         panelCampos = new JPanel();
         panelCampos.setBackground(new Color(60, 63, 65));
@@ -141,7 +139,7 @@ public class RegistroForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(RegistroForm.this, "Redirigiendo a la pantalla de inicio de sesión...");
-                new form2().setVisible(rootPaneCheckingEnabled);
+                new LoginForm().setVisible(true);
                 dispose();
             }
         });
@@ -157,22 +155,47 @@ public class RegistroForm extends JFrame {
     }
 
     private boolean verificarUsuarioExistente(String correo) {
-        conexion conn = new conexion();
-        conn.conectar();
-        String sql = "SELECT COUNT(*) FROM usuarios WHERE correo = ?";
-        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(sql)) {
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean exists = false;
+
+        try {
+            connection = new conexion().getConnection();
+            if (connection == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos para verificar el usuario.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            String sql = "SELECT COUNT(*) FROM usuarios WHERE correo = ?";
+            pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, correo);
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
+
             if (rs.next()) {
-                return rs.getInt(1) > 0;
+                exists = rs.getInt(1) > 0;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al verificar usuario existente: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         } finally {
-            conn.desconectar();
+            try {
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar ResultSet en verificarUsuarioExistente: " + e.getMessage());
+            }
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar PreparedStatement en verificarUsuarioExistente: " + e.getMessage());
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar Connection en verificarUsuarioExistente: " + e.getMessage());
+            }
         }
-        return false;
+        return exists;
     }
 
     private void registrarUsuario() {
@@ -202,13 +225,21 @@ public class RegistroForm extends JFrame {
             return;
         }
 
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-        conexion conn = new conexion();
-        conn.conectar();
+        try {
+            connection = new conexion().getConnection();
+            if (connection == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos para registrar el usuario.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        String sql = "INSERT INTO usuarios (nombre, apellido, correo, contraseña) VALUES (?, ?, ?, ?)";
+            connection.setAutoCommit(false);
 
-        try (PreparedStatement pstmt = conn.getConnection().prepareStatement(sql)) {
+            String sql = "INSERT INTO usuarios (nombre, apellido, correo, contraseña) VALUES (?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, nombre);
             pstmt.setString(2, apellido);
             pstmt.setString(3, correo);
@@ -216,26 +247,102 @@ public class RegistroForm extends JFrame {
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente!", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                rs = pstmt.getGeneratedKeys();
+                if (rs.next()) {
+                    int newUserId = rs.getInt(1);
 
-                txtNombre.setText("");
-                txtApellido.setText("");
-                txtEmail.setText("");
-                txtPassword.setText("");
-                txtConfirmPassword.setText("");
+                    boolean cardCreated = crearTarjetaCreditoInicial(connection, newUserId);
 
+                    if (cardCreated) {
+                        connection.commit();
+                        JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente!", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+                        txtNombre.setText("");
+                        txtApellido.setText("");
+                        txtEmail.setText("");
+                        txtPassword.setText("");
+                        txtConfirmPassword.setText("");
+                    } else {
+                        connection.rollback();
+                        JOptionPane.showMessageDialog(this, "Usuario registrado, pero no se pudo crear la tarjeta de crédito inicial. Por favor, contacte a soporte.", "Error Parcial", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    connection.rollback();
+                    JOptionPane.showMessageDialog(this, "No se pudo obtener el ID del usuario registrado.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
+                connection.rollback();
                 JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException rollbackEx) {
+                System.err.println("Error al hacer rollback: " + rollbackEx.getMessage());
+            }
             JOptionPane.showMessageDialog(this, "Error al registrar usuario: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         } finally {
-            conn.desconectar();
+            try {
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar ResultSet en registrarUsuario: " + e.getMessage());
+            }
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar PreparedStatement en registrarUsuario: " + e.getMessage());
+            }
+            try {
+                if (connection != null) connection.setAutoCommit(true);
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar Connection en registrarUsuario: " + e.getMessage());
+            }
         }
     }
 
-    
+    private boolean crearTarjetaCreditoInicial(Connection connection, int userId) throws SQLException {
+        PreparedStatement pstmt = null;
+        try {
+            String numTarjeta = "0000000000000000";
+            String tipoTarjeta = "Visa";
+            LocalDate fechaVencimiento = LocalDate.now().plusYears(5);
+            // Convierte LocalDate a java.sql.Date
+            java.sql.Date sqlFechaVencimiento = java.sql.Date.valueOf(fechaVencimiento);
+
+            double limiteCredito = 1000.00;
+            double saldo = 0.00;
+
+            String sql = "INSERT INTO tarjeta_credito (num_tarjeta, tipo_tarjeta, fecha_vencimiento, limite_credito, usuario_id, saldo) VALUES (?, ?, ?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, numTarjeta);
+            pstmt.setString(2, tipoTarjeta);
+            pstmt.setDate(3, sqlFechaVencimiento); // Usa setDate() para la columna de tipo Date
+            pstmt.setDouble(4, limiteCredito);
+            pstmt.setInt(5, userId);
+            pstmt.setDouble(6, saldo);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    System.err.println("Error al cerrar PreparedStatement en crearTarjetaCreditoInicial: " + e.getMessage());
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new RegistroForm().setVisible(true);
+        });
+    }
 
     class RoundedTextField extends JTextField {
         private Shape shape;

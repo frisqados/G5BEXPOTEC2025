@@ -1,16 +1,16 @@
 package modelo;
 
-import java.math.BigDecimal; // Necesario para el tipo de dato BigDecimal
+import java.math.BigDecimal;
 
 public class Producto {
     private int id;
     private String nombre;
     private String descripcion;
-    private BigDecimal precio; // El precio debe ser BigDecimal
-    private int stock;         // El stock es un entero
+    private BigDecimal precio;
+    private int stock;
     private String categoria;
-    private byte[] imagen;     // La imagen es un array de bytes
-    private String publisherName; // Nuevo campo
+    private byte[] imagen;
+    private String publisherName;
 
     // Constructor COMPLETO con todos los campos, incluyendo publisherName
     public Producto(int id, String nombre, String descripcion, BigDecimal precio, int stock, String categoria, byte[] imagen, String publisherName) {
@@ -25,14 +25,11 @@ public class Producto {
     }
 
     // Constructor para casos donde el publisherName no es necesario (se le asigna "Desconocido")
-    // Asegúrate de que este constructor coincida con cualquier otro lugar donde crees Producto sin publisherName
     public Producto(int id, String nombre, String descripcion, BigDecimal precio, int stock, String categoria, byte[] imagen) {
-        this(id, nombre, descripcion, precio, stock, categoria, imagen, "Desconocido"); // Llama al constructor completo con un valor por defecto
+        this(id, nombre, descripcion, precio, stock, categoria, imagen, "Desconocido");
     }
 
-    // NUEVO CONSTRUCTOR para coincidir con la llamada en DetallesProductoFrame.main()
-    // Si necesitas crear un Producto solo con estos 6 campos, este constructor lo permite.
-    // Se asignarán valores por defecto para 'precio' y 'publisherName'.
+    // Constructor para coincidir con la llamada en DetallesProductoFrame.main()
     public Producto(int id, String nombre, String descripcion, int stock, String categoria, byte[] imagen) {
         this.id = id;
         this.nombre = nombre;
@@ -40,10 +37,23 @@ public class Producto {
         this.stock = stock;
         this.categoria = categoria;
         this.imagen = imagen;
-        this.precio = BigDecimal.ZERO; // Valor por defecto, ajusta si necesitas otro.
-        this.publisherName = "Desconocido"; // Valor por defecto.
+        this.precio = BigDecimal.ZERO;
+        this.publisherName = "Desconocido";
     }
 
+    // --- NUEVO CONSTRUCTOR para el caso del carrito/factura ---
+    // Este constructor recibe solo ID, nombre, precio y stock.
+    // Los demás campos se inicializan con valores por defecto.
+    public Producto(int id, String nombre, BigDecimal precio, int stock) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.descripcion = ""; // Valor por defecto
+        this.categoria = "";   // Valor por defecto
+        this.imagen = null;    // Valor por defecto
+        this.publisherName = "N/A"; // Valor por defecto
+    }
 
     // --- Getters ---
     public int getId() { return id; }
@@ -53,15 +63,13 @@ public class Producto {
     public int getStock() { return stock; }
     public String getCategoria() { return categoria; }
     public byte[] getImagen() { return imagen; }
-    public String getPublisherName() { return publisherName; } // Nuevo getter
+    public String getPublisherName() { return publisherName; }
 
     // --- Setters ---
-    // Este setter es CRUCIAL para que DetallesProductoFrame pueda actualizar el stock.
     public void setStock(int stock) {
         this.stock = stock;
     }
 
-    // Puedes añadir setters para otros campos si los necesitas en el futuro, por ejemplo:
     public void setId(int id) { this.id = id; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
@@ -73,14 +81,13 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" +
-               "id=" + id +
-               ", nombre='" + nombre + '\'' +
-               ", descripcion='" + descripcion + '\'' +
-               ", precio=" + precio +
-               ", stock=" + stock +
-               ", categoria='" + categoria + '\'' +
-               ", publisherName='" + publisherName + '\'' +
-               // No imprimir la imagen en toString por ser un array de bytes grande
-               '}';
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", stock=" + stock +
+                ", categoria='" + categoria + '\'' +
+                ", publisherName='" + publisherName + '\'' +
+                '}';
     }
 }

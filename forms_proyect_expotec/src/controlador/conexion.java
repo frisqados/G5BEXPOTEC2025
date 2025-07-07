@@ -6,44 +6,35 @@ import java.sql.SQLException;
 
 public class conexion {
 
-    private Connection conn;
+    // Guarda tus datos de conexión como constantes estáticas.
+    // Es mejor leer esto de un archivo de configuración en una aplicación real,
+    // pero para este ejemplo, las dejamos aquí.
+    private static final String DB_URL = "jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:6543/postgres";
+    private static final String DB_USER = "postgres.dmysuzpnstbefvvklffu";
+    private static final String DB_PASSWORD = "crash3344";
+    private static final String CONNECTION_PROPERTIES = "?prepareThreshold=0";
 
-    public conexion() {
-        this.conn = null;
-    }
-
-    public void conectar() {
-        try {
-            // CADENA DE CONEXIÓN MODIFICADA
-            // Añade &prepareThreshold=0 al final de la cadena de conexión
-            String cadena = "jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:6543/postgres?user=postgres.dmysuzpnstbefvvklffu&password=crash3344&prepareThreshold=0";
-            conn = DriverManager.getConnection(cadena);
-            System.out.println("Conectado a la base de datos");
-        } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
-        }
-    }
-
-    public void desconectar() {
-        if (conn != null) {
-            try {
-                conn.close();
-                System.out.println("Conexión cerrada");
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión: " + e.getMessage());
-            }
-        }
-    }
-
+    /**
+     * Obtiene y devuelve una nueva conexión a la base de datos.
+     * Es responsabilidad del código que llama a este método cerrar la conexión
+     * en un bloque finally.
+     * @return Una nueva instancia de Connection, o null si falla la conexión.
+     */
     public Connection getConnection() {
+        Connection connection = null;
         try {
-            if (conn == null || conn.isClosed()) {
-                conectar();
-            }
+            // Carga el driver de PostgreSQL. En JDBC 4.0+ esto suele ser automático,
+            // pero incluirlo es una buena práctica y no hace daño.
+            // Class.forName("org.postgresql.Driver"); // Descomentar si tienes problemas de ClassNotFoundException
+
+            String fullUrl = DB_URL + CONNECTION_PROPERTIES;
+            connection = DriverManager.getConnection(fullUrl, DB_USER, DB_PASSWORD);
+            // System.out.println("Nueva conexión a la base de datos establecida."); // Comenta esto para evitar spam en consola
         } catch (SQLException e) {
-            System.err.println("Error al verificar estado de la conexión: " + e.getMessage());
-            conectar(); // Intentar reconectar si la conexión se perdió
+            System.err.println("Error al conectar a la base de datos: " + e.getMessage());
+            // No imprimimos el stack trace completo aquí. El error se manejará
+            // en el lugar donde se intente usar esta conexión nula.
         }
-        return conn;
+        return connection;
     }
 }
