@@ -36,7 +36,6 @@ public class FormularioRecuperarContrasena extends JFrame {
         panelCentral = new JPanel(cardLayout);
         panelCentral.setBackground(new Color(60, 63, 65));
 
-        // Panel Solicitar Correo
         JPanel panelSolicitarCorreo = crearPanelBase();
         JLabel lblTituloCorreo = new JLabel("Recuperar Contraseña");
         lblTituloCorreo.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -63,7 +62,6 @@ public class FormularioRecuperarContrasena extends JFrame {
         agregarComponenteCentrado(panelSolicitarCorreo, btnEnviarCodigo, 0, 3, 2);
         panelCentral.add(panelSolicitarCorreo, "SOLICITAR_CORREO");
 
-        // Panel Ingresar Código
         JPanel panelIngresarCodigo = crearPanelBase();
         JLabel lblTituloCodigo = new JLabel("Verificación de Código");
         lblTituloCodigo.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -90,7 +88,6 @@ public class FormularioRecuperarContrasena extends JFrame {
         agregarComponenteCentrado(panelIngresarCodigo, btnVerificarCodigo, 0, 3, 2);
         panelCentral.add(panelIngresarCodigo, "INGRESAR_CODIGO");
 
-        // Panel Cambiar Contraseña
         JPanel panelCambiarContrasena = crearPanelBase();
         JLabel lblTituloCambiar = new JLabel("Cambiar Contraseña");
         lblTituloCambiar.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -125,6 +122,26 @@ public class FormularioRecuperarContrasena extends JFrame {
 
         add(panelCentral, BorderLayout.CENTER);
         cardLayout.show(panelCentral, "SOLICITAR_CORREO");
+
+        // Botón para volver al LoginForm
+        JButton btnVolver = new JButton("Volver al Inicio de Sesión");
+        btnVolver.setBackground(new Color(70, 73, 75)); // Un color que combine con el tema oscuro
+        btnVolver.setForeground(Color.WHITE);
+        btnVolver.setFocusPainted(false);
+        btnVolver.setBorderPainted(false);
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginForm().setVisible(true);
+                dispose();
+            }
+        });
+        
+        // Agregar el botón Volver al final del panel principal (sur)
+        JPanel panelBotonVolver = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelBotonVolver.setBackground(new Color(60, 63, 65));
+        panelBotonVolver.add(btnVolver);
+        add(panelBotonVolver, BorderLayout.SOUTH);
     }
 
     private JPanel crearPanelBase() {
@@ -266,8 +283,6 @@ public class FormularioRecuperarContrasena extends JFrame {
             ex.printStackTrace();
         }
     }
-
-    //  Clases internas para componentes redondeados 
 
     class CampoTextoRedondeado extends JTextField {
         private Shape shape;

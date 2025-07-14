@@ -24,19 +24,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
-import forms_proyect_expotec.PanelRound;
+import forms_proyect_expotec.PanelRound; // Assuming this is a custom rounded panel component
 
 public class PerfilPanel extends JPanel {
 
-    private static final Color PRIMARY_TEXT_COLOR = new Color(30, 30, 30);
-    private static final Color SECONDARY_TEXT_COLOR = new Color(90, 90, 90);
-    private static final Color BORDER_COLOR = new Color(220, 220, 220);
-    private static final Color BACKGROUND_COLOR = new Color(248, 248, 248);
-    private static final Color CARD_BACKGROUND = new Color(255, 255, 255);
-    private static final Color BUTTON_BACKGROUND = new Color(50, 50, 50);
-    private static final Color BUTTON_FOREGROUND = Color.WHITE;
-    private static final Color ACCENT_GREEN = new Color(46, 179, 79);
-    private static final Color ACCENT_ORANGE = new Color(255, 140, 0);
+    // Using UIManager to get FlatLaf colors for consistency
+    private final Color PRIMARY_TEXT_COLOR = UIManager.getColor("Label.foreground");
+    private final Color SECONDARY_TEXT_COLOR = UIManager.getColor("Label.disabledForeground");
+    private final Color BORDER_COLOR = UIManager.getColor("Component.borderColor");
+    private final Color BACKGROUND_COLOR = UIManager.getColor("Panel.background");
+    private final Color CARD_BACKGROUND = UIManager.getColor("List.background"); // Or "Panel.background" for a subtle difference
+    private final Color BUTTON_BACKGROUND = UIManager.getColor("Button.default.background");
+    private final Color BUTTON_FOREGROUND = UIManager.getColor("Button.default.foreground");
+    private final Color ACCENT_GREEN = UIManager.getColor("Actions.Green");
+    private final Color ACCENT_ORANGE = UIManager.getColor("Actions.Yellow"); // FlatLaf has "Actions.Yellow" for orange-like accent
 
     private JTextField txtNombre;
     private JTextField txtApellido;
@@ -80,7 +81,7 @@ public class PerfilPanel extends JPanel {
         lblAvatar.setMaximumSize(new Dimension(120, 120));
         lblAvatar.setBorder(BorderFactory.createLineBorder(BORDER_COLOR, 1));
         lblAvatar.setOpaque(true);
-        lblAvatar.setBackground(new Color(230, 230, 230));
+        lblAvatar.setBackground(UIManager.getColor("Button.background")); // Use a soft background from FlatLaf
         lblAvatar.setForeground(SECONDARY_TEXT_COLOR);
         lblAvatar.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblAvatar.setVerticalAlignment(SwingConstants.CENTER);
@@ -92,6 +93,31 @@ public class PerfilPanel extends JPanel {
                 selectAndSetAvatarImage();
             }
         });
+
+        // Sección comentada para el icono de perfil predeterminado
+        // Asegúrate de que la imagen 'usuario.png' esté en una carpeta 'Image'
+        // que se encuentre en la raíz de tu classpath (ej. src/Image/usuario.png
+        // o src/main/resources/Image/usuario.png si usas Maven/Gradle).
+        try {
+            java.net.URL defaultImageUrl = getClass().getResource("/Image/usuario.png");
+            if (defaultImageUrl != null) {
+                ImageIcon defaultIcon = new ImageIcon(defaultImageUrl);
+                Image scaledDefaultImage = defaultIcon.getImage().getScaledInstance(
+                        lblAvatar.getPreferredSize().width,
+                        lblAvatar.getPreferredSize().height,
+                        Image.SCALE_SMOOTH
+                );
+                lblAvatar.setIcon(new ImageIcon(scaledDefaultImage));
+                lblAvatar.setText(""); // Limpiar texto si se establece un icono
+            } else {
+                System.err.println("Advertencia: No se pudo encontrar la imagen predeterminada del usuario en /Image/usuario.png");
+                lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>"); // Volver al texto si no se encuentra
+            }
+        } catch (Exception e) {
+            System.err.println("Error al cargar la imagen predeterminada: " + e.getMessage());
+            lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>"); // Volver al texto en caso de error
+        }
+
 
         JPanel avatarContainer = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         avatarContainer.setOpaque(false);
@@ -180,7 +206,7 @@ public class PerfilPanel extends JPanel {
         btnGuardarCambios.setForeground(BUTTON_FOREGROUND);
         btnGuardarCambios.setFocusPainted(false);
         btnGuardarCambios.setBorder(BorderFactory.createEmptyBorder(12, 25, 12, 25));
-        btnGuardarCambios.putClientProperty("JButton.buttonType", "roundRect");
+        btnGuardarCambios.putClientProperty("JButton.buttonType", "roundRect"); // Apply FlatLaf roundRect style
         btnGuardarCambios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -268,11 +294,11 @@ public class PerfilPanel extends JPanel {
     private JTextField createStyledTextField() {
         JTextField textField = new JTextField(20);
         textField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        textField.setBackground(BACKGROUND_COLOR);
+        textField.setBackground(UIManager.getColor("TextField.background")); // Use FlatLaf text field background
         textField.setForeground(PRIMARY_TEXT_COLOR);
         textField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(BORDER_COLOR, 1),
-            BorderFactory.createEmptyBorder(8, 10, 8, 10)
+                BorderFactory.createLineBorder(BORDER_COLOR, 1),
+                BorderFactory.createEmptyBorder(8, 10, 8, 10)
         ));
         textField.setCaretColor(PRIMARY_TEXT_COLOR);
         return textField;
@@ -304,20 +330,22 @@ public class PerfilPanel extends JPanel {
             BufferedImage originalImage = ImageIO.read(new File(imagePath));
             if (originalImage != null) {
                 Image scaledImage = originalImage.getScaledInstance(
-                    lblAvatar.getPreferredSize().width,
-                    lblAvatar.getPreferredSize().height,
-                    Image.SCALE_SMOOTH
+                        lblAvatar.getPreferredSize().width,
+                        lblAvatar.getPreferredSize().height,
+                        Image.SCALE_SMOOTH
                 );
                 lblAvatar.setIcon(new ImageIcon(scaledImage));
                 lblAvatar.setText("");
             } else {
                 lblAvatar.setIcon(null);
                 lblAvatar.setText("<html><center><br><br>Error al Cargar</center></html>");
+                System.err.println("Error al cargar imagen (originalImage is null): " + imagePath);
             }
         } catch (IOException e) {
             lblAvatar.setIcon(null);
             lblAvatar.setText("<html><center><br><br>No Encontrada</center></html>");
-            System.err.println("Error al cargar imagen: " + e.getMessage());
+            System.err.println("Error al cargar imagen (IOException): " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -577,6 +605,7 @@ public class PerfilPanel extends JPanel {
             long hoursBetween = Duration.between(prevTime, currTime).toHours();
 
             if (hoursBetween <= 24) {
+                // Continue streak
             } else {
                 int streakDuration = (int) Duration.between(validPurchaseTimes.get(currentStreakStartIdx), prevTime).toHours();
                 maxStreakHours = Math.max(maxStreakHours, streakDuration);

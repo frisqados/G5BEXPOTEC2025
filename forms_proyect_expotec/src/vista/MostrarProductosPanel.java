@@ -1,8 +1,11 @@
 package vista;
 
 import modelo.Producto;
-import controlador.conexion;
+import modelo.ProductoDAO; // Importar la nueva clase DAO
 import util.ProductoSeleccionadoListener;
+import util.ImageUtil; // Posible nueva clase para manejo de imágenes
+import util.UserSession; // Si aún la usas, asegúrate que esté correctamente importada
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
@@ -10,88 +13,81 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigDecimal;
-import java.text.Normalizer;
-import javax.swing.Timer;
+import java.util.concurrent.ExecutionException;
 
 public class MostrarProductosPanel extends JPanel {
     private JPanel productosPanel;
     private JTextField searchField;
     private JButton searchButton;
     private ProductoSeleccionadoListener listener;
-
     private Timer searchTimer;
+    private int idUsuario;
+    private ProductoDAO productoDAO; // Instancia del DAO
 
-    public MostrarProductosPanel(ProductoSeleccionadoListener listener) {
+    // Constantes para mejorar la legibilidad y mantenimiento
+    private static final int TIMER_DELAY = 300;
+    private static final int CARD_IMAGE_SIZE = 150;
+    private static final int GRID_COLS = 4;
+    private static final int GRID_GAP = 15;
+    private static final int BORDER_PADDING = 25;
+
+    public MostrarProductosPanel(ProductoSeleccionadoListener listener, int idUsuario) {
         this.listener = listener;
-        setLayout(new BorderLayout(15, 15));
+        this.idUsuario = idUsuario;
+        this.productoDAO = new ProductoDAO(); // Inicializar el DAO
 
-        searchTimer = new Timer(300, e -> {
-            String searchTerm = searchField.getText().trim();
-            cargarProductosDesdeBD(searchTerm);
-        });
-        searchTimer.setRepeats(false);
+        setupPanelLayout();
+        setupHeaderPanel();
+        setupSearchFunctionality();
+        setupProductsPanel();
 
+        cargarProductosAsync(null); // Carga inicial
+    }
+
+    private void setupPanelLayout() {
+        setLayout(new BorderLayout(GRID_GAP, GRID_GAP));
+        setBackground(UIManager.getColor("Panel.background"));
+    }
+
+    private void setupHeaderPanel() {
         JPanel headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(new Color(23, 23, 23));
-        headerPanel.setBorder(new EmptyBorder(10, 25, 10, 25));
+        headerPanel.setBorder(new EmptyBorder(10, BORDER_PADDING, 10, BORDER_PADDING));
+        headerPanel.setBackground(UIManager.getColor("Panel.background"));
 
         JLabel titleLabel = new JLabel("Explorar Productos");
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
-        titleLabel.setForeground(Color.WHITE);
         headerPanel.add(titleLabel, BorderLayout.WEST);
 
         JPanel searchBarPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
-        searchBarPanel.setBackground(new Color(23, 23, 23));
-        
-        JLabel searchLabel = new JLabel("Buscar:");
-        searchLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
-        searchLabel.setForeground(Color.WHITE);
-        searchBarPanel.add(searchLabel);
+        searchBarPanel.setBackground(UIManager.getColor("Panel.background"));
 
+        searchBarPanel.add(new JLabel("Buscar:"));
         searchField = new JTextField(20);
-        searchField.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        searchField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(100, 100, 100)),
-            BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
         searchBarPanel.add(searchField);
 
         searchButton = new JButton("Buscar");
-        searchButton.setFont(new Font("SansSerif", Font.BOLD, 14));
-        searchButton.setBackground(new Color(70, 130, 180));
-        searchButton.setForeground(Color.WHITE);
-        searchButton.setFocusPainted(false);
-        searchButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
         searchButton.addActionListener(e -> {
             searchTimer.stop();
-            String searchTerm = searchField.getText().trim();
-            cargarProductosDesdeBD(searchTerm);
+            cargarProductosAsync(searchField.getText().trim());
         });
         searchBarPanel.add(searchButton);
-        
+
+        headerPanel.add(searchBarPanel, BorderLayout.EAST);
+        add(headerPanel, BorderLayout.NORTH);
+    }
+
+    private void setupSearchFunctionality() {
+        searchTimer = new Timer(TIMER_DELAY, e -> cargarProductosAsync(searchField.getText().trim()));
+        searchTimer.setRepeats(false);
+
         searchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                restartSearchTimer();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                restartSearchTimer();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                restartSearchTimer();
-            }
-
+            @Override public void insertUpdate(DocumentEvent e) { restartSearchTimer(); }
+            @Override public void removeUpdate(DocumentEvent e) { restartSearchTimer(); }
+            @Override public void changedUpdate(DocumentEvent e) { restartSearchTimer(); }
             private void restartSearchTimer() {
                 if (searchTimer.isRunning()) {
                     searchTimer.restart();
@@ -100,137 +96,103 @@ public class MostrarProductosPanel extends JPanel {
                 }
             }
         });
-        
-        headerPanel.add(searchBarPanel, BorderLayout.EAST);
-        add(headerPanel, BorderLayout.NORTH);
+    }
 
+    private void setupProductsPanel() {
         productosPanel = new JPanel();
-        productosPanel.setLayout(new GridLayout(0, 4, 25, 25));
-        productosPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
-        productosPanel.setBackground(new Color(187,187,187));
-
-        cargarProductosDesdeBD(null);
+        productosPanel.setLayout(new BoxLayout(productosPanel, BoxLayout.Y_AXIS));
+        productosPanel.setBorder(new EmptyBorder(BORDER_PADDING, BORDER_PADDING, BORDER_PADDING, BORDER_PADDING));
+        productosPanel.setBackground(UIManager.getColor("Panel.background"));
 
         JScrollPane scrollPane = new JScrollPane(productosPanel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(UIManager.getColor("Panel.background"));
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void cargarProductosDesdeBD(String searchTerm) {
-        SwingWorker<List<Producto>, Void> worker = new SwingWorker<List<Producto>, Void>() {
+    /**
+     * Carga productos de forma asíncrona usando SwingWorker.
+     * Muestra recomendaciones si no hay término de búsqueda, de lo contrario, muestra resultados de búsqueda.
+     */
+    public void cargarProductosAsync(String searchTerm) {
+        SwingWorker<List<List<Producto>>, Void> worker = new SwingWorker<>() {
             @Override
-            protected List<Producto> doInBackground() throws Exception {
-                List<Producto> productos = new ArrayList<>();
-                Connection connection = null;
-                PreparedStatement ps = null;
-                ResultSet rs = null;
+            protected List<List<Producto>> doInBackground() throws Exception {
+                List<List<Producto>> results = new ArrayList<>();
+                List<Producto> recomendaciones = new ArrayList<>();
+                List<Producto> todos = new ArrayList<>();
 
-                try {
-                    connection = new conexion().getConnection();
-                    if (connection == null) {
-                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(MostrarProductosPanel.this, "No se pudo conectar a la base de datos para cargar productos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE));
-                        return productos;
-                    }
-
-                    String sql = "SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock, p.categoria, p.imagen, u.nombre AS nombre_publicador " +
-                                 "FROM Productos p " +
-                                 "LEFT JOIN Usuarios u ON p.id_usuario_subida = u.id_usuario";
-                    
-                    if (searchTerm != null && !searchTerm.isEmpty()) {
-                        String normalizedSearchTerm = normalizeString(searchTerm);
-                        
-                        sql += " WHERE LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(p.nombre, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u')) LIKE ? " +
-                               " OR LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(p.descripcion, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u')) LIKE ? " +
-                               " OR LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(p.categoria, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u')) LIKE ?";
-                    }
-                    
-                    ps = connection.prepareStatement(sql);
-
-                    if (searchTerm != null && !searchTerm.isEmpty()) {
-                        String searchPattern = "%" + normalizeString(searchTerm) + "%";
-                        ps.setString(1, searchPattern);
-                        ps.setString(2, searchPattern);
-                        ps.setString(3, searchPattern);
-                    }
-
-                    rs = ps.executeQuery();
-
-                    while (rs.next()) {
-                        int id = rs.getInt("id_producto");
-                        String nombre = rs.getString("nombre");
-                        String descripcion = rs.getString("descripcion");
-                        BigDecimal precio = rs.getBigDecimal("precio");
-                        int stock = rs.getInt("stock");
-                        String categoria = rs.getString("categoria");
-                        byte[] imagen = rs.getBytes("imagen");
-                        String nombrePublicador = rs.getString("nombre_publicador");
-
-                        productos.add(new Producto(id, nombre, descripcion, precio, stock, categoria, imagen, nombrePublicador));
-                    }
-                } catch (SQLException e) {
-                    System.err.println("Error SQL al obtener productos: " + e.getMessage());
-                    e.printStackTrace();
-                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(MostrarProductosPanel.this, "Error de base de datos al cargar productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE));
-                } finally {
-                    try {
-                        if (rs != null) rs.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al cerrar ResultSet en MostrarProductosPanel: " + e.getMessage());
-                    }
-                    try {
-                        if (ps != null) ps.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al cerrar PreparedStatement en MostrarProductosPanel: " + e.getMessage());
-                    }
-                    try {
-                        if (connection != null) connection.close();
-                    } catch (SQLException e) {
-                        System.err.println("Error al cerrar Connection en MostrarProductosPanel: " + e.getMessage());
-                    }
+                if (searchTerm == null || searchTerm.isEmpty()) {
+                    // Solo cargar recomendaciones si no hay término de búsqueda
+                    recomendaciones = productoDAO.buscarRecomendaciones(idUsuario);
                 }
-                return productos;
+                // Siempre cargar todos los productos (filtrados o no)
+                todos = productoDAO.buscarProductos(searchTerm);
+
+                results.add(recomendaciones);
+                results.add(todos);
+                return results;
             }
 
             @Override
             protected void done() {
                 try {
-                    List<Producto> productos = get();
-                    productosPanel.removeAll();
+                    List<List<Producto>> results = get();
+                    List<Producto> recomendaciones = results.get(0);
+                    List<Producto> todos = results.get(1);
 
-                    if (productos.isEmpty()) {
-                        productosPanel.setLayout(new BorderLayout());
-                        JLabel noProductsLabel = new JLabel("Lo sentimos, no hay productos disponibles que coincidan con su búsqueda.", SwingConstants.CENTER);
-                        noProductsLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-                        noProductsLabel.setForeground(Color.GRAY);
-                        productosPanel.add(noProductsLabel, BorderLayout.CENTER);
-                    } else {
-                        productosPanel.setLayout(new GridLayout(0, 4, 25, 25));
-                        for (Producto producto : productos) {
-                            ProductoCardPanel card = new ProductoCardPanel(producto, MostrarProductosPanel.this.listener);
-                            productosPanel.add(card);
-                        }
+                    productosPanel.removeAll(); // Limpiar el panel antes de añadir nuevos componentes
+
+                    if (!recomendaciones.isEmpty()) {
+                        addSectionHeader("Recomendado para ti");
+                        addProductsToPanel(recomendaciones, true); // true para indicar que son recomendaciones (limitadas)
+                        productosPanel.add(Box.createRigidArea(new Dimension(0, 30))); // Espacio entre secciones
                     }
+
+                    addSectionHeader("Todos los productos");
+                    addProductsToPanel(todos, false);
+
                     productosPanel.revalidate();
                     productosPanel.repaint();
-                } catch (Exception ex) {
+                } catch (InterruptedException | ExecutionException ex) {
+                    // Manejo de errores de la tarea SwingWorker
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(MostrarProductosPanel.this, "Error al procesar los resultados de la búsqueda: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MostrarProductosPanel.this,
+                            "Error al cargar productos: " + ex.getMessage(),
+                            "Error de Carga", JOptionPane.ERROR_MESSAGE);
                 }
             }
         };
         worker.execute();
     }
 
-    private String normalizeString(String text) {
-        if (text == null) {
-            return null;
-        }
-        String normalized = Normalizer.normalize(text, Normalizer.Form.NFD);
-        normalized = normalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-        return normalized.toLowerCase();
+    private void addSectionHeader(String title) {
+        JLabel lblHeader = new JLabel(title);
+        lblHeader.setFont(new Font("SansSerif", Font.BOLD, 20));
+        lblHeader.setAlignmentX(Component.LEFT_ALIGNMENT);
+        productosPanel.add(lblHeader);
+        productosPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio debajo del título
     }
 
+    private void addProductsToPanel(List<Producto> products, boolean isRecommendationSection) {
+        JPanel panelGrid = new JPanel(new GridLayout(0, GRID_COLS, GRID_GAP, GRID_GAP));
+        panelGrid.setBackground(UIManager.getColor("Panel.background"));
+        panelGrid.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        // Si es la sección de recomendaciones, solo añade hasta MAX_RECOMENDACIONES
+        int count = 0;
+        for (Producto producto : products) {
+            if (isRecommendationSection && count >= ProductoDAO.MAX_RECOMENDACIONES) {
+                break; // Limitar las recomendaciones visibles si se cargaron más por alguna razón
+            }
+            panelGrid.add(new ProductoCardPanel(producto, listener));
+            count++;
+        }
+        productosPanel.add(panelGrid);
+    }
+
+    // --- Clase interna ProductoCardPanel ---
     private class ProductoCardPanel extends JPanel {
         private ProductoSeleccionadoListener cardListener;
 
@@ -238,56 +200,45 @@ public class MostrarProductosPanel extends JPanel {
             this.cardListener = listener;
 
             setLayout(new BorderLayout(5, 5));
-            setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)
-            ));
-            setBackground(Color.WHITE);
+            setBorder(BorderFactory.createLineBorder(UIManager.getColor("Separator.foreground")));
             setCursor(new Cursor(Cursor.HAND_CURSOR));
+            setBackground(UIManager.getColor("Panel.background"));
 
-            JPanel imagePanel = new JPanel(new BorderLayout());
-            imagePanel.setBackground(Color.WHITE);
             JLabel lblImagen = new JLabel();
-            lblImagen.setPreferredSize(new Dimension(150, 150));
+            lblImagen.setPreferredSize(new Dimension(CARD_IMAGE_SIZE, CARD_IMAGE_SIZE));
             lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
             lblImagen.setVerticalAlignment(SwingConstants.CENTER);
 
+            // Usa ImageUtil para cargar y escalar la imagen
             if (producto.getImagen() != null) {
-                ImageIcon originalIcon = new ImageIcon(producto.getImagen());
-                Image scaledImage = originalIcon.getImage().getScaledInstance(
-                        150, 150, Image.SCALE_SMOOTH);
-                lblImagen.setIcon(new ImageIcon(scaledImage));
+                lblImagen.setIcon(ImageUtil.createScaledImageIcon(producto.getImagen(), CARD_IMAGE_SIZE, CARD_IMAGE_SIZE));
             } else {
                 lblImagen.setText("No hay imagen");
-                lblImagen.setFont(new Font("SansSerif", Font.ITALIC, 10));
-                lblImagen.setForeground(Color.LIGHT_GRAY);
             }
-            imagePanel.add(lblImagen, BorderLayout.CENTER);
-            add(imagePanel, BorderLayout.NORTH);
+
+            add(lblImagen, BorderLayout.NORTH);
 
             JPanel infoPanel = new JPanel();
             infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-            infoPanel.setBackground(Color.WHITE);
-            infoPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
+            infoPanel.setBackground(UIManager.getColor("Panel.background"));
+            infoPanel.setBorder(new EmptyBorder(5, 10, 10, 10)); // Añadir un poco de padding
 
             JLabel lblNombre = new JLabel(producto.getNombre());
-            lblNombre.setFont(new Font("SansSerif", Font.BOLD, 16));
-            lblNombre.setForeground(new Color(30, 30, 30));
+            lblNombre.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 16f));
             lblNombre.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JLabel lblPrecio = new JLabel("$" + producto.getPrecio().setScale(2, BigDecimal.ROUND_HALF_UP));
-            lblPrecio.setFont(new Font("SansSerif", Font.BOLD, 18));
-            lblPrecio.setForeground(new Color(0, 100, 0));
+            lblPrecio.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 18f));
+            lblPrecio.setForeground(UIManager.getColor("TextInfo.foreground"));
             lblPrecio.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JLabel lblStock = new JLabel("Stock: " + producto.getStock());
-            lblStock.setFont(new Font("SansSerif", Font.PLAIN, 12));
-            lblStock.setForeground(Color.GRAY);
+            lblStock.setFont(UIManager.getFont("Label.font").deriveFont(Font.PLAIN, 12f));
             lblStock.setAlignmentX(Component.CENTER_ALIGNMENT);
+            lblStock.setForeground(producto.getStock() > 0 ? UIManager.getColor("Label.foreground") : Color.RED); // Resaltar stock 0
 
             JLabel lblPublicador = new JLabel("Publicado por: " + (producto.getPublisherName() != null ? producto.getPublisherName() : "Desconocido"));
-            lblPublicador.setFont(new Font("SansSerif", Font.ITALIC, 11));
-            lblPublicador.setForeground(new Color(100, 100, 100));
+            lblPublicador.setFont(UIManager.getFont("Label.font").deriveFont(Font.ITALIC, 11f));
             lblPublicador.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             infoPanel.add(lblNombre);
@@ -300,6 +251,7 @@ public class MostrarProductosPanel extends JPanel {
 
             add(infoPanel, BorderLayout.CENTER);
 
+            // Efectos de hover y click
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -309,11 +261,13 @@ public class MostrarProductosPanel extends JPanel {
                 }
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    setBackground(new Color(230, 230, 230));
+                    setBackground(UIManager.getColor("Panel.background").brighter());
+                    setBorder(BorderFactory.createLineBorder(UIManager.getColor("Component.accentColor"), 2)); // Borde de acento
                 }
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    setBackground(Color.WHITE);
+                    setBackground(UIManager.getColor("Panel.background"));
+                    setBorder(BorderFactory.createLineBorder(UIManager.getColor("Separator.foreground")));
                 }
             });
         }

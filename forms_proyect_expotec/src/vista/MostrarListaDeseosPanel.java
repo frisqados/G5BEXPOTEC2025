@@ -22,31 +22,42 @@ public class MostrarListaDeseosPanel extends JPanel {
     private int userId;
     private ProductoSeleccionadoListener listener;
 
+    // Colores para FlatLaf
+    private final Color BACKGROUND_PANEL = UIManager.getColor("Panel.background");
+    private final Color FOREGROUND_TEXT = UIManager.getColor("Label.foreground");
+    private final Color BORDER_COLOR = UIManager.getColor("Component.borderColor");
+    private final Color CARD_BACKGROUND = UIManager.getColor("List.background");
+    private final Color PRIMARY_BUTTON_BACKGROUND = UIManager.getColor("Button.default.background");
+    private final Color PRIMARY_BUTTON_FOREGROUND = UIManager.getColor("Button.default.foreground");
+    private final Color DANGER_BUTTON_BACKGROUND = UIManager.getColor("Actions.Red");
+    private final Color DANGER_BUTTON_FOREGROUND = UIManager.getColor("Actions.RedForeground");
+
     public MostrarListaDeseosPanel(int userId, ProductoSeleccionadoListener listener) {
         this.userId = userId;
         this.listener = listener;
 
         setLayout(new BorderLayout(15, 15));
-        setBackground(new Color(187, 187, 187));
+        setBackground(BACKGROUND_PANEL);
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        headerPanel.setBackground(new Color(23, 23, 23));
+        headerPanel.setBackground(UIManager.getColor("Panel.background")); // Usa el color de fondo del panel para el header
+        headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15)); // Añade un padding
         JLabel titleLabel = new JLabel("Mi Lista de Deseos");
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(FOREGROUND_TEXT); // Usa el color de texto general
         headerPanel.add(titleLabel);
         add(headerPanel, BorderLayout.NORTH);
 
         productosPanel = new JPanel();
         productosPanel.setLayout(new GridLayout(0, 4, 25, 25));
         productosPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
-        productosPanel.setBackground(new Color(187, 187, 187));
+        productosPanel.setBackground(BACKGROUND_PANEL);
 
         cargarListaDeseos();
 
         JScrollPane scrollPane = new JScrollPane(productosPanel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // Elimina el borde del scrollpane
         add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -61,20 +72,21 @@ public class MostrarListaDeseosPanel extends JPanel {
         this.listener = listener;
 
         setLayout(new BorderLayout(15, 15));
-        setBackground(new Color(187, 187, 187));
+        setBackground(BACKGROUND_PANEL);
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        headerPanel.setBackground(new Color(23, 23, 23));
+        headerPanel.setBackground(UIManager.getColor("Panel.background"));
+        headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
         JLabel titleLabel = new JLabel("Mi Lista de Deseos");
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(FOREGROUND_TEXT);
         headerPanel.add(titleLabel);
         add(headerPanel, BorderLayout.NORTH);
 
         productosPanel = new JPanel();
         productosPanel.setLayout(new GridLayout(0, 4, 25, 25));
         productosPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
-        productosPanel.setBackground(new Color(187, 187, 187));
+        productosPanel.setBackground(BACKGROUND_PANEL);
 
         if (this.userId != -1) {
             cargarListaDeseos();
@@ -97,7 +109,7 @@ public class MostrarListaDeseosPanel extends JPanel {
         productosPanel.setLayout(new BorderLayout());
         JLabel noUserLabel = new JLabel("Inicia sesión para ver tu lista de deseos.", SwingConstants.CENTER);
         noUserLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-        noUserLabel.setForeground(Color.GRAY);
+        noUserLabel.setForeground(UIManager.getColor("Label.disabledForeground")); // Color para texto deshabilitado/gris
         productosPanel.add(noUserLabel, BorderLayout.CENTER);
         productosPanel.revalidate();
         productosPanel.repaint();
@@ -154,7 +166,7 @@ public class MostrarListaDeseosPanel extends JPanel {
             productosPanel.setLayout(new BorderLayout());
             JLabel noProductsLabel = new JLabel("No tienes productos en tu lista de deseos. ¡Explora y añade algunos!", SwingConstants.CENTER);
             noProductsLabel.setFont(new Font("SansSerif", Font.ITALIC, 18));
-            noProductsLabel.setForeground(Color.GRAY);
+            noProductsLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
             productosPanel.add(noProductsLabel, BorderLayout.CENTER);
         } else {
             productosPanel.setLayout(new GridLayout(0, 4, 25, 25));
@@ -214,14 +226,14 @@ public class MostrarListaDeseosPanel extends JPanel {
 
             setLayout(new BorderLayout(5, 5));
             setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                BorderFactory.createLineBorder(BORDER_COLOR, 1), // Usa BORDER_COLOR de FlatLaf
+                new EmptyBorder(10, 10, 10, 10)
             ));
-            setBackground(Color.WHITE);
+            setBackground(CARD_BACKGROUND); // Usa CARD_BACKGROUND de FlatLaf
             setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             JPanel imagePanel = new JPanel(new BorderLayout());
-            imagePanel.setBackground(Color.WHITE);
+            imagePanel.setBackground(CARD_BACKGROUND);
             JLabel lblImagen = new JLabel();
             lblImagen.setPreferredSize(new Dimension(150, 150));
             lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
@@ -234,34 +246,34 @@ public class MostrarListaDeseosPanel extends JPanel {
             } else {
                 lblImagen.setText("No hay imagen");
                 lblImagen.setFont(new Font("SansSerif", Font.ITALIC, 10));
-                lblImagen.setForeground(Color.LIGHT_GRAY);
+                lblImagen.setForeground(UIManager.getColor("Label.disabledForeground")); // Color de texto deshabilitado
             }
             imagePanel.add(lblImagen, BorderLayout.CENTER);
             add(imagePanel, BorderLayout.NORTH);
 
             JPanel infoPanel = new JPanel();
             infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-            infoPanel.setBackground(Color.WHITE);
+            infoPanel.setBackground(CARD_BACKGROUND);
             infoPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
 
             JLabel lblNombre = new JLabel(producto.getNombre());
             lblNombre.setFont(new Font("SansSerif", Font.BOLD, 16));
-            lblNombre.setForeground(new Color(30, 30, 30));
+            lblNombre.setForeground(FOREGROUND_TEXT);
             lblNombre.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JLabel lblPrecio = new JLabel("Q" + producto.getPrecio().setScale(2, BigDecimal.ROUND_HALF_UP));
             lblPrecio.setFont(new Font("SansSerif", Font.BOLD, 18));
-            lblPrecio.setForeground(new Color(0, 100, 0));
+            lblPrecio.setForeground(UIManager.getColor("Actions.Green")); // Un verde de FlatLaf
             lblPrecio.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JLabel lblStock = new JLabel("Stock: " + producto.getStock());
             lblStock.setFont(new Font("SansSerif", Font.PLAIN, 12));
-            lblStock.setForeground(Color.GRAY);
+            lblStock.setForeground(UIManager.getColor("Label.disabledForeground"));
             lblStock.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JLabel lblPublicador = new JLabel("Publicado por: " + (producto.getPublisherName() != null ? producto.getPublisherName() : "Desconocido"));
             lblPublicador.setFont(new Font("SansSerif", Font.ITALIC, 11));
-            lblPublicador.setForeground(new Color(100, 100, 100));
+            lblPublicador.setForeground(UIManager.getColor("Label.infoForeground")); // Color para información secundaria
             lblPublicador.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             infoPanel.add(lblNombre);
@@ -275,19 +287,20 @@ public class MostrarListaDeseosPanel extends JPanel {
             add(infoPanel, BorderLayout.CENTER);
 
             JButton btnEliminar = new JButton("Eliminar");
-            btnEliminar.setBackground(new Color(200, 70, 70));
-            btnEliminar.setForeground(Color.WHITE);
+            btnEliminar.setBackground(DANGER_BUTTON_BACKGROUND); // Usa el color de peligro de FlatLaf
+            btnEliminar.setForeground(DANGER_BUTTON_FOREGROUND); // Usa el foreground de peligro de FlatLaf
             btnEliminar.setFont(new Font("SansSerif", Font.BOLD, 12));
             btnEliminar.setFocusPainted(false);
             btnEliminar.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-            btnEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnEliminar.putClientProperty("JButton.buttonType", "roundRect"); // Estilo FlatLaf para botones
 
             btnEliminar.addActionListener(e -> {
                 eliminarDeListaDeseos(producto.getId());
             });
 
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            buttonPanel.setBackground(Color.WHITE);
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Centra el botón
+            buttonPanel.setBackground(CARD_BACKGROUND);
+            buttonPanel.setBorder(new EmptyBorder(5, 0, 0, 0)); // Añade un pequeño padding arriba
             buttonPanel.add(btnEliminar);
             add(buttonPanel, BorderLayout.SOUTH);
 
@@ -302,13 +315,16 @@ public class MostrarListaDeseosPanel extends JPanel {
                 }
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    setBorder(BorderFactory.createLineBorder(new Color(100, 100, 200), 2));
+                    // FlatLaf maneja mejor los estados de hover con sus propios LookAndFeels.
+                    // Podemos usar un color de resaltado o simplemente dejar que FlatLaf lo maneje.
+                    // Para un resaltado explícito:
+                    setBorder(BorderFactory.createLineBorder(UIManager.getColor("Component.accentColor"), 2));
                 }
                 @Override
                 public void mouseExited(MouseEvent e) {
                     setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                        BorderFactory.createLineBorder(BORDER_COLOR, 1),
+                        new EmptyBorder(10, 10, 10, 10)
                     ));
                 }
             });

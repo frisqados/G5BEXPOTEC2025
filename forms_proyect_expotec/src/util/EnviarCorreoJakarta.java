@@ -7,8 +7,8 @@ import java.util.Properties;
 public class EnviarCorreoJakarta {
 
     public static boolean enviarEmail(String para, String asunto, String contenidoHtml) {
-        final String remitente = "patzanaron9@gmail.com"; // <-- CAMBIA esto
-        final String clave = "mjow lodn yvkv azlt";       // <-- Y esto (contraseña de aplicación)
+        final String remitente = "patzanaron9@gmail.com";
+        final String clave = "mjow lodn yvkv azlt";     
         
         Properties propiedades = new Properties();
         propiedades.put("mail.smtp.auth", "true");

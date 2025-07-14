@@ -1,9 +1,8 @@
 package forms_proyect_expotec;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,120 +11,119 @@ import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import controlador.conexion;
 import util.UserSession;
 
 public class HistorialComprasPanel extends JPanel {
 
-    private JTable tablaHistorial;
-    private DefaultTableModel modeloTabla;
     private JLabel lblTitulo;
     private int userId;
-    private JPanel titlePanel; // Declarar titlePanel como variable de instancia
+    private JPanel titlePanel;
+    private JPanel contentPanel;
+    private JScrollPane mainScrollPane;
+    private JPanel centerMessagePanel; // Panel para el mensaje de "no hay datos"
 
     public HistorialComprasPanel() {
-        setLayout(new BorderLayout(20, 20));
-        setBackground(new Color(45, 45, 48));
+        setLayout(new BorderLayout(25, 25));
+        setBackground(new Color(30, 30, 33));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         this.userId = UserSession.getCurrentUserId();
         String userName = UserSession.getCurrentUserName();
         if (this.userId == 0 || userName == null) {
             JOptionPane.showMessageDialog(this, "No hay una sesión de usuario activa. Inicie sesión para ver el historial.", "Error de Sesión", JOptionPane.ERROR_MESSAGE);
-            return;
+            // No retornar aquí, el panel debe existir para que la interfaz principal pueda mostrarlo.
+            // La lógica de carga ya manejará el caso de usuario no logueado mostrando el mensaje apropiado.
         }
 
-        lblTitulo = new JLabel("Historial de Compras de " + userName);
-        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 36));
-        lblTitulo.setForeground(new Color(230, 230, 230));
+        lblTitulo = new JLabel("Historial de Compras de " + (userName != null ? userName : "Invitado"));
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 38));
+        lblTitulo.setForeground(new Color(240, 240, 240));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 
         titlePanel = new JPanel();
         titlePanel.setBackground(getBackground());
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         titlePanel.add(lblTitulo);
         add(titlePanel, BorderLayout.NORTH);
 
-        String[] columnas = {"ID Orden", "Fecha Orden", "Estado", "Total Orden", "Producto", "Cantidad", "Precio Unitario"};
-        modeloTabla = new DefaultTableModel(columnas, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-            @Override
-            public Class<?> getColumnClass(int column) {
-                if (column == 3 || column == 6) {
-                    return Double.class;
-                }
-                return Object.class;
-            }
-        };
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setOpaque(false); // **HACEMOS EL FONDO TRANSPARENTE AQUÍ**
+        contentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        tablaHistorial = new JTable(modeloTabla);
-        tablaHistorial.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        tablaHistorial.setRowHeight(30);
-        tablaHistorial.setBackground(new Color(60, 63, 65));
-        tablaHistorial.setForeground(new Color(220, 220, 220));
-        tablaHistorial.setGridColor(new Color(75, 75, 78));
-        tablaHistorial.setSelectionBackground(new Color(80, 120, 150));
-        tablaHistorial.setSelectionForeground(Color.WHITE);
+        mainScrollPane = new JScrollPane(contentPanel);
+        mainScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        mainScrollPane.getViewport().setOpaque(false); // **TAMBIÉN HACEMOS TRANSPARENTE EL VIEPORT DEL SCROLLPANE**
+        mainScrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
-        JTableHeader header = tablaHistorial.getTableHeader();
-        header.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        header.setBackground(new Color(30, 30, 33));
-        header.setForeground(Color.WHITE);
-        header.setPreferredSize(new Dimension(header.getWidth(), 40));
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        // Preparamos el panel para el mensaje de "no hay datos"
+        JLabel noDataLabel = new JLabel("<html><div style='text-align: center;'>" +
+                                        "¡Parece que aún no tienes compras!<br>" +
+                                        "Explora nuestros productos y haz tu primera compra." +
+                                        "</div></html>");
+        noDataLabel.setFont(new Font("Segoe UI", Font.ITALIC, 20));
+        noDataLabel.setForeground(new Color(190, 190, 190));
+        noDataLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
-        
-        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("es", "GT"));
-        
-        DefaultTableCellRenderer currencyRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (value instanceof Double) {
-                    label.setText(currencyFormat.format(value));
-                }
-                label.setHorizontalAlignment(JLabel.RIGHT);
-                return label;
-            }
-        };
+        centerMessagePanel = new JPanel(new GridBagLayout());
+        centerMessagePanel.setOpaque(false); // También transparente
+        centerMessagePanel.add(noDataLabel);
 
-        tablaHistorial.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tablaHistorial.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        tablaHistorial.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        tablaHistorial.getColumnModel().getColumn(3).setCellRenderer(currencyRenderer);
-        tablaHistorial.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-        tablaHistorial.getColumnModel().getColumn(6).setCellRenderer(currencyRenderer);
+        add(mainScrollPane, BorderLayout.CENTER); // Añadimos el scrollpane por defecto
 
-        JScrollPane scrollPane = new JScrollPane(tablaHistorial);
-        scrollPane.setBackground(getBackground());
-        scrollPane.getViewport().setBackground(tablaHistorial.getBackground());
-        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(75, 75, 78), 1));
-        
-        add(scrollPane, BorderLayout.CENTER);
+        cargarHistorialCompras(); // Carga inicial
+    }
 
+    // Método para ser llamado desde PrincipalForm cuando la sesión del usuario cambia
+    public void refreshData() {
+        this.userId = UserSession.getCurrentUserId();
+        String userName = UserSession.getCurrentUserName();
+        lblTitulo.setText("Historial de Compras de " + (userName != null ? userName : "Invitado"));
         cargarHistorialCompras();
     }
 
     private void cargarHistorialCompras() {
-        modeloTabla.setRowCount(0);
+        contentPanel.removeAll(); // Limpiamos el contenido anterior del contentPanel
+        mainScrollPane.setViewportView(contentPanel); // Aseguramos que el viewport muestre contentPanel
+
+        if (userId == 0) { // Si no hay usuario logueado
+            contentPanel.add(Box.createVerticalGlue());
+            contentPanel.add(centerMessagePanel); // Mostrar el mensaje de "no hay datos"
+            contentPanel.add(Box.createVerticalGlue());
+            contentPanel.revalidate();
+            contentPanel.repaint();
+            mainScrollPane.getVerticalScrollBar().setValue(0);
+            return;
+        }
 
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
+        Map<Integer, List<Object[]>> ordenesMap = new LinkedHashMap<>();
+        Map<Integer, Double> ordenesTotal = new LinkedHashMap<>();
+        Map<Integer, String> ordenesFecha = new LinkedHashMap<>();
+        Map<Integer, String> ordenesEstado = new LinkedHashMap<>();
+
         try {
             conn = new conexion().getConnection();
             if (conn == null) {
+                // Si no hay conexión, mostrar el mensaje de error y el mensaje de no hay datos
                 JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos para cargar el historial.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
+                contentPanel.add(Box.createVerticalGlue());
+                contentPanel.add(centerMessagePanel);
+                contentPanel.add(Box.createVerticalGlue());
+                contentPanel.revalidate();
+                contentPanel.repaint();
+                mainScrollPane.getVerticalScrollBar().setValue(0);
                 return;
             }
 
@@ -141,60 +139,53 @@ public class HistorialComprasPanel extends JPanel {
             pstmt.setInt(1, this.userId);
             rs = pstmt.executeQuery();
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd 'de' MMMM, yyyy HH:mm", new Locale("es", "GT"));
 
             while (rs.next()) {
-                Object[] row = new Object[7];
-                row[0] = rs.getInt("id_orden");
+                int idOrden = rs.getInt("id_orden");
                 LocalDateTime dateTime = rs.getTimestamp("fecha_orden").toLocalDateTime();
-                row[1] = dateTime.format(dtf);
-                row[2] = rs.getString("estado");
-                row[3] = rs.getDouble("total_orden");
-                row[4] = rs.getString("nombre_producto");
-                row[5] = rs.getInt("cantidad");
-                row[6] = rs.getDouble("precio_unitario");
-                modeloTabla.addRow(row);
+                String fechaFormateada = dateTime.format(dtf);
+                String estado = rs.getString("estado");
+                double totalOrden = rs.getDouble("total_orden");
+                String nombreProducto = rs.getString("nombre_producto");
+                int cantidad = rs.getInt("cantidad");
+                double precioUnitario = rs.getDouble("precio_unitario");
+
+                ordenesMap.computeIfAbsent(idOrden, k -> new ArrayList<>()).add(
+                    new Object[]{nombreProducto, cantidad, precioUnitario}
+                );
+                ordenesTotal.put(idOrden, totalOrden);
+                ordenesFecha.put(idOrden, fechaFormateada);
+                ordenesEstado.put(idOrden, estado);
             }
 
-            if (modeloTabla.getRowCount() == 0) {
-                JLabel noDataLabel = new JLabel("No se encontraron compras para este usuario. ¡Es hora de explorar nuestros productos!");
-                noDataLabel.setFont(new Font("Segoe UI", Font.ITALIC, 18));
-                noDataLabel.setForeground(new Color(180, 180, 180));
-                noDataLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                
-                JPanel centerPanel = new JPanel(new GridBagLayout());
-                centerPanel.setBackground(getBackground());
-                centerPanel.add(noDataLabel);
-                
-                removeAll();
-                add(titlePanel, BorderLayout.NORTH);
-                add(centerPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
+            if (ordenesMap.isEmpty()) {
+                contentPanel.add(Box.createVerticalGlue());
+                contentPanel.add(centerMessagePanel);
+                contentPanel.add(Box.createVerticalGlue());
             } else {
-                Component[] components = getComponents();
-                boolean scrollPaneExists = false;
-                for (Component comp : components) {
-                    if (comp instanceof JScrollPane) {
-                        scrollPaneExists = true;
-                        break;
-                    }
-                }
-                if (!scrollPaneExists) {
-                    removeAll();
-                    add(titlePanel, BorderLayout.NORTH);
-                    JScrollPane newScrollPane = new JScrollPane(tablaHistorial);
-                    newScrollPane.setBackground(getBackground());
-                    newScrollPane.getViewport().setBackground(tablaHistorial.getBackground());
-                    newScrollPane.setBorder(BorderFactory.createLineBorder(new Color(75, 75, 78), 1));
-                    add(newScrollPane, BorderLayout.CENTER);
-                    revalidate();
-                    repaint();
+                for (Map.Entry<Integer, List<Object[]>> entry : ordenesMap.entrySet()) {
+                    int idOrden = entry.getKey();
+                    List<Object[]> productos = entry.getValue();
+                    double total = ordenesTotal.get(idOrden);
+                    String fecha = ordenesFecha.get(idOrden);
+                    String estado = ordenesEstado.get(idOrden);
+                    JPanel orderPanel = crearPanelOrden(idOrden, fecha, estado, total, productos);
+                    
+                    // Aseguramos que el panel de orden no crezca más de lo necesario
+                    orderPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, orderPanel.getPreferredSize().height));
+                    
+                    contentPanel.add(orderPanel);
+                    contentPanel.add(Box.createRigidArea(new Dimension(0, 20)));
                 }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al cargar el historial de compras: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
+            // Asegurarse de que el mensaje de "no hay datos" se muestre también en caso de error SQL
+            contentPanel.add(Box.createVerticalGlue());
+            contentPanel.add(centerMessagePanel);
+            contentPanel.add(Box.createVerticalGlue());
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -204,5 +195,88 @@ public class HistorialComprasPanel extends JPanel {
                 System.err.println("Error al cerrar recursos en cargarHistorialCompras: " + e.getMessage());
             }
         }
+        
+        // Actualización inmediata de la interfaz
+        contentPanel.revalidate();
+        contentPanel.repaint();
+        mainScrollPane.getVerticalScrollBar().setValue(0);
+    }
+
+    private JPanel crearPanelOrden(int idOrden, String fecha, String estado, double total, List<Object[]> productos) {
+        JPanel panelOrden = new JPanel(new BorderLayout(15, 10));
+        panelOrden.setBackground(new Color(45, 45, 48));
+        panelOrden.setBorder(BorderFactory.createCompoundBorder(
+            new LineBorder(new Color(60, 60, 63), 1, false),
+            new EmptyBorder(15, 20, 15, 20)
+        ));
+        panelOrden.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setOpaque(false);
+        headerPanel.setBorder(new EmptyBorder(0, 0, 10, 0));
+
+        JLabel lblOrderId = new JLabel("Orden #" + idOrden);
+        lblOrderId.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        lblOrderId.setForeground(new Color(250, 250, 250));
+
+        JLabel lblFecha = new JLabel(fecha);
+        lblFecha.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        lblFecha.setForeground(new Color(180, 180, 180));
+
+        JPanel leftHeader = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        leftHeader.setOpaque(false);
+        leftHeader.add(lblOrderId);
+        leftHeader.add(lblFecha);
+        headerPanel.add(leftHeader, BorderLayout.WEST);
+
+        JLabel lblTotal = new JLabel(NumberFormat.getCurrencyInstance(new Locale("es", "GT")).format(total));
+        lblTotal.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        lblTotal.setForeground(new Color(100, 200, 100));
+        headerPanel.add(lblTotal, BorderLayout.EAST);
+
+        panelOrden.add(headerPanel, BorderLayout.NORTH);
+
+        JPanel productsPanel = new JPanel();
+        productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS));
+        productsPanel.setOpaque(false);
+        productsPanel.setBorder(new EmptyBorder(0, 0, 10, 0));
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("es", "GT"));
+
+        for (Object[] producto : productos) {
+            String nombre = (String) producto[0];
+            int cantidad = (int) producto[1];
+            double precioUnitario = (double) producto[2];
+
+            JPanel productItemPanel = new JPanel(new BorderLayout());
+            productItemPanel.setOpaque(false);
+            productItemPanel.setBorder(new EmptyBorder(5, 0, 5, 0));
+
+            JLabel lblProductInfo = new JLabel(cantidad + "x " + nombre);
+            lblProductInfo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            lblProductInfo.setForeground(new Color(220, 220, 220));
+            productItemPanel.add(lblProductInfo, BorderLayout.WEST);
+
+            JLabel lblProductPrice = new JLabel(currencyFormat.format(precioUnitario * cantidad));
+            lblProductPrice.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            lblProductPrice.setForeground(new Color(220, 220, 220));
+            lblProductPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+            productItemPanel.add(lblProductPrice, BorderLayout.EAST);
+            
+            productsPanel.add(productItemPanel);
+        }
+        panelOrden.add(productsPanel, BorderLayout.CENTER);
+
+        JPanel footerPanel = new JPanel(new BorderLayout());
+        footerPanel.setOpaque(false);
+
+        JLabel lblEstado = new JLabel("Estado: " + estado);
+        lblEstado.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        lblEstado.setForeground(new Color(150, 180, 255));
+        footerPanel.add(lblEstado, BorderLayout.EAST);
+
+        panelOrden.add(footerPanel, BorderLayout.SOUTH);
+
+        return panelOrden;
     }
 }

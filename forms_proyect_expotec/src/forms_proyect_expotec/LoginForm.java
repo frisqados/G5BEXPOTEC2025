@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter; // Necesario para el MouseAdapter
-import java.awt.event.MouseEvent; // Necesario para el MouseEvent
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -19,6 +19,13 @@ import java.sql.SQLException;
 import controlador.conexion;
 import util.UserSession;
 import forms_proyect_expotec.FormularioRecuperarContrasena;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
+import util.LimitDocumentFilter;
 
 public class LoginForm extends JFrame {
 
@@ -27,7 +34,10 @@ public class LoginForm extends JFrame {
     private JTextField txtEmail;
     private JPasswordField txtPassword;
     private JLabel lblFechaActual;
-    private JLabel lblTogglePassword; // Nuevo JLabel para el icono de mostrar/ocultar contraseña
+    private JLabel lblTogglePassword;
+
+    // Define el límite de caracteres
+    private static final int MAX_CHARS = 50;
 
     public LoginForm() {
         setTitle("Inicio de Sesión");
@@ -89,6 +99,8 @@ public class LoginForm extends JFrame {
         panelCampos.add(lblEmail, gbc);
         gbc.gridx = 1;
         txtEmail = new RoundedTextField(20);
+        // Aplica el DocumentFilter al campo de correo
+        ((AbstractDocument) txtEmail.getDocument()).setDocumentFilter(new LimitDocumentFilter(MAX_CHARS));
         panelCampos.add(txtEmail, gbc);
 
         gbc.gridx = 0;
@@ -98,33 +110,22 @@ public class LoginForm extends JFrame {
         panelCampos.add(lblPassword, gbc);
 
         gbc.gridx = 1;
-        JPanel passwordPanel = new JPanel(new BorderLayout()); // Panel para agrupar JPasswordField y JLabel del ojo
-        passwordPanel.setOpaque(false); // Importante para que el color de fondo del panelCampos se vea
+        JPanel passwordPanel = new JPanel(new BorderLayout());
+        passwordPanel.setOpaque(false);
         txtPassword = new RoundedPasswordField(20);
+        // Aplica el DocumentFilter al campo de contraseña
+        ((AbstractDocument) txtPassword.getDocument()).setDocumentFilter(new LimitDocumentFilter(MAX_CHARS));
         passwordPanel.add(txtPassword, BorderLayout.CENTER);
 
         lblTogglePassword = new JLabel();
         lblTogglePassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblTogglePassword.setPreferredSize(new Dimension(30, 0)); // Ajusta el ancho para el icono
+        lblTogglePassword.setPreferredSize(new Dimension(30, 0));
         lblTogglePassword.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        // --- Imagen del ojo (descomentar y especificar la ruta correcta) ---
-        // try {
-        //     ImageIcon eyeIcon = new ImageIcon(new ImageIcon(getClass().getResource("/Image/eye_hide.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        //     lblTogglePassword.setIcon(eyeIcon);
-        // } catch (Exception ex) {
-        //     System.err.println("Error al cargar icono de ojo: " + ex.getMessage());
-        //     lblTogglePassword.setText("👁️"); // Un emoji como fallback
-        //     lblTogglePassword.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16));
-        //     lblTogglePassword.setForeground(Color.WHITE);
-        // }
-        // --- FIN Imagen del ojo ---
-        
+
         // Texto de fallback para el icono si no se carga la imagen
-        lblTogglePassword.setText("👁️"); 
+        lblTogglePassword.setText("👁️");
         lblTogglePassword.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16));
         lblTogglePassword.setForeground(Color.WHITE);
-
 
         lblTogglePassword.addMouseListener(new MouseAdapter() {
             private boolean passwordVisible = false;
@@ -132,23 +133,11 @@ public class LoginForm extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (passwordVisible) {
-                    txtPassword.setEchoChar('*'); // Ocultar contraseña
-                    // try {
-                    //     ImageIcon eyeIcon = new ImageIcon(new ImageIcon(getClass().getResource("/Image/eye_hide.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-                    //     lblTogglePassword.setIcon(eyeIcon);
-                    // } catch (Exception ex) {
-                    //     lblTogglePassword.setText("👁️");
-                    // }
+                    txtPassword.setEchoChar('*');
                     lblTogglePassword.setText("👁️");
                 } else {
-                    txtPassword.setEchoChar((char) 0); // Mostrar contraseña
-                    // try {
-                    //     ImageIcon eyeIcon = new ImageIcon(new ImageIcon(getClass().getResource("/Image/eye_show.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-                    //     lblTogglePassword.setIcon(eyeIcon);
-                    // } catch (Exception ex) {
-                    //     lblTogglePassword.setText("🚫");
-                    // }
-                    lblTogglePassword.setText("🚫"); // Emoji de ojo tachado o similar
+                    txtPassword.setEchoChar((char) 0);
+                    lblTogglePassword.setText("🚫");
                 }
                 passwordVisible = !passwordVisible;
             }
@@ -163,7 +152,11 @@ public class LoginForm extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                iniciarSesion();
+                try {
+                    iniciarSesion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         panelCampos.add(btnLogin, gbc);
@@ -213,7 +206,7 @@ public class LoginForm extends JFrame {
         lblFechaActual.setText("Fecha: " + fecha.format(formatter));
     }
 
-    private void iniciarSesion() {
+    private void iniciarSesion() throws SQLException {
         String correo = txtEmail.getText().trim();
         String contrasenia = new String(txtPassword.getPassword());
 
@@ -222,8 +215,15 @@ public class LoginForm extends JFrame {
             return;
         }
 
+        // Ya tienes una validación de formato de correo, esta es buena.
         if (!correo.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
             JOptionPane.showMessageDialog(this, "Por favor, ingresa un formato de correo electrónico válido.", "Correo Inválido", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Agrega una validación explícita de longitud aquí también, aunque el DocumentFilter ya lo limita visualmente
+        if (correo.length() > MAX_CHARS || contrasenia.length() > MAX_CHARS) {
+            JOptionPane.showMessageDialog(this, "El correo o la contraseña exceden el límite de " + MAX_CHARS + " caracteres.", "Límite de Caracteres Excedido", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -249,8 +249,23 @@ public class LoginForm extends JFrame {
 
                         JOptionPane.showMessageDialog(this, "¡Bienvenido, " + userName + "!", "Inicio de Sesión Exitoso", JOptionPane.INFORMATION_MESSAGE);
 
-                        new PrincipalForm().setVisible(true);
-                        dispose();
+                        SwingWorker<Void, Void> worker = new SwingWorker<>() {
+                            @Override
+                            protected Void doInBackground() throws Exception {
+                                // Aquí puedes hacer tareas pesadas si las hubiera
+                                Thread.sleep(1200); // Simulación de carga
+                                return null;
+                            }
+
+                            @Override
+                           protected void done() { 
+                               
+                                new PrincipalForm().setVisible(true);
+                                dispose();
+                            }
+                        };
+                        worker.execute();
+                   
                     } else {
                         JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
                     }
@@ -273,7 +288,9 @@ public class LoginForm extends JFrame {
     }
 
     class RoundedTextField extends JTextField {
+
         private Shape shape;
+
         public RoundedTextField(int size) {
             super(size);
             setOpaque(false);
@@ -282,31 +299,36 @@ public class LoginForm extends JFrame {
             setCaretColor(Color.WHITE);
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         }
+
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(getBackground());
-            g2.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             super.paintComponent(g2);
             g2.dispose();
         }
+
         protected void paintBorder(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(getForeground());
-            g2.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             g2.dispose();
         }
+
         public boolean contains(int x, int y) {
             if (shape == null || !shape.getBounds().equals(getBounds())) {
-                shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+                shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             }
             return shape.contains(x, y);
         }
     }
 
     class RoundedPasswordField extends JPasswordField {
+
         private Shape shape;
+
         public RoundedPasswordField(int size) {
             super(size);
             setOpaque(false);
@@ -315,31 +337,36 @@ public class LoginForm extends JFrame {
             setCaretColor(Color.WHITE);
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         }
+
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(getBackground());
-            g2.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             super.paintComponent(g2);
             g2.dispose();
         }
+
         protected void paintBorder(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(getForeground());
-            g2.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             g2.dispose();
         }
+
         public boolean contains(int x, int y) {
             if (shape == null || !shape.getBounds().equals(getBounds())) {
-                shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+                shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             }
             return shape.contains(x, y);
         }
     }
 
     class RoundedButton extends JButton {
+
         private Shape shape;
+
         public RoundedButton(String label) {
             super(label);
             setContentAreaFilled(false);
@@ -357,7 +384,7 @@ public class LoginForm extends JFrame {
             } else {
                 g2.setColor(getBackground());
             }
-            g2.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 20, 20);
+            g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
             super.paintComponent(g2);
             g2.dispose();
         }
@@ -366,13 +393,13 @@ public class LoginForm extends JFrame {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(getForeground());
-            g2.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 20, 20);
+            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
             g2.dispose();
         }
 
         public boolean contains(int x, int y) {
             if (shape == null || !shape.getBounds().equals(getBounds())) {
-                shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 20, 20);
+                shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
             }
             return shape.contains(x, y);
         }

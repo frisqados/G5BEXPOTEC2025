@@ -1,270 +1,478 @@
 package vista;
 
-import modelo.Producto; // Make sure this Producto class has appropriate constructors or setters if you use it for other purposes.
-import controlador.conexion; // Import your connection class
-import util.UserSession; // Import the UserSession class to detect the logged-in user
-
+import controlador.conexion;
+import util.UserSession;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IngresoProductoPanel extends JPanel { // CHANGED: Now extends JPanel
-    private JTextField txtNombre, txtPrecio, txtStock, txtCategoria;
-    private JTextArea txtDescripcion;
-    private JLabel lblImagenPreview;
-    private byte[] imagenBytes;
+public class IngresoProductoPanel extends JPanel {
 
-    // Define the color palette
-    private final Color PRIMARY_DARK = new Color(30, 30, 30);   // Dark for headers
-    private final Color SECONDARY_DARK = new Color(50, 50, 50); // Darker gray for labels
-    private final Color ACCENT_ORANGE = new Color(255, 153, 0); // Primary accent
-    private final Color ACCENT_ORANGE_LIGHT = new Color(255, 164, 28); // Lighter accent
-    private final Color BACKGROUND_LIGHT = new Color(245, 245, 245); // Light gray background for form
-    private final Color TEXT_COLOR = new Color(20, 20, 20); // Very dark gray for general text
-    private final Color BORDER_GRAY = new Color(200, 200, 200); // Light gray for borders
+    private final Color PRIMARY_TEXT_COLOR = UIManager.getColor("Label.foreground");
+    private final Color SECONDARY_TEXT_COLOR = UIManager.getColor("Label.disabledForeground");
+    private final Color BORDER_COLOR = UIManager.getColor("Component.borderColor");
+    private final Color BACKGROUND_COLOR = UIManager.getColor("Panel.background");
+    private final Color CARD_BACKGROUND = UIManager.getColor("List.background");
+    private final Color BUTTON_PRIMARY_BACKGROUND = new Color(70, 130, 180);
+    private final Color BUTTON_FOREGROUND = Color.WHITE;
+    private final Color DANGER_COLOR = new Color(220, 20, 60);
+
+    private JTextField txtNombreProducto;
+    private JTextArea txtDescripcion;
+    private JTextField txtPrecio;
+    private JTextField txtStock;
+    private JComboBox<String> cmbCategorias;
+    private JLabel lblImagenProducto;
+    private JButton btnSeleccionarImagen;
+    private JButton btnGuardarProducto;
+
+    private byte[] selectedImageData = null;
 
     public IngresoProductoPanel() {
-        setLayout(new BorderLayout(20, 20)); // Add some padding around the panel
-        setBackground(BACKGROUND_LIGHT); // Set overall panel background
+        initComponents();
+        loadCategories();
+        clearFields();
+    }
 
-        JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        headerPanel.setBackground(PRIMARY_DARK); // Dark header background
-        JLabel titleLabel = new JLabel("Ingreso de Productos");
-        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 28)); // Slightly larger font
-        titleLabel.setForeground(Color.WHITE);
+    private void initComponents() {
+        setLayout(new BorderLayout(0, 0));
+        setBackground(BACKGROUND_COLOR);
+        setBorder(new EmptyBorder(40, 80, 40, 80));
+
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout(0, 30));
+        contentPanel.setOpaque(false);
+
+        JPanel headerPanel = new JPanel();
+        headerPanel.setOpaque(false);
+        headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel titleLabel = new JLabel("Ingreso de Nuevo Producto");
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 38));
+        titleLabel.setForeground(PRIMARY_TEXT_COLOR);
         headerPanel.add(titleLabel);
-        add(headerPanel, BorderLayout.NORTH);
+        contentPanel.add(headerPanel, BorderLayout.NORTH);
 
-        JPanel formPanel = new JPanel();
+        forms_proyect_expotec.PanelRound formPanel = new forms_proyect_expotec.PanelRound();
+        formPanel.setBackground(CARD_BACKGROUND);
+        formPanel.setRoundTopLeft(15);
+        formPanel.setRoundTopRight(15);
+        formPanel.setRoundBottomLeft(15);
+        formPanel.setRoundBottomRight(15);
+        formPanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOR, 1));
         formPanel.setLayout(new GridBagLayout());
-        formPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // Padding inside the form
-        formPanel.setBackground(BACKGROUND_LIGHT); // Light gray background for the form
+        formPanel.setBorder(new EmptyBorder(25, 30, 25, 30));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Spacing between components
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Components fill their display area horizontally
+        gbc.insets = new Insets(10, 5, 10, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
 
-        addRow(formPanel, gbc, "Nombre del Producto:", txtNombre = new JTextField(30), 0);
+        JLabel lblNombreProducto = createStyledLabel("Nombre del Producto:", SECONDARY_TEXT_COLOR, new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0;
+        formPanel.add(lblNombreProducto, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.NORTHWEST; // Align label to top-left
-        formPanel.add(createLabel("Descripción:", new Font("SansSerif", Font.BOLD, 14)), gbc);
+        txtNombreProducto = createStyledTextField();
+        gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 1.0;
+        formPanel.add(txtNombreProducto, gbc);
 
-        gbc.gridx = 1; gbc.weightx = 1.0; // Allow description text area to expand
-        gbc.weighty = 0.5; // Allow description to take more vertical space
-        txtDescripcion = new JTextArea(5, 30);
+        JLabel lblDescripcion = createStyledLabel("Descripción:", SECONDARY_TEXT_COLOR, new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
+        formPanel.add(lblDescripcion, gbc);
+
+        txtDescripcion = new JTextArea(5, 20);
+        txtDescripcion.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        txtDescripcion.setBackground(UIManager.getColor("TextField.background"));
+        txtDescripcion.setForeground(PRIMARY_TEXT_COLOR);
+        txtDescripcion.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(BORDER_COLOR, 1),
+                new EmptyBorder(8, 10, 8, 10)
+        ));
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
-        txtDescripcion.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        txtDescripcion.setBorder(BorderFactory.createLineBorder(BORDER_GRAY)); // Add border to text area
-        JScrollPane scrollPane = new JScrollPane(txtDescripcion);
-        scrollPane.setPreferredSize(new Dimension(300, 80)); // Preferred size for the scroll pane
-        formPanel.add(scrollPane, gbc);
-        gbc.weightx = 0; // Reset weightx
-        gbc.weighty = 0; // Reset weighty
-        gbc.anchor = GridBagConstraints.WEST; // Reset anchor for subsequent rows
+        JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+        scrollDescripcion.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        gbc.gridx = 1; gbc.gridy = 1; gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.ipady = 30;
+        formPanel.add(scrollDescripcion, gbc);
+        gbc.ipady = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        addRow(formPanel, gbc, "Precio ($):", txtPrecio = new JTextField(15), 2);
-        addRow(formPanel, gbc, "Stock:", txtStock = new JTextField(10), 3);
-        addRow(formPanel, gbc, "Categoría:", txtCategoria = new JTextField(20), 4);
+        JLabel lblPrecio = createStyledLabel("Precio:", SECONDARY_TEXT_COLOR, new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0;
+        formPanel.add(lblPrecio, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 5;
-        formPanel.add(createLabel("Imagen del Producto:", new Font("SansSerif", Font.BOLD, 14)), gbc);
+        txtPrecio = createStyledTextField();
+        gbc.gridx = 1; gbc.gridy = 2; gbc.weightx = 1.0;
+        formPanel.add(txtPrecio, gbc);
 
-        gbc.gridx = 1;
-        JPanel imageUploadPanel = new JPanel(new BorderLayout(10, 0));
-        imageUploadPanel.setBackground(formPanel.getBackground());
-        JButton btnCargarImagen = new JButton("Cargar Imagen");
-        btnCargarImagen.setFont(new Font("SansSerif", Font.BOLD, 12));
-        btnCargarImagen.setBackground(ACCENT_ORANGE_LIGHT); // Orange color for button
-        btnCargarImagen.setForeground(TEXT_COLOR); // Use dark text for button
-        btnCargarImagen.setFocusPainted(false);
-        btnCargarImagen.setBorderPainted(false); // No default border
-        btnCargarImagen.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnCargarImagen.setPreferredSize(new Dimension(120, 30)); // Smaller button
+        JLabel lblStock = createStyledLabel("Stock:", SECONDARY_TEXT_COLOR, new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0;
+        formPanel.add(lblStock, gbc);
 
-        lblImagenPreview = new JLabel("No hay imagen seleccionada", SwingConstants.CENTER);
-        lblImagenPreview.setPreferredSize(new Dimension(150, 100));
-        lblImagenPreview.setBorder(BorderFactory.createLineBorder(BORDER_GRAY)); // Lighter border
-        lblImagenPreview.setBackground(Color.WHITE); // White background for preview
-        lblImagenPreview.setOpaque(true);
-        lblImagenPreview.setFont(new Font("SansSerif", Font.ITALIC, 10));
-        lblImagenPreview.setForeground(SECONDARY_DARK); // Darker gray for info text
+        txtStock = createStyledTextField();
+        gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 1.0;
+        formPanel.add(txtStock, gbc);
 
-        imageUploadPanel.add(btnCargarImagen, BorderLayout.WEST);
-        imageUploadPanel.add(lblImagenPreview, BorderLayout.CENTER);
-        formPanel.add(imageUploadPanel, gbc);
+        JLabel lblCategoria = createStyledLabel("Categoría:", SECONDARY_TEXT_COLOR, new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0;
+        formPanel.add(lblCategoria, gbc);
 
-        btnCargarImagen.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imágenes", "jpg", "jpeg", "png", "gif"));
-            int result = fileChooser.showOpenDialog(this);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                try {
-                    imagenBytes = Files.readAllBytes(selectedFile.toPath());
-                    ImageIcon originalIcon = new ImageIcon(imagenBytes);
-                    // Scale image to fit the preview label while maintaining aspect ratio
-                    Image scaledImage = originalIcon.getImage().getScaledInstance(
-                            lblImagenPreview.getWidth(), lblImagenPreview.getHeight(), Image.SCALE_SMOOTH);
-                    lblImagenPreview.setIcon(new ImageIcon(scaledImage));
-                    lblImagenPreview.setText(""); // Clear text when image is loaded
-                } catch (IOException ex) {
-                    lblImagenPreview.setText("Error al cargar");
-                    lblImagenPreview.setIcon(null);
-                    imagenBytes = null; // Clear image bytes on error
-                    JOptionPane.showMessageDialog(this, "Error al cargar la imagen: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
+        cmbCategorias = new JComboBox<>();
+        cmbCategorias.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        cmbCategorias.setPreferredSize(new Dimension(250, 35));
+        gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 1.0;
+        formPanel.add(cmbCategorias, gbc);
+
+        JLabel lblImagen = createStyledLabel("Imagen del Producto:", SECONDARY_TEXT_COLOR, new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0; gbc.gridy = 5; gbc.weightx = 0;
+        formPanel.add(lblImagen, gbc);
+
+        lblImagenProducto = new JLabel("Haz clic para seleccionar una imagen", SwingConstants.CENTER);
+        lblImagenProducto.setHorizontalAlignment(SwingConstants.CENTER);
+        lblImagenProducto.setVerticalAlignment(SwingConstants.CENTER);
+        lblImagenProducto.setPreferredSize(new Dimension(400, 400));
+        lblImagenProducto.setBorder(BorderFactory.createDashedBorder(BORDER_COLOR, 2, 2));
+        lblImagenProducto.setBackground(UIManager.getColor("Panel.background"));
+        lblImagenProducto.setOpaque(true);
+        lblImagenProducto.setForeground(SECONDARY_TEXT_COLOR);
+        lblImagenProducto.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+        lblImagenProducto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblImagenProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSeleccionarImagen.doClick();
             }
         });
+        
+        gbc.gridx = 1; gbc.gridy = 5; gbc.weightx = 1.0; gbc.insets = new Insets(10, 5, 5, 5);
+        gbc.fill = GridBagConstraints.BOTH;
+        formPanel.add(lblImagenProducto, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 20)); // Centered button with vertical padding
-        buttonPanel.setBackground(BACKGROUND_LIGHT);
-        JButton btnGuardar = new JButton("Guardar Producto");
-        btnGuardar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnGuardar.setBackground(ACCENT_ORANGE); // Primary orange for save button
-        btnGuardar.setForeground(Color.WHITE); // White text for save button
-        btnGuardar.setFocusPainted(false);
-        btnGuardar.setBorderPainted(false);
-        btnGuardar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnGuardar.setPreferredSize(new Dimension(200, 45));
-        buttonPanel.add(btnGuardar);
+        btnSeleccionarImagen = createStyledButton("Seleccionar Imagen", BUTTON_PRIMARY_BACKGROUND, BUTTON_FOREGROUND);
+        btnSeleccionarImagen.addActionListener(e -> selectImage());
+        gbc.gridx = 1; gbc.gridy = 6; gbc.weightx = 1.0; gbc.insets = new Insets(5, 5, 10, 5);
+        formPanel.add(btnSeleccionarImagen, gbc);
 
-        btnGuardar.addActionListener(e -> {
-            guardarProducto(); // Calls the method to save the product directly
-        });
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
+        buttonPanel.setOpaque(false);
 
-        add(formPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        btnGuardarProducto = createStyledButton("Guardar Nuevo Producto", BUTTON_PRIMARY_BACKGROUND, BUTTON_FOREGROUND);
+        btnGuardarProducto.addActionListener(e -> saveNewProduct());
+        buttonPanel.add(btnGuardarProducto);
+
+        gbc.gridx = 0; gbc.gridy = 7; gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(20, 0, 0, 0);
+        formPanel.add(buttonPanel, gbc);
+
+        JScrollPane mainScrollPane = new JScrollPane(formPanel);
+        mainScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        mainScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        mainScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        
+        contentPanel.add(mainScrollPane, BorderLayout.CENTER);
+        
+        add(contentPanel, BorderLayout.CENTER);
     }
 
-    private void guardarProducto() {
-        // --- Step 1: Check if a user is logged in ---
-        if (!UserSession.isLoggedIn()) {
-            JOptionPane.showMessageDialog(this, "Debe iniciar sesión para subir productos.", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // Get the ID of the logged-in user
-        int idUsuarioSubida = UserSession.getCurrentUserId();
-
-        String nombre = txtNombre.getText().trim(); // Use trim to clean spaces
-        String descripcion = txtDescripcion.getText().trim();
-        String categoria = txtCategoria.getText().trim();
-
-        // Validate that required fields are not empty
-        if (nombre.isEmpty() || descripcion.isEmpty() || txtPrecio.getText().trim().isEmpty() || txtStock.getText().trim().isEmpty() || categoria.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        BigDecimal precio;
-        int stock;
-        try {
-            precio = new BigDecimal(txtPrecio.getText().trim());
-            stock = Integer.parseInt(txtStock.getText().trim());
-            // Validate positive price and non-negative stock
-            if (precio.compareTo(BigDecimal.ZERO) <= 0 || stock < 0) {
-                JOptionPane.showMessageDialog(this, "El precio debe ser mayor que cero y el stock no puede ser negativo.", "Datos Inválidos", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Precio y Stock deben ser números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // --- Logic to save to the database ---
-        Connection connection = null;
-        PreparedStatement ps = null;
-
-        try {
-            // Get a new connection using your 'conexion' class
-            connection = new conexion().getConnection();
-            if (connection == null) {
-                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos.", "Error de Conexión", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // SQL: Include id_usuario_subida in the insertion
-            // Make sure the column 'id_usuario_subida' exists in your 'Productos' table
-            String sql = "INSERT INTO Productos (nombre, descripcion, precio, stock, categoria, imagen, id_usuario_subida) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, nombre);
-            ps.setString(2, descripcion);
-            ps.setBigDecimal(3, precio);
-            ps.setInt(4, stock);
-            ps.setString(5, categoria);
-            if (imagenBytes != null) {
-                ps.setBytes(6, imagenBytes); // Handle the image as a byte array
-            } else {
-                ps.setNull(6, java.sql.Types.BLOB); // Save NULL if no image
-            }
-            ps.setInt(7, idUsuarioSubida); // Assign the ID of the logged-in user
-
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(this, "Producto guardado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                limpiarCampos(); // Call a method to clear the fields
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error SQL al guardar el producto: " + e.getMessage());
-            e.printStackTrace(); // Print stack trace for debugging
-            JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // ALWAYS CLOSE RESOURCES! (In reverse order of their opening)
-            try {
-                if (ps != null) ps.close();
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar PreparedStatement: " + e.getMessage());
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar Connection: " + e.getMessage());
-            }
-        }
-    }
-
-    private void limpiarCampos() {
-        txtNombre.setText("");
-        txtDescripcion.setText("");
-        txtPrecio.setText("");
-        txtStock.setText("");
-        txtCategoria.setText("");
-        lblImagenPreview.setIcon(null);
-        lblImagenPreview.setText("No hay imagen seleccionada");
-        imagenBytes = null; // Reset image bytes
-    }
-
-    private JLabel createLabel(String text, Font font) {
+    private JLabel createStyledLabel(String text, Color foreground, Font font) {
         JLabel label = new JLabel(text);
+        label.setForeground(foreground);
         label.setFont(font);
-        label.setForeground(SECONDARY_DARK); // Dark gray text
         return label;
     }
 
-    private void addRow(JPanel panel, GridBagConstraints gbc, String labelText, JTextField textField, int row) {
-        gbc.gridx = 0; gbc.gridy = row;
-        gbc.anchor = GridBagConstraints.WEST; // Align label to the west
-        panel.add(createLabel(labelText, new Font("SansSerif", Font.BOLD, 14)), gbc);
+    private JTextField createStyledTextField() {
+        JTextField textField = new JTextField(20);
+        textField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        textField.setBackground(UIManager.getColor("TextField.background"));
+        textField.setForeground(PRIMARY_TEXT_COLOR);
+        textField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(BORDER_COLOR, 1),
+                BorderFactory.createEmptyBorder(8, 10, 8, 10)
+        ));
+        textField.setCaretColor(PRIMARY_TEXT_COLOR);
+        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 35));
+        return textField;
+    }
 
-        gbc.gridx = 1;
-        gbc.weightx = 1.0; // The text field expands horizontally
-        textField.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        textField.setBorder(BorderFactory.createLineBorder(BORDER_GRAY)); // Add border to text field
-        panel.add(textField, gbc);
-        gbc.weightx = 0; // Reset weightx for the next row
+    private JButton createStyledButton(String text, Color background, Color foreground) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        button.setBackground(background);
+        button.setForeground(foreground);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        button.putClientProperty("JButton.buttonType", "roundRect");
+        return button;
+    }
+
+    private void loadCategories() {
+        cmbCategorias.removeAllItems();
+        Connection con = null;
+        try {
+            con = new conexion().getConnection();
+            String sql = "SELECT DISTINCT categoria FROM productos WHERE categoria IS NOT NULL AND categoria <> '' ORDER BY categoria";
+            try (PreparedStatement ps = con.prepareStatement(sql);
+                 ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    cmbCategorias.addItem(rs.getString("categoria"));
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al cargar categorías disponibles: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        // --- INICIO: Nuevas categorías agregadas ---
+        // Puedes agregar categorías aquí que no estén en la base de datos o que quieras asegurar que siempre aparezcan.
+        // Se añadirán al final de las categorías ya cargadas de la DB.
+        if (cmbCategorias.getItemCount() == 0) { // Si no hay categorías de la DB, añade algunas por defecto
+            cmbCategorias.addItem("Electrónica");
+            cmbCategorias.addItem("Ropa y Accesorios");
+            cmbCategorias.addItem("Hogar y Cocina");
+            cmbCategorias.addItem("Libros");
+            cmbCategorias.addItem("Deportes");
+            cmbCategorias.addItem("Juguetes y Juegos");
+            cmbCategorias.addItem("Belleza y Cuidado Personal");
+            cmbCategorias.addItem("Salud");
+            cmbCategorias.addItem("Automotriz");
+            cmbCategorias.addItem("Herramientas y Mejoras para el Hogar");
+            cmbCategorias.addItem("Alimentos y Bebidas");
+            cmbCategorias.addItem("Mascotas");
+            cmbCategorias.addItem("Arte y Manualidades");
+            cmbCategorias.addItem("Oficina y Papelería");
+            cmbCategorias.addItem("Jardín y Exterior");
+            cmbCategorias.addItem("Música, Películas y TV");
+            cmbCategorias.addItem("Videojuegos y Consolas");
+            cmbCategorias.addItem("Software");
+            cmbCategorias.addItem("Viajes");
+            cmbCategorias.addItem("Servicios");
+            cmbCategorias.addItem("Otros");
+        } else { // Si ya hay categorías de la DB, puedes añadir estas si no existen
+             String[] defaultCategories = {
+                "Electrónica", "Ropa y Accesorios", "Hogar y Cocina", "Libros", "Deportes",
+                "Juguetes y Juegos", "Belleza y Cuidado Personal", "Salud", "Automotriz",
+                "Herramientas y Mejoras para el Hogar", "Alimentos y Bebidas", "Mascotas",
+                "Arte y Manualidades", "Oficina y Papelería", "Jardín y Exterior",
+                "Música, Películas y TV", "Videojuegos y Consolas", "Software", "Viajes",
+                "Servicios", "Otros"
+            };
+            for (String cat : defaultCategories) {
+                boolean found = false;
+                for (int i = 0; i < cmbCategorias.getItemCount(); i++) {
+                    if (cmbCategorias.getItemAt(i).equals(cat)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    cmbCategorias.addItem(cat);
+                }
+            }
+        }
+        // --- FIN: Nuevas categorías agregadas ---
+
+        cmbCategorias.insertItemAt("Seleccionar o Escribir Nueva...", 0);
+        cmbCategorias.setSelectedIndex(0);
+    }
+
+    private void clearFields() {
+        txtNombreProducto.setText("");
+        txtDescripcion.setText("");
+        txtPrecio.setText("");
+        txtStock.setText("");
+        if (cmbCategorias.getItemCount() > 0) {
+            cmbCategorias.setSelectedIndex(0);
+        } else {
+            cmbCategorias.addItem("Seleccionar o Escribir Nueva...");
+            cmbCategorias.setSelectedIndex(0);
+        }
+        
+        lblImagenProducto.setIcon(null);
+        lblImagenProducto.setText("Haz clic para seleccionar una imagen");
+        lblImagenProducto.setForeground(SECONDARY_TEXT_COLOR);
+        lblImagenProducto.setPreferredSize(new Dimension(400, 400));
+        selectedImageData = null;
+        
+        revalidate(); 
+        repaint();
+    }
+
+    private void loadImage(byte[] imageData) {
+        if (imageData == null || imageData.length == 0) {
+            lblImagenProducto.setIcon(null);
+            lblImagenProducto.setText("Haz clic para seleccionar una imagen");
+            lblImagenProducto.setForeground(SECONDARY_TEXT_COLOR);
+            lblImagenProducto.setPreferredSize(new Dimension(400, 400));
+            return;
+        }
+        try {
+            ImageIcon icon = new ImageIcon(imageData);
+            Image image = icon.getImage();
+
+            if (image.getWidth(null) == -1 || image.getHeight(null) == -1) {
+                throw new IOException("Los datos de la imagen son inválidos o están corruptos.");
+            }
+
+            int imageWidth = image.getWidth(null);
+            int imageHeight = image.getHeight(null);
+
+            lblImagenProducto.setPreferredSize(new Dimension(imageWidth, imageHeight));
+            
+            lblImagenProducto.setIcon(icon); 
+            lblImagenProducto.setText("");
+            lblImagenProducto.setForeground(PRIMARY_TEXT_COLOR);
+
+            revalidate();
+            repaint();
+
+        } catch (Exception e) {
+            lblImagenProducto.setIcon(null);
+            lblImagenProducto.setText("Error al cargar imagen. Los datos podrían estar corruptos.");
+            lblImagenProducto.setForeground(DANGER_COLOR);
+            lblImagenProducto.setPreferredSize(new Dimension(400, 400));
+            System.err.println("Error al cargar imagen desde bytes: " + e.getMessage());
+            e.printStackTrace();
+            revalidate(); 
+            repaint();
+        }
+    }
+
+    private void selectImage() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccionar Imagen para el Producto");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de Imagen", "jpg", "jpeg", "png", "gif"));
+
+        int userSelection = fileChooser.showOpenDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if (selectedFile != null) {
+                try {
+                    selectedImageData = Files.readAllBytes(selectedFile.toPath());
+                    loadImage(selectedImageData);
+                    lblImagenProducto.setForeground(PRIMARY_TEXT_COLOR);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "No se pudo leer la imagen seleccionada: " + e.getMessage(), "Error de Archivo", JOptionPane.ERROR_MESSAGE);
+                    selectedImageData = null;
+                    lblImagenProducto.setIcon(null);
+                    lblImagenProducto.setText("Error al leer la imagen seleccionada.");
+                    lblImagenProducto.setForeground(DANGER_COLOR);
+                    lblImagenProducto.setPreferredSize(new Dimension(400, 400));
+                    e.printStackTrace();
+                    revalidate();
+                    repaint();
+                }
+            }
+        }
+    }
+
+    private void saveNewProduct() {
+        String nombre = txtNombreProducto.getText().trim();
+        String descripcion = txtDescripcion.getText().trim();
+        String precioStr = txtPrecio.getText().trim();
+        String stockStr = txtStock.getText().trim();
+        String categoria = (String) cmbCategorias.getSelectedItem();
+
+        if (nombre.isEmpty() || descripcion.isEmpty() || precioStr.isEmpty() || stockStr.isEmpty() || categoria == null || categoria.isEmpty() || categoria.equals("Seleccionar o Escribir Nueva...")) {
+            JOptionPane.showMessageDialog(this, "Todos los campos (excepto la imagen) son obligatorios. Por favor, rellénelos.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        double precio;
+        int stock;
+        try {
+            precio = Double.parseDouble(precioStr);
+            if (precio <= 0) {
+                JOptionPane.showMessageDialog(this, "El precio debe ser un número positivo mayor que cero.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El precio no es válido. Por favor, ingrese un número (ej. 19.99).", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            stock = Integer.parseInt(stockStr);
+            if (stock < 0) {
+                JOptionPane.showMessageDialog(this, "El stock no puede ser un número negativo.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El stock no es válido. Por favor, ingrese un número entero.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int userId = UserSession.getCurrentUserId();
+        if (userId == -1) {
+            JOptionPane.showMessageDialog(this, "Debe iniciar sesión para poder subir productos.", "Error de Sesión", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Connection con = null;
+        try {
+            con = new conexion().getConnection();
+            con.setAutoCommit(false);
+
+            String sqlInsert = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria, imagen, id_usuario_subida) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement ps = con.prepareStatement(sqlInsert)) {
+                ps.setString(1, nombre);
+                ps.setString(2, descripcion);
+                ps.setDouble(3, precio);
+                ps.setInt(4, stock);
+                ps.setString(5, categoria);
+                if (selectedImageData != null && selectedImageData.length > 0) {
+                    ps.setBytes(6, selectedImageData);
+                } else {
+                    ps.setNull(6, java.sql.Types.VARBINARY);
+                }
+                ps.setInt(7, userId);
+
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    con.commit();
+                    JOptionPane.showMessageDialog(this, "¡Producto ingresado con éxito! Ya está disponible.", "Ingreso Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    clearFields();
+                } else {
+                    con.rollback();
+                    JOptionPane.showMessageDialog(this, "No se pudo ingresar el producto. Inténtelo de nuevo.", "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException ex) {
+            try {
+                if (con != null) con.rollback();
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "Ocurrió un error en la base de datos al intentar guardar el producto: " + ex.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void refreshPanel() {
+        clearFields();
+        loadCategories();
     }
 }

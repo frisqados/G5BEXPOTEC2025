@@ -1,6 +1,5 @@
 package modelo;
 
-// Importa Producto para poder hacer referencia a él
 import java.math.BigDecimal;
 import modelo.Producto;
 

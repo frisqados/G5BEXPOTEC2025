@@ -1,7 +1,7 @@
-// util/ProductoSeleccionadoListener.java
+
 package util;
 
-import modelo.Producto; // Asume que Producto está en el paquete 'modelo'
+import modelo.Producto; 
 
 public interface ProductoSeleccionadoListener {
     // Se llama cuando se hace clic en una tarjeta de producto (para ver detalles, etc.)
