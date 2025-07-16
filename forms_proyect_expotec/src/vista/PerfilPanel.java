@@ -55,11 +55,12 @@ public class PerfilPanel extends JPanel {
 
     private JButton btnGuardarCambios;
 
+    // Esta variable almacenará la ruta absoluta del archivo del avatar en el sistema de archivos
     private String currentAvatarPath;
 
     public PerfilPanel() {
         initComponents();
-        loadUserProfileData();
+        loadUserProfileData(); // Carga los datos al iniciar el panel
     }
 
     private void initComponents() {
@@ -94,30 +95,8 @@ public class PerfilPanel extends JPanel {
             }
         });
 
-        // Sección comentada para el icono de perfil predeterminado
-        // Asegúrate de que la imagen 'usuario.png' esté en una carpeta 'Image'
-        // que se encuentre en la raíz de tu classpath (ej. src/Image/usuario.png
-        // o src/main/resources/Image/usuario.png si usas Maven/Gradle).
-        try {
-            java.net.URL defaultImageUrl = getClass().getResource("/Image/usuario.png");
-            if (defaultImageUrl != null) {
-                ImageIcon defaultIcon = new ImageIcon(defaultImageUrl);
-                Image scaledDefaultImage = defaultIcon.getImage().getScaledInstance(
-                        lblAvatar.getPreferredSize().width,
-                        lblAvatar.getPreferredSize().height,
-                        Image.SCALE_SMOOTH
-                );
-                lblAvatar.setIcon(new ImageIcon(scaledDefaultImage));
-                lblAvatar.setText(""); // Limpiar texto si se establece un icono
-            } else {
-                System.err.println("Advertencia: No se pudo encontrar la imagen predeterminada del usuario en /Image/usuario.png");
-                lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>"); // Volver al texto si no se encuentra
-            }
-        } catch (Exception e) {
-            System.err.println("Error al cargar la imagen predeterminada: " + e.getMessage());
-            lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>"); // Volver al texto en caso de error
-        }
-
+        // Cargar imagen de perfil predeterminada al inicio
+        setDefaultAvatarImage();
 
         JPanel avatarContainer = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         avatarContainer.setOpaque(false);
@@ -320,35 +299,74 @@ public class PerfilPanel extends JPanel {
         return gbc;
     }
 
+    /**
+     * Carga y establece la imagen del avatar desde una ruta de archivo.
+     * Si la ruta es nula, vacía, o el archivo no se encuentra/no es válido,
+     * se establece una imagen por defecto.
+     * @param imagePath La ruta absoluta del archivo de imagen.
+     */
     private void setAvatarImage(String imagePath) {
-        if (imagePath == null || imagePath.isEmpty()) {
-            lblAvatar.setIcon(null);
-            lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>");
-            return;
+        BufferedImage originalImage = null;
+        if (imagePath != null && !imagePath.isEmpty()) {
+            try {
+                File imageFile = new File(imagePath);
+                if (imageFile.exists() && imageFile.isFile()) {
+                    originalImage = ImageIO.read(imageFile);
+                } else {
+                    System.err.println("Advertencia: El archivo de avatar no existe o no es un archivo válido: " + imagePath);
+                }
+            } catch (IOException e) {
+                System.err.println("Error al cargar imagen (IOException): " + e.getMessage() + " - Ruta: " + imagePath);
+                e.printStackTrace();
+            }
         }
+
+        if (originalImage != null) {
+            Image scaledImage = originalImage.getScaledInstance(
+                    lblAvatar.getPreferredSize().width,
+                    lblAvatar.getPreferredSize().height,
+                    Image.SCALE_SMOOTH
+            );
+            lblAvatar.setIcon(new ImageIcon(scaledImage));
+            lblAvatar.setText(""); // Limpiar texto si se establece un icono
+        } else {
+            // Si no se pudo cargar la imagen del usuario, establecer el avatar por defecto
+            setDefaultAvatarImage();
+        }
+    }
+
+    /**
+     * Establece la imagen de avatar por defecto (usuario.png) desde los recursos.
+     */
+    private void setDefaultAvatarImage() {
         try {
-            BufferedImage originalImage = ImageIO.read(new File(imagePath));
-            if (originalImage != null) {
-                Image scaledImage = originalImage.getScaledInstance(
+            java.net.URL defaultImageUrl = getClass().getResource("/Image/usuario.png");
+            if (defaultImageUrl != null) {
+                ImageIcon defaultIcon = new ImageIcon(defaultImageUrl);
+                Image scaledDefaultImage = defaultIcon.getImage().getScaledInstance(
                         lblAvatar.getPreferredSize().width,
                         lblAvatar.getPreferredSize().height,
                         Image.SCALE_SMOOTH
                 );
-                lblAvatar.setIcon(new ImageIcon(scaledImage));
-                lblAvatar.setText("");
+                lblAvatar.setIcon(new ImageIcon(scaledDefaultImage));
+                lblAvatar.setText(""); // Limpiar texto si se establece un icono
+                currentAvatarPath = null; // Resetear la ruta si se usa el default para no guardar una ruta inexistente
             } else {
+                System.err.println("Advertencia: No se pudo encontrar la imagen predeterminada del usuario en /Image/usuario.png");
                 lblAvatar.setIcon(null);
-                lblAvatar.setText("<html><center><br><br>Error al Cargar</center></html>");
-                System.err.println("Error al cargar imagen (originalImage is null): " + imagePath);
+                lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>"); // Volver al texto si no se encuentra
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.err.println("Error al cargar la imagen predeterminada: " + e.getMessage());
             lblAvatar.setIcon(null);
-            lblAvatar.setText("<html><center><br><br>No Encontrada</center></html>");
-            System.err.println("Error al cargar imagen (IOException): " + e.getMessage());
-            e.printStackTrace();
+            lblAvatar.setText("<html><center><br><br>Cargar Foto</center></html>"); // Volver al texto en caso de error
         }
     }
 
+    /**
+     * Permite al usuario seleccionar un archivo de imagen y lo establece como avatar.
+     * Actualiza `currentAvatarPath`.
+     */
     private void selectAndSetAvatarImage() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar Foto de Perfil");
@@ -358,8 +376,9 @@ public class PerfilPanel extends JPanel {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             if (selectedFile != null) {
+                // Importante: Guardar la ruta absoluta para la persistencia
                 currentAvatarPath = selectedFile.getAbsolutePath();
-                setAvatarImage(currentAvatarPath);
+                setAvatarImage(currentAvatarPath); // Mostrar la imagen seleccionada
             }
         }
     }
@@ -401,6 +420,7 @@ public class PerfilPanel extends JPanel {
     }
 
     private void loadUserInfo(int userId, Connection con) throws SQLException {
+        // Asegúrate de que tu tabla 'usuarios' tenga la columna 'foto_perfil_ruta'
         String userSql = "SELECT nombre, apellido, correo, telefono, fecha_registro, insignia_ventas, insignia_compras, racha_compras_horas, foto_perfil_ruta FROM usuarios WHERE id_usuario = ?";
         try (PreparedStatement psUser = con.prepareStatement(userSql)) {
             psUser.setInt(1, userId);
@@ -416,8 +436,9 @@ public class PerfilPanel extends JPanel {
                     lblInsigniaCompras.setText(rsUser.getString("insignia_compras") != null ? rsUser.getString("insignia_compras") : "Comprador Ocasional");
                     lblRachaCompras.setText(rsUser.getInt("racha_compras_horas") + " horas");
 
+                    // Cargar la ruta del avatar desde la base de datos y establecer la imagen
                     currentAvatarPath = rsUser.getString("foto_perfil_ruta");
-                    setAvatarImage(currentAvatarPath);
+                    setAvatarImage(currentAvatarPath); // Este método ya maneja si la ruta es nula/inválida
 
                     btnGuardarCambios.setEnabled(true);
                 } else {
@@ -457,12 +478,14 @@ public class PerfilPanel extends JPanel {
                 return;
             }
 
+            // Asegúrate de que la columna 'foto_perfil_ruta' exista en tu tabla 'usuarios'
             String updateSql = "UPDATE usuarios SET nombre = ?, apellido = ?, correo = ?, telefono = ?, foto_perfil_ruta = ? WHERE id_usuario = ?";
             try (PreparedStatement ps = con.prepareStatement(updateSql)) {
                 ps.setString(1, nombre);
                 ps.setString(2, apellido);
                 ps.setString(3, correo);
                 ps.setString(4, telefono.isEmpty() ? null : telefono);
+                // Guardar la ruta del archivo del avatar. Si es null, se guardará NULL en la DB
                 ps.setString(5, currentAvatarPath);
                 ps.setInt(6, userId);
 
@@ -489,11 +512,15 @@ public class PerfilPanel extends JPanel {
     }
 
     private void loadSalesData(int userId, Connection con) throws SQLException {
+        // NOTA: La columna 'id_usuario_subida' no existe en tu esquema de `productos`.
+        // Necesitas añadirla si un producto está asociado a un usuario que lo subió/vendió.
+        // Por ahora, el query generará un error si no existe esa columna.
+        // Para que funcione, tendrías que ejecutar: ALTER TABLE productos ADD COLUMN id_usuario_subida INTEGER REFERENCES usuarios(id_usuario);
         String totalVentasSql = "SELECT COALESCE(SUM(det.cantidad), 0) AS total_productos_vendidos " +
                                 "FROM detalle_ordenes det " +
                                 "JOIN productos p ON det.id_producto = p.id_producto " +
                                 "JOIN ordenes o ON det.id_orden = o.id_orden " +
-                                "WHERE p.id_usuario_subida = ? AND o.estado = 'completada'";
+                                "WHERE p.id_usuario_subida = ? AND o.estado = 'completada'"; // <-- Asumiendo id_usuario_subida en productos
         try (PreparedStatement psTotalVentas = con.prepareStatement(totalVentasSql)) {
             psTotalVentas.setInt(1, userId);
             try (ResultSet rsTotalVentas = psTotalVentas.executeQuery()) {
@@ -504,6 +531,7 @@ public class PerfilPanel extends JPanel {
                 lblTotalProductosVendidos.setText(String.valueOf(totalProductosVendidos));
 
                 String newInsigniaVentas = getInsigniaVentas(totalProductosVendidos);
+                // Solo actualiza la DB si la insignia ha cambiado
                 if (!newInsigniaVentas.equals(lblInsigniaVentas.getText())) {
                     updateUserAttribute(userId, "insignia_ventas", newInsigniaVentas, con);
                     lblInsigniaVentas.setText(newInsigniaVentas);
@@ -524,6 +552,7 @@ public class PerfilPanel extends JPanel {
                 lblTotalComprasRealizadas.setText(String.valueOf(totalOrdenesCompletadas));
 
                 String newInsigniaCompras = getInsigniaCompras(totalOrdenesCompletadas);
+                // Solo actualiza la DB si la insignia ha cambiado
                 if (!newInsigniaCompras.equals(lblInsigniaCompras.getText())) {
                     updateUserAttribute(userId, "insignia_compras", newInsigniaCompras, con);
                     lblInsigniaCompras.setText(newInsigniaCompras);
@@ -536,12 +565,15 @@ public class PerfilPanel extends JPanel {
 
         int newRachaHoras = calculatePurchaseStreak(userId, con);
         try {
+            // Intenta leer el valor actual de la racha para evitar actualizaciones innecesarias
+            // Esto asume que lblRachaCompras siempre tendrá "N horas"
             int currentRachaDisplay = Integer.parseInt(lblRachaCompras.getText().replace(" horas", ""));
             if (newRachaHoras != currentRachaDisplay) {
                 updateUserAttribute(userId, "racha_compras_horas", String.valueOf(newRachaHoras), con);
                 lblRachaCompras.setText(newRachaHoras + " horas");
             }
         } catch (NumberFormatException e) {
+            // Si hay un error al parsear (ej. primera vez), simplemente actualiza
             updateUserAttribute(userId, "racha_compras_horas", String.valueOf(newRachaHoras), con);
             lblRachaCompras.setText(newRachaHoras + " horas");
         }
@@ -574,11 +606,12 @@ public class PerfilPanel extends JPanel {
     }
 
     private int calculatePurchaseStreak(int userId, Connection con) throws SQLException {
+        // La racha se basa en órdenes completadas con al menos 2 productos
         String sql = "SELECT o.fecha_orden FROM ordenes o " +
                      "JOIN detalle_ordenes det ON o.id_orden = det.id_orden " +
                      "WHERE o.id_usuario = ? AND o.estado = 'completada' " +
                      "GROUP BY o.id_orden, o.fecha_orden " +
-                     "HAVING SUM(det.cantidad) >= 2 " +
+                     "HAVING SUM(det.cantidad) >= 2 " + // Requiere al menos 2 productos en la orden
                      "ORDER BY o.fecha_orden ASC";
         List<LocalDateTime> validPurchaseTimes = new ArrayList<>();
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -591,33 +624,43 @@ public class PerfilPanel extends JPanel {
         }
 
         if (validPurchaseTimes.isEmpty()) return 0;
+        
+        // Si solo hay una compra válida, la racha es desde esa compra hasta ahora
         if (validPurchaseTimes.size() == 1) {
             long hours = Duration.between(validPurchaseTimes.get(0), LocalDateTime.now()).toHours();
-            return (int) hours;
+            return (int) Math.max(0, hours); // Asegurar que no sea negativo
         }
 
         int maxStreakHours = 0;
-        int currentStreakStartIdx = 0;
-
+        // La racha se calcula entre compras consecutivas. Si hay un gap > 24h, la racha se rompe.
+        // La duración de la racha actual es desde la primera compra en la racha hasta la última.
+        
+        // La racha actual empieza con la primera compra
+        LocalDateTime currentStreakStart = validPurchaseTimes.get(0);
+        
         for (int i = 1; i < validPurchaseTimes.size(); i++) {
             LocalDateTime prevTime = validPurchaseTimes.get(i - 1);
             LocalDateTime currTime = validPurchaseTimes.get(i);
             long hoursBetween = Duration.between(prevTime, currTime).toHours();
 
-            if (hoursBetween <= 24) {
-                // Continue streak
-            } else {
-                int streakDuration = (int) Duration.between(validPurchaseTimes.get(currentStreakStartIdx), prevTime).toHours();
+            if (hoursBetween <= 24) { // Si la siguiente compra está dentro de 24 horas, la racha continúa
+                // No necesitamos ajustar currentStreakStart aquí, solo la última compra
+            } else { // La racha se rompe
+                int streakDuration = (int) Duration.between(currentStreakStart, prevTime).toHours();
                 maxStreakHours = Math.max(maxStreakHours, streakDuration);
-                currentStreakStartIdx = i;
+                // Reiniciar la racha desde la compra actual
+                currentStreakStart = currTime;
             }
         }
-        int lastStreakDuration = (int) Duration.between(validPurchaseTimes.get(currentStreakStartIdx), LocalDateTime.now()).toHours();
+        
+        // Considerar la última racha o la única racha si nunca se rompió
+        int lastStreakDuration = (int) Duration.between(currentStreakStart, LocalDateTime.now()).toHours();
         maxStreakHours = Math.max(maxStreakHours, lastStreakDuration);
 
-        return Math.max(0, maxStreakHours);
+        return Math.max(0, maxStreakHours); // Asegurarse de que no devuelva un valor negativo
     }
 
+    // Método genérico para actualizar un solo atributo del usuario
     private void updateUserAttribute(int userId, String columnName, String value, Connection con) {
         String updateSql = "UPDATE usuarios SET " + columnName + " = ? WHERE id_usuario = ?";
         try (PreparedStatement psUpdate = con.prepareStatement(updateSql)) {
@@ -634,6 +677,9 @@ public class PerfilPanel extends JPanel {
         }
     }
 
+    /**
+     * Resetea los campos del perfil y deshabilita la edición cuando no hay sesión activa.
+     */
     private void updateNoSessionData() {
         txtNombre.setText("N/A");
         txtApellido.setText("N/A");
@@ -648,11 +694,14 @@ public class PerfilPanel extends JPanel {
         lblRachaCompras.setText("0 horas");
         lblDescuentoPotencial.setText("0%");
 
-        if (lblAvatar != null) lblAvatar.setText("<html><center><br><br>Sin Usuario</center></html>");
-        lblAvatar.setIcon(null);
+        setDefaultAvatarImage(); // Asegurarse de que se muestre el avatar por defecto
+        lblAvatar.setText("<html><center><br><br>Sin Usuario</center></html>"); // Añadir texto indicativo
         btnGuardarCambios.setEnabled(false);
     }
 
+    /**
+     * Recarga todos los datos del perfil. Útil cuando se navega de vuelta a este panel.
+     */
     public void refreshData() {
         loadUserProfileData();
     }

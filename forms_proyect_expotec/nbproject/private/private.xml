@@ -3,34 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/EditarProductoPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/controlador/conexion.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/util/ImageUtil.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/forms_proyect_expotec/RegistroForm.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/util/FacturadorEmail.java</file>
             <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/ReseñasPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/forms_proyect_expotec/LoginForm.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/controlador/ControladorOrden.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/CarritoPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/PanelTrayectoProducto.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/controlador/main.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/forms_proyect_expotec/SplashScreen.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/forms_proyect_expotec/PrincipalForm.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/util/UserSession.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/DetallesProductoPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/forms_proyect_expotec/HistorialComprasPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/MostrarProductosPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/util/ProductoSeleccionadoListener.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/modelo/ProductoDAO.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/DashboardPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/modelo/Producto.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/ProductosRecientesPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/MostrarListaDeseosPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/modelo/Orden.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/modelo/ItemCarrito.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/IngresoProductoPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/ProductoCardPanel.java</file>
-            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/util/LimitDocumentFilter.java</file>
+            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/forms_proyect_expotec/FormularioRecuperarContrasena.java</file>
+            <file>file:/C:/Users/patza/Downloads/Expotec%202025/G5BEXPOTEC2025/forms_proyect_expotec/src/vista/PerfilPanel.java</file>
         </group>
     </open-files>
 </project-private>
