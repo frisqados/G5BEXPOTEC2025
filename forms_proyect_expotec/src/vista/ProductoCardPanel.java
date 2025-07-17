@@ -129,17 +129,58 @@ public class ProductoCardPanel extends JPanel {
         qtySubtotalPanel.setBackground(getBackground());
 
         JLabel qtyLabel = new JLabel("Cant:");
-        quantitySpinner = new JSpinner(new SpinnerNumberModel(initialQuantity, 1, producto.getStock(), 1)); // Máx es el stock
+
+        // --- INICIO DE MODIFICACIONES CLAVE ---
+        int stockActual = producto.getStock();
+        int minQuantity = 1; // Cantidad mínima que un usuario puede tener de un producto
+        int maxQuantity = Math.max(0, stockActual); // El máximo no puede ser negativo; si stock es 0, max es 0.
+
+        // Ajustar la cantidad inicial para que sea válida dentro del rango [minQuantity, maxQuantity]
+        // O [0, 0] si no hay stock
+        int effectiveInitialQuantity = initialQuantity;
+
+        if (maxQuantity == 0) { // Si no hay stock disponible
+            effectiveInitialQuantity = 0; // La cantidad inicial debe ser 0
+            minQuantity = 0; // El mínimo también debe ser 0 para evitar el error
+        } else { // Si hay stock disponible
+            if (effectiveInitialQuantity < minQuantity) {
+                effectiveInitialQuantity = minQuantity; // Asegurar que sea al menos 1
+            }
+            if (effectiveInitialQuantity > maxQuantity) {
+                effectiveInitialQuantity = maxQuantity; // Asegurar que no exceda el stock
+            }
+        }
+        // --- FIN DE MODIFICACIONES CLAVE ---
+
+        quantitySpinner = new JSpinner(new SpinnerNumberModel(effectiveInitialQuantity, minQuantity, maxQuantity, 1));
         ((JSpinner.DefaultEditor) quantitySpinner.getEditor()).getTextField().setColumns(2); // Colocar un tamaño más pequeño
+        
+        // Deshabilitar el spinner si no hay stock, o si la cantidad inicial es 0 y el stock también es 0
+        if (maxQuantity == 0) {
+            quantitySpinner.setEnabled(false);
+        }
+
         quantitySpinner.addChangeListener(e -> {
             int newQuantity = (int) quantitySpinner.getValue();
+            // Asegurarse de que la cantidad no exceda el stock real si hay algún cambio manual o externo
+            if (newQuantity > producto.getStock()) {
+                newQuantity = producto.getStock();
+                quantitySpinner.setValue(newQuantity); // Corregir el valor del spinner
+            }
             if (cartActionListener != null) {
                 cartActionListener.onQuantityChanged(producto.getId(), newQuantity);
             }
+            updateSubtotalDisplay(newQuantity); // Actualizar el subtotal cada vez que cambia la cantidad
         });
 
-        lblSubtotal = new JLabel("Subtotal: $" + producto.getPrecio().multiply(BigDecimal.valueOf(initialQuantity)).setScale(2, BigDecimal.ROUND_HALF_UP));
+        lblSubtotal = new JLabel("Subtotal: $" + producto.getPrecio().multiply(BigDecimal.valueOf(effectiveInitialQuantity)).setScale(2, BigDecimal.ROUND_HALF_UP));
         lblSubtotal.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12f));
+
+        // Actualizar el subtotal inicial si el stock era 0
+        if (maxQuantity == 0) {
+            lblSubtotal.setText("Subtotal: $0.00 (Sin Stock)");
+            lblSubtotal.setForeground(Color.RED); // Destacar que no hay stock
+        }
 
         qtySubtotalPanel.add(qtyLabel);
         qtySubtotalPanel.add(quantitySpinner);
@@ -162,6 +203,8 @@ public class ProductoCardPanel extends JPanel {
                     "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 if (cartActionListener != null) {
+                    // Nota: Aquí se llama a onProductoSeleccionado, lo cual es típico para eliminar
+                    // Si tienes un método específico para eliminar por ID o Producto, úsalo aquí.
                     cartActionListener.onProductoSeleccionado(producto);
                 }
             }
@@ -180,14 +223,49 @@ public class ProductoCardPanel extends JPanel {
 
     public void updateQuantityDisplay(int newQuantity) {
         if (quantitySpinner != null) {
-            quantitySpinner.setValue(newQuantity);
+            // Asegúrate de que el nuevo valor sea válido para el spinner.
+            // Si el stock cambió o se intentó establecer un valor inválido.
+            int maxStock = producto.getStock();
+            int minVal = (maxStock > 0) ? 1 : 0; // Mínimo 1 si hay stock, 0 si no
+            int maxVal = Math.max(0, maxStock); // Máximo es el stock real, no negativo
+
+            if (newQuantity < minVal) newQuantity = minVal;
+            if (newQuantity > maxVal) newQuantity = maxVal;
+            
+            // Actualizar el modelo del spinner si el rango cambió (por ejemplo, stock disminuyó)
+            SpinnerNumberModel model = (SpinnerNumberModel) quantitySpinner.getModel();
+            
+            // --- CORRECCIÓN AQUÍ ---
+            if (((Number)model.getMinimum()).intValue() != minVal || ((Number)model.getMaximum()).intValue() != maxVal) {
+            // --- FIN CORRECCIÓN ---
+                model = new SpinnerNumberModel(newQuantity, minVal, maxVal, 1);
+                quantitySpinner.setModel(model);
+                // Si el stock ahora es 0, deshabilitar el spinner
+                if (maxVal == 0) {
+                    quantitySpinner.setEnabled(false);
+                    lblSubtotal.setText("Subtotal: $0.00 (Sin Stock)");
+                    lblSubtotal.setForeground(Color.RED);
+                } else {
+                    quantitySpinner.setEnabled(true);
+                    lblSubtotal.setForeground(UIManager.getColor("Label.foreground")); // Restablecer color
+                }
+            } else {
+                quantitySpinner.setValue(newQuantity);
+            }
         }
         updateSubtotalDisplay(newQuantity);
     }
 
     public void updateSubtotalDisplay(int currentQuantity) {
         if (lblSubtotal != null) {
-            lblSubtotal.setText("Subtotal: $" + producto.getPrecio().multiply(BigDecimal.valueOf(currentQuantity)).setScale(2, BigDecimal.ROUND_HALF_UP));
+            // Asegúrate de que el subtotal se muestre como $0.00 si el stock es 0, incluso si currentQuantity > 0 por error
+            if (producto.getStock() <= 0) {
+                lblSubtotal.setText("Subtotal: $0.00 (Sin Stock)");
+                lblSubtotal.setForeground(Color.RED);
+            } else {
+                lblSubtotal.setText("Subtotal: $" + producto.getPrecio().multiply(BigDecimal.valueOf(currentQuantity)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                lblSubtotal.setForeground(UIManager.getColor("Label.foreground")); // Restablecer color si el stock es > 0
+            }
         }
     }
 
@@ -196,8 +274,18 @@ public class ProductoCardPanel extends JPanel {
     }
 
     public void updateStockDisplay(int newStock) {
-        if (lblStock != null) { // Este lblStock solo se usa en modo catálogo
+        // En el modo catálogo, actualiza la etiqueta de stock
+        if (lblStock != null) {
             lblStock.setText("Stock: " + newStock);
+        }
+        // En el modo carrito, si el stock cambia, necesitamos actualizar el spinner y el subtotal
+        if (quantitySpinner != null) {
+            // Actualizar el stock del objeto producto (asumiendo que 'newStock' es el stock más reciente)
+            producto.setStock(newStock); // Asegúrate de tener un setter para stock en tu clase Producto
+
+            // Llama a updateQuantityDisplay para que el spinner se ajuste al nuevo stock
+            // y para que el subtotal se actualice (si el usuario tenía más de lo disponible ahora)
+            updateQuantityDisplay((int) quantitySpinner.getValue());
         }
     }
 
